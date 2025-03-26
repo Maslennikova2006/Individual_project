@@ -24,6 +24,7 @@
 4. Все данные будут храниться в csv-формате и подтягиваться при очередном запуске приложения. 
 
 ![Схема классов](source/class_diagram.png)
+
 [Description of the study std::vector](/source/Description%20of%20the%20study%20Vector.pdf)
 
 
