@@ -7,4 +7,4 @@ class User {
     char* _login;
     char* _password;
 };
-#endif  // FILM_LIBRARY_USER_USER_H
+#endif  // FILM_LIBRARY_USER_USER_H_
