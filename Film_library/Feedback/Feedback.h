@@ -5,6 +5,6 @@
 
 class Feedback {
     char* _review_text;
-    float _estimation;  // оценка
+    float _mark;  // оценка
 };
 #endif  // FILM_LIBRARY_FEEDBACK_FEEDBACK_H_

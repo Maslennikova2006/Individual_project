@@ -8,6 +8,6 @@ class Film {
     char* _film_genre;
     char* _country_of_issue;
     char* _year_of_issue;
-    float _average_estimation;  // средн€€ оценка
+    float _average_mark;
 };
 #endif  // FILM_LIBRARY_FILM_FILM_H_
