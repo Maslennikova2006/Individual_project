@@ -1,7 +1,7 @@
 // Copyright 2025 Maslennikova Mary
 
-#ifndef FILM_LIBRARY_USER_USER_H
-#define FILM_LIBRARY_USER_USER_H
+#ifndef FILM_LIBRARY_USER_USER_H_
+#define FILM_LIBRARY_USER_USER_H_
 
 class User {
     char* _login;
