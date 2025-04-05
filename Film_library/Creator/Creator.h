@@ -1,12 +1,8 @@
 // Copyright 2025 Maslennikova Mary
 
-#ifndef CREATOR_H
-#define CREATOR_H
+#ifndef FILM_LIBRARY_CREATOR_CREATOR_H
+#define FILM_LIBRARY_CREATOR_CREATOR_H
 
 class Creator {
-
-public:
-
 };
-
-#endif //CREATOR_H
+#endif  // FILM_LIBRARY_CREATOR_CREATOR_H

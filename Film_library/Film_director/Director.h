@@ -1,14 +1,10 @@
 // Copyright 2025 Maslennikova Mary
 
-#ifndef DIRECTOR_H
-#define DIRECTOR_H
+#ifndef FILM_LIBRARY_FILM_DIRECTOR_DIRECTOR_H
+#define FILM_LIBRARY_FILM_DIRECTOR_DIRECTOR_H
 
 class Director {
-	char* _awards;
-	int _rating;
-
-public:
-
+    char* _awards;
+    int _rating;
 };
-
-#endif //DIRECTOR_H
+#endif  // FILM_LIBRARY_FILM_DIRECTOR_DIRECTOR_H

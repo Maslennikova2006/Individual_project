@@ -1,13 +1,10 @@
 // Copyright 2025 Maslennikova Mary
 
-#ifndef FEEDBACK_H
-#define FEEDBACK_H
+#ifndef FILM_LIBRARY_FEEDBACK_FEEDBACK_H
+#define FILM_LIBRARY_FEEDBACK_FEEDBACK_H
 
 class Feedback {
-	char* _review_text;
-	int _estimation; //оценка
-
-public:
+    char* _review_text;
+    int _estimation;  // оценка
 };
-
-#endif //FEEDBACK_H
+#endif  // FILM_LIBRARY_FEEDBACK_FEEDBACK_H

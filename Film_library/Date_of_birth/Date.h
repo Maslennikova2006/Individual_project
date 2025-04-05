@@ -1,15 +1,11 @@
 // Copyright 2025 Maslennikova Mary
 
-#ifndef DATE_H
-#define DATE_H
+#ifndef FILM_LIBRARY_DATE_OF_BIRTH_DATE_H
+#define FILM_LIBRARY_DATE_OF_BIRTH_DATE_H
 
 class Date {
-	int day;
-	int month;
-	int year;
-public:
-
+    int day;
+    int month;
+    int year;
 };
-
-#endif //DATE_H
-
+#endif  // FILM_LIBRARY_DATE_OF_BIRTH_DATE_H
