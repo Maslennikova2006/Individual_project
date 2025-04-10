@@ -1,13 +1,7 @@
 // Copyright 2025 Maslennikova Mary
 
-#ifndef ACTOR_H
-#define ACTOR_H
-
+#ifndef FILM_LIBRARY_ACTOR_ACTOR_H_
+#define FILM_LIBRARY_ACTOR_ACTOR_H_
 class Actor {
-
-
-public:
-
 };
-
-#endif //ACTOR_H
+#endif   //  FILM_LIBRARY_ACTOR_ACTOR_H_
