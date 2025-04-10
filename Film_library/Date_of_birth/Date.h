@@ -6,6 +6,5 @@ class Date {
     int day;
     int month;
     int year;
-public:
 };
 #endif  // FILM_LIBRARY_DATE_OF_BIRTH_DATE_H_

@@ -1,3 +1,5 @@
+// Copyright 2025 Maslennikova Mary
+
 #include <iostream>
 
 #include "/git/Film_library/Actor/Actor.h"

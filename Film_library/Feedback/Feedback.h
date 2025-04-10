@@ -5,6 +5,5 @@
 class Feedback {
     char* _review_text;
     int _estimation;  
-public:
 };
 #endif   // FILM_LIBRARY_FEEDBACK_FEEDBACK_H_

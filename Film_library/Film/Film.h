@@ -8,6 +8,5 @@ class Film {
     char* _country_of_issue;
     char* _year_of_issue;
     int _average_estimation;  
-public:
 };
 #endif  // FILM_LIBRARY_FILM_FILM_H_

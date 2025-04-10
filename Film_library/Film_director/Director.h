@@ -5,6 +5,5 @@
 class Director {
     char* _awards;
     int _rating;
-public:
 };
 #endif  // FILM_LIBRARY_FILM_DIRECTOR_DIRECTOR_H_

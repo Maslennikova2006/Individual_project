@@ -12,7 +12,8 @@ class TVector {
     size_t _capacity;
     size_t _deleted;
     State* _states;
-public:
+
+ public:
     TVector();
     TVector(size_t size, const T* data);
     TVector(size_t size, std::initializer_list<T> data);
@@ -59,7 +60,8 @@ public:
 
     inline bool is_empty() const noexcept;
     void print() const;
-private:
+
+ private:
     inline bool is_full() const noexcept;
     void reserve(size_t new_capacity);
     void resize(size_t count);
