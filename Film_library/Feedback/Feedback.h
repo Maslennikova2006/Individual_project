@@ -4,6 +4,6 @@
 #define FILM_LIBRARY_FEEDBACK_FEEDBACK_H_
 class Feedback {
     char* _review_text;
-    int _estimation;  
+    int _estimation;
 };
 #endif   // FILM_LIBRARY_FEEDBACK_FEEDBACK_H_
