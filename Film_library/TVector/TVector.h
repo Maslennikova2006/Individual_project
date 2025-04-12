@@ -30,7 +30,9 @@ class TVector {
     inline T& front() noexcept;
     inline T& back() noexcept;
     inline T* begin() noexcept;
+    inline const T* begin() const noexcept;
     inline T* end() noexcept;
+    inline const T* end() const noexcept;
 
     void push_front(const T& value);
     T* insert(const T* index, const T& value);
@@ -151,5 +153,45 @@ template <class T>
 TVector<T>::~TVector() {
     delete[] _data;
     delete[] _states;
+}
+template <class T>
+inline T* TVector<T>::data() noexcept {
+    return _data;
+}
+template <class T>
+inline size_t TVector<T>::size() const noexcept {
+    return _size;
+}
+template <class T>
+inline size_t TVector<T>::capacity() const noexcept {
+    return _capacity;
+}
+template <class T>
+inline const T* TVector<T>::data() const noexcept {
+    return _data;
+}
+template <class T>
+inline T& TVector<T>::front() noexcept {
+    return _data[0];
+}
+template <class T>
+inline T& TVector<T>::back() noexcept {
+    return _data[_size - 1];
+}
+template <class T>
+inline T* TVector<T>::begin() noexcept {
+    return _data;
+}
+template <class T>
+inline const T* TVector<T>::begin() const noexcept {
+    return _data;
+}
+template <class T>
+inline T* TVector<T>::end() noexcept {
+    return _data + _size;
+}
+template <class T>
+inline const T* TVector<T>::end() const noexcept {
+    return _data + _size;
 }
 #endif  // FILM_LIBRARY_TVECTOR_TVECTOR_H_
