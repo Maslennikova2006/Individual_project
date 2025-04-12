@@ -69,4 +69,85 @@ class TVector {
     void shrink_to_fit();
     void reallocation_memory();
 };
+template <class T>
+TVector<T>::TVector() : _data(nullptr), _size(0), _capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) { }
+template <class T>
+TVector<T>::TVector(size_t size, const T* data) : _data(nullptr), _size(size), _capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
+    if (size != 0) {
+        _capacity = ((size + 1) / STEP_OF_CAPACITY) * STEP_OF_CAPACITY;
+        if ((size + 1) % STEP_OF_CAPACITY != 0) {
+            _capacity += STEP_OF_CAPACITY;
+        }
+    }
+    _data = new T[_capacity];
+    _states = new State[_capacity];
+    if (data != nullptr) {
+        for (size_t i = 0; i < _size; i++) {
+            _data[i] = data[i];
+            _states[i] = busy;
+        }
+    }
+    for (size_t i = _size; i < _capacity; i++) {
+        _states[i] = empty;
+    }
+}
+template <class T>
+TVector<T>::TVector(size_t size, std::initializer_list<T> data) {
+    _size = size;
+    _capacity = ((_size + 1) / STEP_OF_CAPACITY) * STEP_OF_CAPACITY;
+    if ((_size + 1) % STEP_OF_CAPACITY != 0) {
+         _capacity += STEP_OF_CAPACITY;
+	}
+    _data = new T[_capacity];
+    _states = new State[_capacity];
+    _deleted = 0;
+    size_t index = 0;
+    auto it = data.begin();
+    for (index; it != data.end(); index++, it++) {
+        _data[index] = *it;
+        _states[index] = busy;
+    }
+    while (index < _size) {
+        _data[index++] = 0;
+    }
+}
+template <class T>
+TVector<T>::TVector(std::initializer_list<T> data) {
+    _size = data.size();
+    _capacity = ((_size + 1) / STEP_OF_CAPACITY) * STEP_OF_CAPACITY;
+    if ((_size + 1) % STEP_OF_CAPACITY != 0) {
+        _capacity += STEP_OF_CAPACITY;
+    }
+    _data = new T[_capacity];
+    _states = new State[_capacity];
+    _deleted = 0;
+    size_t index = 0;
+    auto it = data.begin();
+    for (index; it != data.end(); index++, it++) {
+        _data[index] = *it;
+        _states[index] = busy;
+    }
+    while (index < _size) {
+        _data[index++] = 0;
+    }
+}
+template <class T>
+TVector<T>::TVector(const TVector<T>& other) {
+    if (&other == NULL)
+        throw std::invalid_argument("The object was not received!\n");
+    _size = other._size;
+    _capacity = other._capacity;
+    _deleted = other._deleted;
+    _data = new T[_capacity];
+    _states = new State[_capacity];
+    for (size_t i = 0; i < _size; i++) {
+        _data[i] = other._data[i];
+        _states[i] = other._states[i];
+    }
+}
+template <class T>
+TVector<T>::~TVector() {
+    delete[] _data;
+    delete[] _states;
+}
 #endif  // FILM_LIBRARY_TVECTOR_TVECTOR_H_
