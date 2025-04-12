@@ -70,9 +70,11 @@ class TVector {
     void reallocation_memory();
 };
 template <class T>
-TVector<T>::TVector() : _data(nullptr), _size(0), _capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) { }
+TVector<T>::TVector() : _data(nullptr), _size(0), _capacity(STEP_OF_CAPACITY), 
+_deleted(0), _states(nullptr) { }
 template <class T>
-TVector<T>::TVector(size_t size, const T* data) : _data(nullptr), _size(size), _capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
+TVector<T>::TVector(size_t size, const T* data) : _data(nullptr), _size(size),
+_capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
     if (size != 0) {
         _capacity = ((size + 1) / STEP_OF_CAPACITY) * STEP_OF_CAPACITY;
         if ((size + 1) % STEP_OF_CAPACITY != 0) {
@@ -96,8 +98,8 @@ TVector<T>::TVector(size_t size, std::initializer_list<T> data) {
     _size = size;
     _capacity = ((_size + 1) / STEP_OF_CAPACITY) * STEP_OF_CAPACITY;
     if ((_size + 1) % STEP_OF_CAPACITY != 0) {
-         _capacity += STEP_OF_CAPACITY;
-	}
+        _capacity += STEP_OF_CAPACITY;
+    }
     _data = new T[_capacity];
     _states = new State[_capacity];
     _deleted = 0;
