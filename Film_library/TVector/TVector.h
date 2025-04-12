@@ -70,7 +70,7 @@ class TVector {
     void reallocation_memory();
 };
 template <class T>
-TVector<T>::TVector() : _data(nullptr), _size(0), _capacity(STEP_OF_CAPACITY), 
+TVector<T>::TVector() : _data(nullptr), _size(0), _capacity(STEP_OF_CAPACITY),
 _deleted(0), _states(nullptr) { }
 template <class T>
 TVector<T>::TVector(size_t size, const T* data) : _data(nullptr), _size(size),
