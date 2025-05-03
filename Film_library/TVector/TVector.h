@@ -15,7 +15,6 @@ class TVector {
     size_t _capacity;
     size_t _deleted;
     State* _states;
-
 public:
     TVector();
     TVector(size_t size, const T* data);
@@ -67,7 +66,6 @@ public:
 
     inline bool is_empty() const noexcept;
     void print() const noexcept;
-
 private:
     inline bool is_full() const noexcept;
     void set_memory(size_t size) noexcept;
