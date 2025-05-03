@@ -63,22 +63,23 @@ void print_final_info() {
     set_color(2, 0);
     std::cout << "[==========] ";
     set_color(7, 0);
-    std::cout << count_success + count_failed << " test" 
-        << (count_success + count_failed > 1 ? "s" : "") << " ran." << std::endl;
+    std::cout << count_success + count_failed << " test"
+        << (count_success + count_failed > 1 ? "s" : "")
+        << " ran." << std::endl;
     set_color(2, 0);
     std::cout << "[  PASSED  ] ";
     set_color(7, 0);
-    std::cout << count_success << " test" 
+    std::cout << count_success << " test"
         << (count_success > 1 ? "s" : "") << std::endl;
     if (count_failed > 0) {
         set_color(4, 0);
         std::cout << "[  FAILED  ] ";
         set_color(7, 0);
-        std::cout << count_failed << " test" 
+        std::cout << count_failed << " test"
             << (count_failed > 1 ? "s." : ".") << std::endl;
     }
 }
-};
+};  // namespace TestSystem
 
 bool test_1_check_the_default_constructor() {
     TVector<float> vec;
