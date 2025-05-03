@@ -70,17 +70,19 @@ class TVector {
     void set_memory(size_t size) noexcept;
     void reallocation_memory_for_deleted() noexcept;
     void reallocation_memory(size_t count) noexcept;
-    void swap(T& first_number, T& second_number) const noexcept;
+    void my_swap(T& first_number, T& second_number) const noexcept;
     size_t rand_generation(size_t min, size_t max) const noexcept;
     size_t recalculate_the_position(size_t index) const noexcept;
-    size_t recalculate_the_address(size_t index) const noexcept; 
+    size_t recalculate_the_address(size_t index) const noexcept;
 };
 template <class T>
-TVector<T>::TVector() : _data(nullptr), _size(0), _capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) { 
+TVector<T>::TVector() : _data(nullptr), _size(0), 
+_capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
     set_memory(0);
 }
 template <class T>
-TVector<T>::TVector(size_t size, const T* data) : _data(nullptr), _size(size), _capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
+TVector<T>::TVector(size_t size, const T* data) : _data(nullptr), _size(size),
+_capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
     set_memory(size);
     if (data != nullptr) {
         for (size_t i = 0; i < _size; i++) {
@@ -157,8 +159,9 @@ inline const T* TVector<T>::data() const noexcept {
 }
 template <class T>
 inline const T& TVector<T>::front() {
-    if (is_empty())
+    if (is_empty()) {
         throw std::invalid_argument("There is no first element in the empty vector!\n");
+    }
     size_t new_index = recalculate_the_position(0);
     return _data[new_index];
 }
@@ -227,7 +230,7 @@ void TVector<T>::reallocation_memory(size_t count) noexcept {
     reserve(new_capacity);
 }
 template <class T>
-void TVector<T>::swap(T& first_number, T& second_number) const noexcept {
+void TVector<T>::my_swap(T& first_number, T& second_number) const noexcept {
     T tmp = first_number;
     first_number = second_number;
     second_number = tmp;
@@ -235,6 +238,8 @@ void TVector<T>::swap(T& first_number, T& second_number) const noexcept {
 template <class T>
 size_t TVector<T>::rand_generation(size_t min, size_t max) const noexcept {
     srand(time(0));
+    /*size_t seed = time(0);
+    size_t result = min + rand_r(&seed) % (max - min + 1);*/
     size_t result = min + rand() % (max - min + 1);
     return result;
 }
