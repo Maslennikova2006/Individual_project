@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\git\Film_library\TVector;C:\GitHub\Individual_project\Film_library\Film_library;C:\GitHub\Individual_project\Film_library\User;C:\GitHub\Individual_project\Film_library\Feedback;C:\GitHub\Individual_project\Film_library\Film;C:\GitHub\Individual_project\Film_library\Actor;C:\GitHub\Individual_project\Film_library\Film_director;C:\GitHub\Individual_project\Film_library\Creator;C:\GitHub\Individual_project\Film_library\Date_of_birth;C:\GitHub\Individual_project\Film_library\FIO;$(IncludePath)</IncludePath>
+    <IncludePath>C:\git\Film_library\TVector;C:\git\Film_library\Film_library;C:\git\Film_library\Film;C:\git\Film_library\User;C:\git\Film_library\Feedback;C:\git\Film_library\Actor;C:\git\Film_library\Film_director;C:\git\Film_library\Creator;C:\git\Film_library\Date_of_birth;C:\git\Film_library\FIO;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -131,6 +131,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Actor\Actor.vcxproj">
       <Project>{fb3e9f66-8163-40d3-a9db-6936c16b8eae}</Project>
     </ProjectReference>
@@ -161,9 +164,6 @@
     <ProjectReference Include="..\User\User.vcxproj">
       <Project>{01f876cb-61a5-41ce-aa52-24e6123c953b}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
