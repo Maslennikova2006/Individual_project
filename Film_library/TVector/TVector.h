@@ -76,7 +76,7 @@ class TVector {
     size_t recalculate_the_address(size_t index) const noexcept;
 };
 template <class T>
-TVector<T>::TVector() : _data(nullptr), _size(0), 
+TVector<T>::TVector() : _data(nullptr), _size(0),
 _capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
     set_memory(0);
 }
@@ -159,9 +159,9 @@ inline const T* TVector<T>::data() const noexcept {
 }
 template <class T>
 inline const T& TVector<T>::front() {
-    if (is_empty()) {
-        throw std::invalid_argument("There is no first element in the empty vector!\n");
-    }
+    if (is_empty()) 
+        throw std::invalid_argument
+        ("There is no first element in the empty vector!\n");
     size_t new_index = recalculate_the_position(0);
     return _data[new_index];
 }
