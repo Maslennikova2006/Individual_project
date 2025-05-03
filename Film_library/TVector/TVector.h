@@ -159,7 +159,7 @@ inline const T* TVector<T>::data() const noexcept {
 }
 template <class T>
 inline const T& TVector<T>::front() {
-    if (is_empty()) 
+    if (is_empty())
         throw std::invalid_argument
         ("There is no first element in the empty vector!\n");
     size_t new_index = recalculate_the_position(0);
@@ -168,7 +168,8 @@ inline const T& TVector<T>::front() {
 template <class T>
 inline const T& TVector<T>::back() {
     if (is_empty())
-        throw std::invalid_argument("There is no last element in the empty vector!\n");
+        throw std::invalid_argument
+        ("There is no last element in the empty vector!\n");
     size_t new_index = recalculate_the_position(_size - 1);
     return _data[new_index];
 }
