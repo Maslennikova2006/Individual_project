@@ -23,6 +23,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "User", "User\User.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Film_library", "Film_library\Film_library.vcxproj", "{40409A31-8E8B-49F8-AFC4-9ACF9C1EBAF6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TVector", "TVector\TVector.vcxproj", "{660D3917-5B19-4F47-A2FA-B6200904294F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -111,6 +113,14 @@ Global
 		{40409A31-8E8B-49F8-AFC4-9ACF9C1EBAF6}.Release|x64.Build.0 = Release|x64
 		{40409A31-8E8B-49F8-AFC4-9ACF9C1EBAF6}.Release|x86.ActiveCfg = Release|Win32
 		{40409A31-8E8B-49F8-AFC4-9ACF9C1EBAF6}.Release|x86.Build.0 = Release|Win32
+		{660D3917-5B19-4F47-A2FA-B6200904294F}.Debug|x64.ActiveCfg = Debug|x64
+		{660D3917-5B19-4F47-A2FA-B6200904294F}.Debug|x64.Build.0 = Debug|x64
+		{660D3917-5B19-4F47-A2FA-B6200904294F}.Debug|x86.ActiveCfg = Debug|Win32
+		{660D3917-5B19-4F47-A2FA-B6200904294F}.Debug|x86.Build.0 = Debug|Win32
+		{660D3917-5B19-4F47-A2FA-B6200904294F}.Release|x64.ActiveCfg = Release|x64
+		{660D3917-5B19-4F47-A2FA-B6200904294F}.Release|x64.Build.0 = Release|x64
+		{660D3917-5B19-4F47-A2FA-B6200904294F}.Release|x86.ActiveCfg = Release|Win32
+		{660D3917-5B19-4F47-A2FA-B6200904294F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
