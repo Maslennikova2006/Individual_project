@@ -84,7 +84,8 @@ void print_final_info() {
 bool test_1_check_the_default_constructor() {
     TVector<float> vec;
     return TestSystem::check(static_cast < size_t>(0), vec.size()) &&
-        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY), vec.capacity()) &&
+        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY),
+            vec.capacity()) &&
         TestSystem::check(true, vec.is_empty());
 }
 bool test_2_check_the_initialization_constructor() {
@@ -99,7 +100,8 @@ bool test_2_check_the_initialization_constructor() {
             check_correct_values_data &= false;
     }
     return TestSystem::check(static_cast < size_t>(5), vec.size()) &&
-        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY), vec.capacity()) &&
+        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY),
+            vec.capacity()) &&
         TestSystem::check(true, check_address_data) &&
         TestSystem::check(true, check_correct_values_data);
 }
@@ -115,7 +117,8 @@ bool test_3_check_the_initialization_list_constructor() {
             check_correct_values_data &= false;
     }
     return TestSystem::check(static_cast < size_t>(4), vec.size()) &&
-        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY), vec.capacity()) &&
+        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY),
+            vec.capacity()) &&
         TestSystem::check(true, check_address_data) &&
         TestSystem::check(true, check_correct_values_data);
 }
@@ -124,7 +127,7 @@ bool test_4_throw_when_try_copy_vector() {
     bool expected_result = false;
     bool actual_result = true;
     try {
-        TVector<int> copy(*obj);
+        TVector<int> copy_obj(*obj);
     }
     catch (const std::exception& ex) {
         actual_result = false;
@@ -144,7 +147,8 @@ bool test_5_check_the_copy_constructor() {
             check_correct_values_data &= false;
     }
     return TestSystem::check(static_cast < size_t>(5), vec2.size()) &&
-        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY), vec2.capacity()) &&
+        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY),
+            vec2.capacity()) &&
         TestSystem::check(true, check_address_data) &&
         TestSystem::check(true, check_correct_values_data);
 }

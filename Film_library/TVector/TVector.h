@@ -15,7 +15,7 @@ class TVector {
     size_t _capacity;
     size_t _deleted;
     State* _states;
-    
+
  public:
     TVector();
     TVector(size_t size, const T* data);
