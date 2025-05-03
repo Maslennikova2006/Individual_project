@@ -149,15 +149,15 @@ bool test_5_check_the_copy_constructor() {
         TestSystem::check(true, check_correct_values_data);
 }
 int main() {
-    TestSystem::start_test(test_1_check_the_default_constructor, 
+    TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
-    TestSystem::start_test(test_2_check_the_initialization_constructor, 
+    TestSystem::start_test(test_2_check_the_initialization_constructor,
         "TVector.test_2_check_the_initialization_constructor");
-    TestSystem::start_test(test_3_check_the_initialization_list_constructor, 
+    TestSystem::start_test(test_3_check_the_initialization_list_constructor,
         "TVector.test_3_check_the_initialization_list_constructor");
-    TestSystem::start_test(test_4_throw_when_try_copy_vector, 
+    TestSystem::start_test(test_4_throw_when_try_copy_vector,
         "TVector.test_4_throw_when_try_copy_vector");
-    TestSystem::start_test(test_5_check_the_copy_constructor, 
+    TestSystem::start_test(test_5_check_the_copy_constructor,
         "TVector.test_5_check_the_copy_constructor");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
