@@ -12,7 +12,7 @@ enum State { empty, busy, deleted };
 
 template <class T> class TVector;
 template <class T> void hoara_sort(TVector<T>& data);
-template <class T> void hoara_sort_rec(TVector<T>& data, size_t left, size_t right);
+template <class T> void hoara_sort_rec(TVector<T>&, size_t, size_t);
 template <class T> void shuffle(TVector<T>& data);
 
 template <class T>
@@ -657,8 +657,9 @@ void hoara_sort_rec(TVector<T>& data, size_t left, size_t right) {
                 l++;
                 if (r > 0)
                     r--;
+            } else { 
+                break; 
             }
-            else { break; } // ??
         }
         hoara_sort_rec(data, left, r);
         hoara_sort_rec(data, l, right);
