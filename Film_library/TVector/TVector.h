@@ -696,7 +696,8 @@ size_t* find_elem(const TVector<T>& data, T value) {
         }
     }
     if (count_repetitions == 0)
-        throw std::invalid_argument("The element was not found in the vector!\n");
+        throw std::invalid_argument
+        ("The element was not found in the vector!\n");
     size_t* result = new size_t[count_repetitions + 1];
     result[0] = count_repetitions;
     if (count_repetitions > 0) {
