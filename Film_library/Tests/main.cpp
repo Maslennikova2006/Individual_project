@@ -152,6 +152,53 @@ bool test_5_check_the_copy_constructor() {
         TestSystem::check(true, check_address_data) &&
         TestSystem::check(true, check_correct_values_data);
 }
+bool test_6_check_reserve_with_decreasing_capacity() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.reserve(5);
+    TVector<int> res({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_7_check_reserve_with_increasing_capacity() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.reserve(25);
+    return TestSystem::check(static_cast<size_t>(25), vec.capacity());
+}
+bool test_8_check_resize_with_decreasing_size() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.resize(5);
+    TVector<int> res({ 1, 2, 3, 4, 5 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_9_check_resize_with_increasing_size_and_capacity() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.resize(16);
+    return TestSystem::check(static_cast<size_t>(16), vec.size()) &&
+        TestSystem::check(static_cast<size_t>(30), vec.capacity());
+}
+bool test_10_check_resize_with_filling_in_the_value() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.resize(16, 0);
+    TVector<int> res({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0, 0, 0, 0 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(16), vec.size()) &&
+        TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_11_check_shrink_to_fit() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.shrink_to_fit();
+    TVector<int> res({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(10), vec.size()) &&
+        TestSystem::check(static_cast<size_t>(10), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
@@ -163,6 +210,18 @@ int main() {
         "TVector.test_4_throw_when_try_copy_vector");
     TestSystem::start_test(test_5_check_the_copy_constructor,
         "TVector.test_5_check_the_copy_constructor");
+    TestSystem::start_test(test_6_check_reserve_with_decreasing_capacity,
+        "TVector.test_6_check_reserve_with_decreasing_capacity");
+    TestSystem::start_test(test_7_check_reserve_with_increasing_capacity,
+        "TVector.test_7_check_reserve_with_increasing_capacity");
+    TestSystem::start_test(test_8_check_resize_with_decreasing_size,
+        "TVector.test_8_check_resize_with_decreasing_size");
+    TestSystem::start_test(test_9_check_resize_with_increasing_size_and_capacity,
+        "TVector.test_9_check_resize_with_increasing_size_and_capacity");
+    TestSystem::start_test(test_10_check_resize_with_filling_in_the_value,
+        "TVector.test_10_check_resize_with_filling_in_the_value");
+    TestSystem::start_test(test_11_check_shrink_to_fit,
+        "TVector.test_11_check_shrink_to_fit");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;

@@ -35,10 +35,10 @@ class TVector {
     inline const T* begin() const noexcept;
     inline const T* end() const noexcept;
 
-    void reserve(size_t new_capacity);
-    void resize(size_t count);
-    void resize(size_t count, const T& value);
-    void shrink_to_fit();
+    void reserve(size_t new_capacity) noexcept;
+    void resize(size_t count) noexcept;
+    void resize(size_t count, const T& value) noexcept;
+    void shrink_to_fit() noexcept;
 
     void push_front(const T& value) noexcept;
     void insert(const size_t index, const T& value);
@@ -285,6 +285,46 @@ void TVector<T>::shrink_to_fit() noexcept {
     _capacity = _size;
 }
 
+template <class T>
+TVector<T>& TVector<T>::operator=(const TVector<T>& other) {
+    if (this == &other)
+        return *this;
+    size_t size = other._size;
+    _deleted = other._deleted;
+    set_memory(size);
+    for (size_t i = 0; i < _capacity; i++) {
+        _data[i] = other._data[i];
+        _states[i] = other._states[i];
+    }
+    return *this;
+}
+template <class T>
+bool TVector<T>::operator!=(const TVector<T>& other) {
+    return !(this->operator==(other));
+}
+template <class T>
+bool TVector<T>::operator==(const TVector<T>& other) {
+    if (_size != other._size) {
+        return false;
+    }
+    size_t i = 0, j = 0;
+
+    while (i < _capacity && j < other._capacity) {
+        while (i < _capacity && _states[i] != busy)
+            i++;
+        while (j < other._capacity && other._states[j] != busy)
+            j++;
+        if (i >= _capacity || j >= other._capacity) {
+            break;
+        }
+        if (_data[i] != other._data[j]) {
+            return false;
+        }
+        i++;
+        j++;
+    }
+    return true;
+}
 template <class T>
 const T& TVector<T>::operator[](size_t index) const {
     if (index >= _size + _deleted) {
