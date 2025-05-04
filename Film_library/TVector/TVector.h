@@ -657,8 +657,8 @@ void hoara_sort_rec(TVector<T>& data, size_t left, size_t right) {
                 l++;
                 if (r > 0)
                     r--;
-            } else { 
-                break; 
+            } else {
+                break;
             }
         }
         hoara_sort_rec(data, left, r);
