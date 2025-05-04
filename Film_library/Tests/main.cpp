@@ -590,7 +590,7 @@ int main() {
         "TVector.test_34_check_the_exception_when_going_out_of_bounds");
     TestSystem::start_test(
         test_35_check_for_an_exception_when_interacting_with_an_empty_vector,
-        "TVector.test_35_check_for_an_except_when_interacting_with_an_empty_vec");
+        "TVector.test_35_check_except_when_interacting_with_an_empty_vec");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
