@@ -336,7 +336,7 @@ int main() {
         "TVector.test_18_check_the_index_conversion_operator");
     TestSystem::start_test(
         test_19_check_the_insertion_at_the_beginning_with_memory_reallocation,
-        "TVector.test_19_check_the_insertion_at_the_beginning_with_reallocation");
+        "TVector.test_19_check_the_insertion_at_the_begin_with_reallocation");
     TestSystem::start_test(
         test_20_check_the_insertion_in_the_middle_with_memory_reallocation,
         "TVector.test_20_check_the_insertion_in_the_middle_with_reallocation");
