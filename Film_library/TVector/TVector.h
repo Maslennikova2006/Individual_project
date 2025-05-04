@@ -13,6 +13,9 @@ enum State { empty, busy, deleted };
 template <class T> class TVector;
 template <class T> void hoara_sort(TVector<T>& data);
 template <class T> void hoara_sort_rec(TVector<T>&, size_t, size_t);
+template <class T> size_t find_first_elem(const TVector<T>&, const T&);
+template <class T> size_t find_last_elem(const TVector<T>& data, T value);
+template <class T> size_t* find_elem(const TVector<T>& data, T value);
 template <class T> void shuffle(TVector<T>& data);
 
 template <class T>
@@ -76,6 +79,9 @@ class TVector {
 
     friend void hoara_sort_rec<T>(TVector<T>& data, size_t left, size_t right);
     friend void hoara_sort<T>(TVector<T>& data);
+    friend size_t find_first_elem<T>(const TVector<T>& data, const T& value);
+    friend size_t find_last_elem<T>(const TVector<T>& data, T value);
+    friend size_t* find_elem<T>(const TVector<T>& data, T value);
     friend void shuffle<T>(TVector<T>& data);
 
  private:
@@ -664,6 +670,44 @@ void hoara_sort_rec(TVector<T>& data, size_t left, size_t right) {
         hoara_sort_rec(data, left, r);
         hoara_sort_rec(data, l, right);
     }
+}
+template<class T>
+size_t find_first_elem(const TVector<T>& data, const T& value) {
+    for (size_t i = 0; i < data._size + data._deleted; i++) {
+        if (data._data[i] == value && data._states[i] == busy)
+            return i;
+    }
+    throw std::invalid_argument("The element was not found in the vector!\n");
+}
+template <class T>
+size_t find_last_elem(const TVector<T>& data, T value) {
+    for (int i = data._size + data._deleted - 1; i >= 0; i--) {
+        if (data._data[i] == value && data._states[i] == busy)
+            return i;
+    }
+    throw std::invalid_argument("The element was not found in the vector!\n");
+}
+template <class T>
+size_t* find_elem(const TVector<T>& data, T value) {
+    int count_repetitions = 0;
+    for (size_t i = 0; i < data._size + data._deleted; i++) {
+        if (data._data[i] == value && data._states[i] == busy) {
+            count_repetitions++;
+        }
+    }
+    if (count_repetitions == 0)
+        throw std::invalid_argument("The element was not found in the vector!\n");
+    size_t* result = new size_t[count_repetitions + 1];
+    result[0] = count_repetitions;
+    if (count_repetitions > 0) {
+        size_t  index = 1;
+        for (size_t i = 0; i < data._size + data._deleted; i++) {
+            if (data._data[i] == value && data._states[i] == busy) {
+                result[index++] = i;
+            }
+        }
+    }
+    return result;
 }
 template <class T>
 void shuffle(TVector<T>& data) {

@@ -545,7 +545,66 @@ bool test_38_check_hoara_sort() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-
+bool test_39_check_find_first_element() {
+    TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
+    size_t pos = find_first_elem(vec, 5);
+    return TestSystem::check(static_cast<size_t>(2), pos);
+}
+bool test_40_check_find_first_element_if_there_is_no_element() {
+    TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
+    bool expected_result = true;
+    bool actual_result = false;
+    try {
+        size_t pos = find_first_elem(vec, 11);
+    }
+    catch (const std::exception& ex) {
+        actual_result = true;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_41_check_find_last_element() {
+    TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
+    size_t pos = find_last_elem(vec, 5);
+    return TestSystem::check(static_cast < size_t>(4), pos);
+}
+bool test_42_check_find_last_element_if_there_is_no_element() {
+    TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
+    bool expected_result = true;
+    bool actual_result = false;
+    try {
+        size_t pos = find_last_elem(vec, 11);
+    }
+    catch (const std::exception& ex) {
+        actual_result = true;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_43_check_find_several_elements() {
+    TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 5, 9 });
+    size_t* actual_indexes = find_elem(vec, 5);
+    size_t expected_indexes[] = { 3, 2, 4, 8 };
+    bool expected_result = true;
+    bool actual_result = true;
+    for (size_t i = 0; i < 3; i++) {
+        if (actual_indexes[i] == expected_indexes[i])
+            actual_result &= true;
+        else
+            actual_result &= false;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_44_check_find_several_elements_if_there_is_no_element() {
+    TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 5, 9 });
+    bool expected_result = true;
+    bool actual_result = false;
+    try {
+        size_t* actual_indexes = find_elem(vec, 15);
+    }
+    catch (const std::exception& ex) {
+        actual_result = true;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
@@ -633,6 +692,21 @@ int main() {
         "TVector.test_37_check_shuffle_vector");
     TestSystem::start_test(test_38_check_hoara_sort,
         "TVector.test_38_check_hoara_sort");
+    TestSystem::start_test(test_39_check_find_first_element,
+        "TVector.test_39_check_find_first_element");
+    TestSystem::start_test(
+        test_40_check_find_first_element_if_there_is_no_element,
+        "TVector.test_40_check_find_first_element_if_there_is_no_element");
+    TestSystem::start_test(test_41_check_find_last_element,
+        "TVector.test_41_check_find_last_element");
+    TestSystem::start_test(
+        test_42_check_find_last_element_if_there_is_no_element,
+        "TVector.test_42_check_find_last_element_if_there_is_no_element");
+    TestSystem::start_test(test_43_check_find_several_elements,
+        "TVector.test_43_check_find_several_elements");
+    TestSystem::start_test(
+        test_44_check_find_several_elements_if_there_is_no_element,
+        "TVector.test_44_check_find_several_elements_if_there_is_no_element");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
