@@ -250,7 +250,8 @@ bool test_18_check_the_index_conversion_operator() {
 bool test_19_check_the_insertion_at_the_beginning_with_memory_reallocation() {
     TVector<int> vec(15, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     vec.push_front(55);
-    TVector<int> res(16, { 55, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
+    TVector<int> res(16,
+        { 55, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     bool expected_result = true;
     bool actual_result = (vec == res);
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
@@ -265,19 +266,21 @@ bool test_20_check_the_insertion_in_the_middle_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_21_check_the_insertion_in_the_middle_several_elements_with_memory_reallocation() {
+bool test_21_check_the_insertion_several_elems_with_memory_reallocation() {
     TVector<int> vec(14, { 6, 2, 3, 4, 5, 6, 7, 8, 5, 6, 7, 8, 9, 3 });
     vec.insert(2, 4, 99);
-    TVector<int> res(18, { 6, 2, 99, 99, 99, 99, 3, 4, 5, 6, 7, 8, 5, 6, 7, 8, 9, 3 });
+    TVector<int> res(18,
+        { 6, 2, 99, 99, 99, 99, 3, 4, 5, 6, 7, 8, 5, 6, 7, 8, 9, 3 });
     bool expected_result = true;
     bool actual_result = (vec == res);
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_22_check_the_insertion_in_the_middle_from_the_list_with_memory_reallocation() {
+bool test_22_check_the_insertion_from_the_list_with_memory_reallocation() {
     TVector<int> vec(13, { 6, 2, 3, 4, 5, 6, 7, 8, 99, 87, 5, 66, 7 });
     vec.insert(3, { 11, 22, 33 });
-    TVector<int> res(16, { 6, 2, 3, 11, 22, 33, 4, 5, 6, 7, 8, 99, 87, 5, 66, 7 });
+    TVector<int> res(16,
+        { 6, 2, 3, 11, 22, 33, 4, 5, 6, 7, 8, 99, 87, 5, 66, 7 });
     bool expected_result = true;
     bool actual_result = (vec == res);
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
@@ -335,10 +338,10 @@ int main() {
         "TVector.test_19_check_the_insertion_at_the_beginning_with_memory_reallocation");
     TestSystem::start_test(test_20_check_the_insertion_in_the_middle_with_memory_reallocation,
         "TVector.test_20_check_the_insertion_in_the_middle_with_memory_reallocation");
-    TestSystem::start_test(test_21_check_the_insertion_in_the_middle_several_elements_with_memory_reallocation,
-        "TVector.test_21_check_the_insertion_in_the_middle_several_elements_with_memory_reallocation");
-    TestSystem::start_test(test_22_check_the_insertion_in_the_middle_from_the_list_with_memory_reallocation,
-        "TVector.test_22_check_the_insertion_in_the_middle_from_the_list_with_memory_reallocation");
+    TestSystem::start_test(test_21_check_the_insertion_several_elems_with_memory_reallocation,
+        "TVector.test_21_check_the_insertion_several_elems_with_memory_reallocation");
+    TestSystem::start_test(test_22_check_the_insertion_from_the_list_with_memory_reallocation,
+        "TVector.test_22_check_the_insertion_from_the_list_with_memory_reallocation");
     TestSystem::start_test(test_23_check_the_insertion_at_the_end_with_memory_reallocation,
         "TVector.test_23_check_the_insertion_at_the_end_with_memory_reallocation");
     TestSystem::print_init_info();
