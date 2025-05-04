@@ -512,6 +512,25 @@ bool test_35_check_for_an_exception_when_interacting_with_an_empty_vector() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
+bool test_36_check_the_insertion_into_an_empty_vector() {
+    TVector<int> vec1;
+    vec1.push_front(1);
+    TVector<int> res1({ 1 });
+    TVector<int> vec2;
+    vec2.push_back(10);
+    TVector<int> res2({ 10 });
+    TVector<int> vec3;
+    vec3.insert(0, 88);
+    TVector<int> res3({ 88 });
+    bool expected_result = true;
+    bool actual_result = false;
+    if ((vec1 == res1) && (vec2 == res2) && (vec3 == res3))
+        actual_result = true;
+
+    return TestSystem::check(expected_result, actual_result);
+}
+
+
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
@@ -579,18 +598,22 @@ int main() {
         "TVector.test_28_check_the_insertion_after_deletion");
     TestSystem::start_test(test_29_check_the_replacement_by_index,
         "TVector.test_29_check_the_replacement_by_index");
-    TestSystem::start_test(test_30_check_the_replacement_by_index_after_deleted,
+    TestSystem::start_test(
+        test_30_check_the_replacement_by_index_after_deleted,
         "TVector.test_30_check_the_replacement_by_index_after_deleted");
     TestSystem::start_test(test_31_check_at, "TVector.test_31_check_at");
     TestSystem::start_test(test_32_check_assign_value,
         "TVector.test_32_check_assign_value");
     TestSystem::start_test(test_33_check_assign_list,
         "TVector.test_33_check_assign_list");
-    TestSystem::start_test(test_34_check_the_exception_when_going_out_of_bounds,
+    TestSystem::start_test(
+        test_34_check_the_exception_when_going_out_of_bounds,
         "TVector.test_34_check_the_exception_when_going_out_of_bounds");
     TestSystem::start_test(
         test_35_check_for_an_exception_when_interacting_with_an_empty_vector,
         "TVector.test_35_check_except_when_interacting_with_an_empty_vec");
+    TestSystem::start_test(test_36_check_the_insertion_into_an_empty_vector,
+        "TVector.test_36_check_the_insertion_into_an_empty_vector");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
