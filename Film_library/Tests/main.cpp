@@ -393,6 +393,29 @@ bool test_30_check_the_replacement_by_index_after_deleted() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
+bool test_31_check_at() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    int res = vec.at(4);
+    bool expected_result = true;
+    bool actual_result = (res == 5);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_32_check_assign_value() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.assign(4, 66);
+    TVector<int> res({ 66, 66, 66, 66 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_33_check_assign_list() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.assign({ 11, 22, 33, 44, 55, 66 });
+    TVector<int> res({ 11, 22, 33, 44, 55, 66 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(expected_result, actual_result);
+}
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
@@ -462,6 +485,11 @@ int main() {
         "TVector.test_29_check_the_replacement_by_index");
     TestSystem::start_test(test_30_check_the_replacement_by_index_after_deleted,
         "TVector.test_30_check_the_replacement_by_index_after_deleted");
+    TestSystem::start_test(test_31_check_at, "TVector.test_31_check_at");
+    TestSystem::start_test(test_32_check_assign_value,
+        "TVector.test_32_check_assign_value");
+    TestSystem::start_test(test_33_check_assign_list,
+        "TVector.test_33_check_assign_list");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
