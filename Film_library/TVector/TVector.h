@@ -415,9 +415,6 @@ void TVector<T>::pop_back() {
     size_t new_index = recalculate_the_position(_size - 1);
     _states[new_index] = empty;
     _size--;
-    if (_deleted >= 0.10 * (_size + _deleted)) {
-        reallocation_memory_for_deleted();
-    }
 }
 template <class T>
 void TVector<T>::clear() {

@@ -295,6 +295,48 @@ bool test_23_check_the_insertion_at_the_end_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
+bool test_24_check_for_deletion_from_the_beginning_with_memory_reallocation() {
+    TVector<int> vec(16, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+    vec.pop_front();
+    vec.pop_front();
+    vec.pop_front();
+    TVector<int> res(13, { 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_25_check_for_deletion_from_the_middle_with_memory_reallocation() {
+    TVector<int> vec(16, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+    vec.erase(4);
+    vec.erase(3);
+    vec.erase(5);
+    TVector<int> res(13, { 1, 2, 3, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_26_check_for_deletion_from_the_back() {
+    TVector<int> vec(16, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+    vec.pop_back();
+    vec.pop_back();
+    vec.pop_back();
+    TVector<int> res(13, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_27_check_for_complete_deletion() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.clear();
+    TVector<int> res;
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(expected_result, actual_result) &&
+        TestSystem::check(static_cast<size_t>(0), vec.size());
+}
 
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
@@ -349,6 +391,16 @@ int main() {
     TestSystem::start_test(
         test_23_check_the_insertion_at_the_end_with_memory_reallocation,
         "TVector.test_23_check_the_insertion_at_the_end_with_reallocation");
+    TestSystem::start_test(
+        test_24_check_for_deletion_from_the_beginning_with_memory_reallocation,
+        "TVector.test_24_check_for_deletion_from_the_beginning_with_realloc");
+    TestSystem::start_test(
+        test_25_check_for_deletion_from_the_middle_with_memory_reallocation,
+        "TVector.test_25_check_for_deletion_from_the_middle_with_realloc");
+    TestSystem::start_test(test_26_check_for_deletion_from_the_back,
+        "TVector.test_26_check_for_deletion_from_the_back");
+    TestSystem::start_test(test_27_check_for_complete_deletion,
+        "TVector.test_27_check_for_complete_deletion");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
