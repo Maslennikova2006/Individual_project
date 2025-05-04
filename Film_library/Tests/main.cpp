@@ -416,6 +416,102 @@ bool test_33_check_assign_list() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
+bool test_34_check_the_exception_when_going_out_of_bounds() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool actual_result = true;
+    bool expected_result = true;
+    try {
+        vec.insert(11, { 2, 3, 4 });
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.insert(11, 2, 77);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.insert(12, 55);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.erase(12);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.erase(7, 18);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.replace(12, 8);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_35_check_for_an_exception_when_interacting_with_an_empty_vector() {
+    TVector<int> vec;
+    bool actual_result = true;
+    bool expected_result = true;
+    try {
+        vec.pop_front();
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.pop_back();
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.clear();
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.erase(10);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.erase(7, 18);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        vec.replace(12, 8);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
@@ -490,6 +586,11 @@ int main() {
         "TVector.test_32_check_assign_value");
     TestSystem::start_test(test_33_check_assign_list,
         "TVector.test_33_check_assign_list");
+    TestSystem::start_test(test_34_check_the_exception_when_going_out_of_bounds,
+        "TVector.test_34_check_the_exception_when_going_out_of_bounds");
+    TestSystem::start_test(
+        test_35_check_for_an_exception_when_interacting_with_an_empty_vector,
+        "TVector.test_35_check_for_an_exception_when_interacting_with_an_empty_vec");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
