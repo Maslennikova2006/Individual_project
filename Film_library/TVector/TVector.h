@@ -291,12 +291,13 @@ void TVector<T>::push_front(const T& value) noexcept {
     if (is_full()) {
         reallocation_memory(_size + 1);
     }
-    for (int i = _size + _deleted; i > 0; i--) {
+    size_t new_index = recalculate_the_position(0);
+    for (int i = _size + _deleted; i > new_index; i--) {
         _data[i] = _data[i - 1];
         _states[i] = busy;
     }
-    _data[0] = value;
-    _states[0] = busy;
+    _data[new_index] = value;
+    _states[new_index] = busy;
     _size++;
 }
 template <class T>
@@ -354,8 +355,79 @@ void TVector<T>::push_back(const T& value) noexcept {
     if (is_full()) {
         reallocation_memory(_size + 1);
     }
-    _data[_size] = value;
-    _states[_size++] = busy;
+    size_t new_index = recalculate_the_position(_size - 1) + 1;
+    _data[new_index] = value;
+    _states[new_index] = busy;
+    _size++;
+}
+
+template <class T>
+void TVector<T>::pop_front() {
+    if (is_empty())
+        throw std::invalid_argument("Cannot be deleted from an empty vector\n");
+    size_t new_index = recalculate_the_position(0);
+    _states[new_index] = deleted;
+    _deleted++;
+    _size--;
+    if (_deleted >= 0.10 * (_size + _deleted)) {
+        reallocation_memory_for_deleted();
+    }
+}
+template <class T>
+void TVector<T>::erase(size_t index) {
+    if (is_empty())
+        throw std::invalid_argument("Cannot be deleted from an empty vector\n");
+    if (index > _size)
+        throw std::invalid_argument("The index goes beyond the boundaries\n");
+    size_t new_index = recalculate_the_position(index);
+    _states[new_index] = deleted;
+    _size--;
+    _deleted++;
+    if (_deleted >= 0.10 * (_size + _deleted)) {
+        reallocation_memory_for_deleted();
+    }
+}
+template <class T>
+void TVector<T>::erase(const size_t first, const size_t last) {
+    if (is_empty())
+        throw std::invalid_argument("Cannot be deleted from an empty vector\n");
+    if (first > last || last >= _size)
+        throw std::invalid_argument("The index goes beyond the boundaries\n");
+    size_t new_first = recalculate_the_position(first);
+    size_t new_last = recalculate_the_position(last);
+    size_t count_busy_deleted = 0;
+    for (size_t i = new_first; i <= new_last; i++) {
+        if (_states[i] == busy) {
+            _states[i] = deleted;
+            count_busy_deleted++;
+        }
+    }
+    _deleted += count_busy_deleted;
+    _size -= count_busy_deleted;
+    if (_deleted >= 0.10 * (_size + _deleted)) {
+        reallocation_memory_for_deleted();
+    }
+}
+template <class T>
+void TVector<T>::pop_back() {
+    if (is_empty())
+        throw std::invalid_argument("Cannot be deleted from an empty vector\n");
+    size_t new_index = recalculate_the_position(_size - 1);
+    _states[new_index] = empty;
+    _size--;
+    if (_deleted >= 0.10 * (_size + _deleted)) {
+        reallocation_memory_for_deleted();
+    }
+}
+template <class T>
+void TVector<T>::clear() {
+    if (is_empty())
+        throw std::invalid_argument("Cannot be deleted from an empty vector\n");
+    for (size_t i = 0; i < _size + _deleted; i++) {
+        _states[i] = empty;
+    }
+    _deleted = 0;
+    _size = 0;
 }
 
 template <class T>
