@@ -216,7 +216,8 @@ int main() {
         "TVector.test_7_check_reserve_with_increasing_capacity");
     TestSystem::start_test(test_8_check_resize_with_decreasing_size,
         "TVector.test_8_check_resize_with_decreasing_size");
-    TestSystem::start_test(test_9_check_resize_with_increasing_size_and_capacity,
+    TestSystem::
+        start_test(test_9_check_resize_with_increasing_size_and_capacity,
         "TVector.test_9_check_resize_with_increasing_size_and_capacity");
     TestSystem::start_test(test_10_check_resize_with_filling_in_the_value,
         "TVector.test_10_check_resize_with_filling_in_the_value");
