@@ -363,6 +363,36 @@ bool test_28_check_the_insertion_after_deletion() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
+bool test_29_check_the_replacement_by_index() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.replace(4, 77);
+    TVector<int> res({ 1, 2, 3, 4, 77, 6, 7, 8, 9, 10 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_30_check_the_replacement_by_index_after_deleted() {
+    int* mass = new int[100];
+    for (int i = 0; i < 100; i++) {
+        mass[i] = i + 1;
+    }
+    TVector<int> vec(100, mass);
+    vec.erase(3);
+    vec.pop_front();
+    vec.pop_back();
+    vec.erase(3);
+    vec.replace(4, 55);
+    TVector<int> res({ 2, 3, 5, 7, 55, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+        33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48,
+        49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64,
+        65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
+        81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96,
+        97, 98, 99 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(expected_result, actual_result);
+}
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
@@ -428,6 +458,10 @@ int main() {
         "TVector.test_27_check_for_complete_deletion");
     TestSystem::start_test(test_28_check_the_insertion_after_deletion,
         "TVector.test_28_check_the_insertion_after_deletion");
+    TestSystem::start_test(test_29_check_the_replacement_by_index,
+        "TVector.test_29_check_the_replacement_by_index");
+    TestSystem::start_test(test_30_check_the_replacement_by_index_after_deleted,
+        "TVector.test_30_check_the_replacement_by_index_after_deleted");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;

@@ -428,6 +428,16 @@ void TVector<T>::clear() {
 }
 
 template <class T>
+void TVector<T>::replace(size_t index, const T& value) {
+    if (is_empty())
+        throw std::invalid_argument("It is impossible to replace an element in an empty vector\n");
+    if (index >= _size)
+        throw std::invalid_argument("The index goes beyond the boundaries\n");
+    size_t new_index = recalculate_the_position(index);
+    _data[new_index] = value;
+}
+
+template <class T>
 TVector<T>& TVector<T>::operator=(const TVector<T>& other) noexcept {
     if (this == &other)
         return *this;
