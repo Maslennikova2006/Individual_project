@@ -605,6 +605,25 @@ bool test_44_check_find_several_elements_if_there_is_no_element() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
+bool test_45_check_the_exception_when_accessing_the_index() {
+    TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 5, 9 });
+    bool expected_result = true;
+    bool actual_result_1 = false;
+    bool actual_result_2 = false;
+    try {
+        size_t value = vec[10];
+    }
+    catch (const std::exception& ex) {
+        actual_result_1 = true;
+    }
+    try {
+        vec[10] = 55;
+    }
+    catch (const std::exception& ex) {
+        actual_result_2 = true;
+    }
+    return TestSystem::check(expected_result, actual_result_1 && actual_result_2);
+}
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
@@ -707,6 +726,9 @@ int main() {
     TestSystem::start_test(
         test_44_check_find_several_elements_if_there_is_no_element,
         "TVector.test_44_check_find_several_elements_if_there_is_no_element");
+    TestSystem::start_test(
+        test_45_check_the_exception_when_accessing_the_index,
+        "TVector.test_45_check_the_exception_when_accessing_the_index");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
