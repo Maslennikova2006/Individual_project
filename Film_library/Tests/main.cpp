@@ -537,6 +537,14 @@ bool test_37_check_shuffle_vector() {
     bool actual_result = (vec1 != vec2);
     return TestSystem::check(expected_result, actual_result);
 }
+bool test_38_check_hoara_sort() {
+    TVector<int> vec({ 2, 7, 3, 9, 28, 38, 93, 9, 6, 4, 2 });
+    hoara_sort(vec);
+    TVector<int> res({ 2, 2, 3, 4, 6, 7, 9, 9, 28, 38, 93 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(expected_result, actual_result);
+}
 
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
@@ -623,6 +631,8 @@ int main() {
         "TVector.test_36_check_the_insertion_into_an_empty_vector");
     TestSystem::start_test(test_37_check_shuffle_vector,
         "TVector.test_37_check_shuffle_vector");
+    TestSystem::start_test(test_38_check_hoara_sort,
+        "TVector.test_38_check_hoara_sort");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;

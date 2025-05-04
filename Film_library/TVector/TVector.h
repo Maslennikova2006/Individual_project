@@ -11,6 +11,8 @@
 enum State { empty, busy, deleted };
 
 template <class T> class TVector;
+template <class T> void hoara_sort(TVector<T>& data);
+template <class T> void hoara_sort_rec(TVector<T>& data, size_t left, size_t right);
 template <class T> void shuffle(TVector<T>& data);
 
 template <class T>
@@ -72,6 +74,8 @@ class TVector {
     inline bool is_empty() const noexcept;
     void print() const noexcept;
 
+    friend void hoara_sort_rec<T>(TVector<T>& data, size_t left, size_t right);
+    friend void hoara_sort<T>(TVector<T>& data);
     friend void shuffle<T>(TVector<T>& data);
 
  private:
@@ -630,7 +634,36 @@ size_t TVector<T>::recalculate_the_address(size_t index) const noexcept {
 }
 #endif  // FILM_LIBRARY_TVECTOR_TVECTOR_H_
 
-
+template <class T>
+void hoara_sort(TVector<T>& data) {
+    if (data.size() < 2) return;
+    hoara_sort_rec(data, 0, data.size() - 1);
+}
+template <class T>
+void hoara_sort_rec(TVector<T>& data, size_t left, size_t right) {
+    if (left < right) {
+        size_t base = (left + right) / 2;
+        size_t l = left, r = right;
+        const T base_value = data[base];
+        while (l <= r) {
+            while (data[l] < base_value) {
+                l++;
+            }
+            while (data[r] > base_value) {
+                r--;
+            }
+            if (l <= r) {
+                data.my_swap(data[l], data[r]);
+                l++;
+                if (r > 0)
+                    r--;
+            }
+            else { break; } // ??
+        }
+        hoara_sort_rec(data, left, r);
+        hoara_sort_rec(data, l, right);
+    }
+}
 template <class T>
 void shuffle(TVector<T>& data) {
     int i, rand_i;
