@@ -622,7 +622,8 @@ bool test_45_check_the_exception_when_accessing_the_index() {
     catch (const std::exception& ex) {
         actual_result_2 = true;
     }
-    return TestSystem::check(expected_result, actual_result_1 && actual_result_2);
+    return TestSystem::check
+    (expected_result, actual_result_1 && actual_result_2);
 }
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
