@@ -439,6 +439,43 @@ void TVector<T>::replace(size_t index, const T& value) {
 }
 
 template <class T>
+const T& TVector<T>::at(size_t index) const {
+    if (index >= _size) {
+        throw std::invalid_argument("The index goes beyond the boundaries\n");
+    }
+    size_t new_index = recalculate_the_position(index);
+    return _data[new_index];
+}
+template <class T>
+void TVector<T>::assign(size_t count, const T& value) {
+    set_memory(count);
+    _deleted = 0;
+    size_t i = 0;
+    for (i; i < count; i++) {
+        _data[i] = value;
+        _states[i] = busy;
+    }
+    while (i < _capacity) {
+        _states[i++] = empty;
+    }
+}
+template <class T>
+void TVector<T>::assign(std::initializer_list<T> data) {
+    size_t size = data.size();
+    set_memory(size);
+    _deleted = 0;
+    size_t i = 0;
+    auto it = data.begin();
+    for (i; it != data.end(); i++, it++) {
+        _data[i] = *it;
+        _states[i] = busy;
+    }
+    while (i < _capacity) {
+        _states[i++] = empty;
+    }
+}
+
+template <class T>
 TVector<T>& TVector<T>::operator=(const TVector<T>& other) noexcept {
     if (this == &other)
         return *this;
