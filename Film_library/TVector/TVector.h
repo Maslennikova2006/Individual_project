@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <stdexcept>
 #include <initializer_list>
+#include <iostream>
 #ifndef FILM_LIBRARY_TVECTOR_TVECTOR_H_
 #define FILM_LIBRARY_TVECTOR_TVECTOR_H_
 
@@ -286,6 +287,78 @@ void TVector<T>::shrink_to_fit() noexcept {
 }
 
 template <class T>
+void TVector<T>::push_front(const T& value) noexcept {
+    if (is_full()) {
+        reallocation_memory(_size + 1);
+    }
+    for (int i = _size + _deleted; i > 0; i--) {
+        _data[i] = _data[i - 1];
+        _states[i] = busy;
+    }
+    _data[0] = value;
+    _states[0] = busy;
+    _size++;
+}
+template <class T>
+void TVector<T>::insert(const size_t index, const T& value) {
+    if (index > _size)
+        throw std::invalid_argument("The index goes beyond the boundaries\n");
+    if (is_full())
+        reallocation_memory(_size + 1);
+    size_t new_index = recalculate_the_position(index);
+    for (size_t i = _size + _deleted; i > new_index; i--) {
+        _data[i] = _data[i - 1];
+        _states[i] = _states[i - 1];
+    }
+    _data[new_index] = value;
+    _states[new_index] = busy;
+    _size++;
+}
+template <class T>
+void TVector<T>::insert(const size_t index, size_t count, const T& value) {
+    if (index > _size)
+        throw std::invalid_argument("The index goes beyond the boundaries\n");
+    if (_size + _deleted + count > _capacity)
+        reallocation_memory(_size + count);
+    size_t new_index = recalculate_the_position(index);
+    for (size_t i = _size + _deleted; i > new_index; i--) {
+        _data[i + count - 1] = _data[i - 1];
+        _states[i + count - 1] = _states[i - 1];
+    }
+    for (size_t i = 0; i < count; i++) {
+        _data[new_index + i] = value;
+        _states[new_index + i] = busy;
+    }
+    _size += count;
+}
+template <class T>
+void TVector<T>::insert(const size_t index, std::initializer_list<T> data) {
+    if (index > _size)
+        throw std::invalid_argument("The index goes beyond the boundaries\n");
+    if (_size + _deleted + data.size() > _capacity)
+        reallocation_memory(_size + data.size());
+    size_t new_index = recalculate_the_position(index);
+    for (size_t i = _size + _deleted; i > new_index; i--) {
+        _data[i + data.size() - 1] = _data[i - 1];
+        _states[i + data.size() - 1] = _states[i - 1];
+    }
+    auto it = data.begin();
+    for (size_t i = 0; i < data.size(); i++) {
+        _data[new_index + i] = *(it + i);
+        _states[new_index + i] = busy;
+    }
+    _size += data.size();
+}
+template <class T>
+void TVector<T>::push_back(const T& value) noexcept {
+    if (is_full()) {
+        reallocation_memory(_size + 1);
+    }
+    _data[_size] = value;
+    _states[_size++] = busy;
+}
+
+template <class T>
 TVector<T>& TVector<T>::operator=(const TVector<T>& other) noexcept {
     if (this == &other)
         return *this;
@@ -346,6 +419,14 @@ template <class T>
 inline bool TVector<T>::is_empty() const noexcept {
     return _size == 0;
 }
+template <class T>
+void TVector<T>::print() const noexcept {
+    for (size_t i = 0; i < _size + _deleted; i++) {
+        if (_states[i] == busy)
+            std::cout << _data[i] << " ";
+    }
+    std::cout << std::endl;
+}
 
 template <class T>
 inline bool TVector<T>::is_full() const noexcept {
@@ -366,7 +447,6 @@ void TVector<T>::set_memory(size_t size) noexcept {
 template <class T>
 void TVector<T>::reallocation_memory(size_t count) noexcept {
     size_t new_capacity = (count / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
-    _size = count;
     reserve(new_capacity);
 }
 template <class T>
