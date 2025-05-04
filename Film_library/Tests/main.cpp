@@ -334,16 +334,21 @@ int main() {
         "TVector.test_17_check_the_index_conversion_operator");
     TestSystem::start_test(test_18_check_the_index_conversion_operator,
         "TVector.test_18_check_the_index_conversion_operator");
-    TestSystem::start_test(test_19_check_the_insertion_at_the_beginning_with_memory_reallocation,
-        "TVector.test_19_check_the_insertion_at_the_beginning_with_memory_reallocation");
-    TestSystem::start_test(test_20_check_the_insertion_in_the_middle_with_memory_reallocation,
-        "TVector.test_20_check_the_insertion_in_the_middle_with_memory_reallocation");
-    TestSystem::start_test(test_21_check_the_insertion_several_elems_with_memory_reallocation,
-        "TVector.test_21_check_the_insertion_several_elems_with_memory_reallocation");
-    TestSystem::start_test(test_22_check_the_insertion_from_the_list_with_memory_reallocation,
-        "TVector.test_22_check_the_insertion_from_the_list_with_memory_reallocation");
-    TestSystem::start_test(test_23_check_the_insertion_at_the_end_with_memory_reallocation,
-        "TVector.test_23_check_the_insertion_at_the_end_with_memory_reallocation");
+    TestSystem::start_test(
+        test_19_check_the_insertion_at_the_beginning_with_memory_reallocation,
+        "TVector.test_19_check_the_insertion_at_the_beginning_with_reallocation");
+    TestSystem::start_test(
+        test_20_check_the_insertion_in_the_middle_with_memory_reallocation,
+        "TVector.test_20_check_the_insertion_in_the_middle_with_reallocation");
+    TestSystem::start_test(
+        test_21_check_the_insertion_several_elems_with_memory_reallocation,
+        "TVector.test_21_check_the_insertion_several_elems_with_reallocation");
+    TestSystem::start_test(
+        test_22_check_the_insertion_from_the_list_with_memory_reallocation,
+        "TVector.test_22_check_the_insertion_from_the_list_with_reallocation");
+    TestSystem::start_test(
+        test_23_check_the_insertion_at_the_end_with_memory_reallocation,
+        "TVector.test_23_check_the_insertion_at_the_end_with_reallocation");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
