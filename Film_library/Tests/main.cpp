@@ -529,7 +529,14 @@ bool test_36_check_the_insertion_into_an_empty_vector() {
 
     return TestSystem::check(expected_result, actual_result);
 }
-
+bool test_37_check_shuffle_vector() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+    TVector<int> vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+    bool expected_result = true;
+    shuffle(vec2);
+    bool actual_result = (vec1 != vec2);
+    return TestSystem::check(expected_result, actual_result);
+}
 
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
@@ -614,6 +621,8 @@ int main() {
         "TVector.test_35_check_except_when_interacting_with_an_empty_vec");
     TestSystem::start_test(test_36_check_the_insertion_into_an_empty_vector,
         "TVector.test_36_check_the_insertion_into_an_empty_vector");
+    TestSystem::start_test(test_37_check_shuffle_vector,
+        "TVector.test_37_check_shuffle_vector");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;

@@ -3,11 +3,15 @@
 #include <stdexcept>
 #include <initializer_list>
 #include <iostream>
+#include <random>
 #ifndef FILM_LIBRARY_TVECTOR_TVECTOR_H_
 #define FILM_LIBRARY_TVECTOR_TVECTOR_H_
 
 #define STEP_OF_CAPACITY 15
 enum State { empty, busy, deleted };
+
+template <class T> class TVector;
+template <class T> void shuffle(TVector<T>& data);
 
 template <class T>
 class TVector {
@@ -67,6 +71,8 @@ class TVector {
 
     inline bool is_empty() const noexcept;
     void print() const noexcept;
+
+    friend void shuffle<T>(TVector<T>& data);
 
  private:
     inline bool is_full() const noexcept;
@@ -588,6 +594,19 @@ void TVector<T>::reallocation_memory_for_deleted() noexcept {
     _deleted = 0;
 }
 template <class T>
+void TVector<T>::my_swap(T& first_number, T& second_number) const noexcept {
+    T tmp = first_number;
+    first_number = second_number;
+    second_number = tmp;
+}
+template <class T>
+size_t TVector<T>::rand_generation(size_t min, size_t max) const noexcept {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<size_t> dist(min, max);
+    return dist(gen);
+}
+template <class T>
 size_t TVector<T>::recalculate_the_position(size_t index) const noexcept {
     size_t count_busy = 0;
     for (size_t i = 0; i < _size + _deleted; i++) {
@@ -610,3 +629,13 @@ size_t TVector<T>::recalculate_the_address(size_t index) const noexcept {
     }
 }
 #endif  // FILM_LIBRARY_TVECTOR_TVECTOR_H_
+
+
+template <class T>
+void shuffle(TVector<T>& data) {
+    int i, rand_i;
+    for (i = 0; i < data._size + data._deleted; i++) {
+        rand_i = data.rand_generation(0, data._size + data._deleted - 1);
+        data.my_swap(data[i], data[rand_i]);
+    }
+}
