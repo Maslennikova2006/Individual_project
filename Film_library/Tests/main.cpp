@@ -296,7 +296,8 @@ bool test_23_check_the_insertion_at_the_end_with_memory_reallocation() {
         TestSystem::check(expected_result, actual_result);
 }
 bool test_24_check_for_deletion_from_the_beginning_with_memory_reallocation() {
-    TVector<int> vec(16, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+    TVector<int> vec(16,
+        { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
     vec.pop_front();
     vec.pop_front();
     vec.pop_front();
@@ -307,7 +308,8 @@ bool test_24_check_for_deletion_from_the_beginning_with_memory_reallocation() {
         TestSystem::check(expected_result, actual_result);
 }
 bool test_25_check_for_deletion_from_the_middle_with_memory_reallocation() {
-    TVector<int> vec(16, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+    TVector<int> vec(16,
+        { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
     vec.erase(4);
     vec.erase(3);
     vec.erase(5);
@@ -318,7 +320,8 @@ bool test_25_check_for_deletion_from_the_middle_with_memory_reallocation() {
         TestSystem::check(expected_result, actual_result);
 }
 bool test_26_check_for_deletion_from_the_back() {
-    TVector<int> vec(16, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
+    TVector<int> vec(16,
+        { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
     vec.pop_back();
     vec.pop_back();
     vec.pop_back();
