@@ -58,9 +58,9 @@ class TVector {
     void assign(size_t count, const T& value);
     void assign(std::initializer_list<T> data);
 
-    TVector<T>& operator=(const TVector<T>& other);
-    bool operator!=(const TVector<T>& other);
-    bool operator==(const TVector<T>& other);
+    TVector<T>& operator=(const TVector<T>& other) noexcept;
+    bool operator!=(const TVector<T>& other) const noexcept;
+    bool operator==(const TVector<T>& other) const noexcept;
     const T& operator[](size_t index) const;
     T& operator[](size_t index);
 
@@ -286,7 +286,7 @@ void TVector<T>::shrink_to_fit() noexcept {
 }
 
 template <class T>
-TVector<T>& TVector<T>::operator=(const TVector<T>& other) {
+TVector<T>& TVector<T>::operator=(const TVector<T>& other) noexcept {
     if (this == &other)
         return *this;
     size_t size = other._size;
@@ -299,11 +299,11 @@ TVector<T>& TVector<T>::operator=(const TVector<T>& other) {
     return *this;
 }
 template <class T>
-bool TVector<T>::operator!=(const TVector<T>& other) {
+bool TVector<T>::operator!=(const TVector<T>& other) const noexcept {
     return !(this->operator==(other));
 }
 template <class T>
-bool TVector<T>::operator==(const TVector<T>& other) {
+bool TVector<T>::operator==(const TVector<T>& other) const noexcept {
     if (_size != other._size) {
         return false;
     }

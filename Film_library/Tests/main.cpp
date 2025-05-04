@@ -152,7 +152,35 @@ bool test_5_check_the_copy_constructor() {
         TestSystem::check(true, check_address_data) &&
         TestSystem::check(true, check_correct_values_data);
 }
-bool test_6_check_reserve_with_decreasing_capacity() {
+bool test_6_check_for_equivalence() {
+    int array[4] = { 1, 2, 3, 4 };
+    TVector<int> vec1(4, array), vec2(4, { 1, 2, 3, 4 });
+    bool expected_result = true;
+    bool actual_result = (vec1 == vec2);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_7_check_for_equivalence() {
+    int array[4] = { 1, 2, 3, 4 };
+    TVector<int> vec1(4, array), vec2(4, { 1, 2, 3, 4 });
+    bool expected_result = false;
+    bool actual_result = (vec1 != vec2);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_8_check_for_not_equivalence() {
+    int array[4] = { 1, 2, 3, 4 };
+    TVector<int> vec1(4, array), vec2(5, { 1, 2, 3, 4, 5 });
+    bool expected_result = true;
+    bool actual_result = (vec1 != vec2);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_9_check_for_not_equivalence() {
+    int array[5] = { 1, 2, 3, 4, 5 };
+    TVector<int> vec1(5, array), vec2(4, { 1, 2, 3, 4 });
+    bool expected_result = false;
+    bool actual_result = (vec1 == vec2);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_10_check_reserve_with_decreasing_capacity() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.reserve(5);
     TVector<int> res({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
@@ -160,12 +188,12 @@ bool test_6_check_reserve_with_decreasing_capacity() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_7_check_reserve_with_increasing_capacity() {
+bool test_11_check_reserve_with_increasing_capacity() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.reserve(25);
     return TestSystem::check(static_cast<size_t>(25), vec.capacity());
 }
-bool test_8_check_resize_with_decreasing_size() {
+bool test_12_check_resize_with_decreasing_size() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.resize(5);
     TVector<int> res({ 1, 2, 3, 4, 5 });
@@ -173,13 +201,13 @@ bool test_8_check_resize_with_decreasing_size() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_9_check_resize_with_increasing_size_and_capacity() {
+bool test_13_check_resize_with_increasing_size_and_capacity() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.resize(16);
     return TestSystem::check(static_cast<size_t>(16), vec.size()) &&
         TestSystem::check(static_cast<size_t>(30), vec.capacity());
 }
-bool test_10_check_resize_with_filling_in_the_value() {
+bool test_14_check_resize_with_filling_in_the_value() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.resize(16, 0);
     TVector<int> res({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0, 0, 0, 0, 0, 0 });
@@ -189,7 +217,7 @@ bool test_10_check_resize_with_filling_in_the_value() {
         TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_11_check_shrink_to_fit() {
+bool test_15_check_shrink_to_fit() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.shrink_to_fit();
     TVector<int> res({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
@@ -198,6 +226,26 @@ bool test_11_check_shrink_to_fit() {
     return TestSystem::check(static_cast<size_t>(10), vec.size()) &&
         TestSystem::check(static_cast<size_t>(10), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
+}
+bool test_16_check_the_assignment_operator() {
+    TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    TVector<int> vec2;
+    vec2 = vec1;
+    bool expected_result = true;
+    bool actual_result = (vec2 == vec1);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_17_check_the_index_conversion_operator() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_value = 4;
+    int actual_value = vec[3];
+    return TestSystem::check(expected_value, actual_value);
+}
+bool test_18_check_the_index_conversion_operator() {
+    TVector<int> vec({ 1, 2, 3, 4, 5 });
+    int expected_value = 5;
+    vec[3] = 5;
+    return TestSystem::check(expected_value, vec[3]);
 }
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
@@ -210,19 +258,33 @@ int main() {
         "TVector.test_4_throw_when_try_copy_vector");
     TestSystem::start_test(test_5_check_the_copy_constructor,
         "TVector.test_5_check_the_copy_constructor");
-    TestSystem::start_test(test_6_check_reserve_with_decreasing_capacity,
-        "TVector.test_6_check_reserve_with_decreasing_capacity");
-    TestSystem::start_test(test_7_check_reserve_with_increasing_capacity,
-        "TVector.test_7_check_reserve_with_increasing_capacity");
-    TestSystem::start_test(test_8_check_resize_with_decreasing_size,
-        "TVector.test_8_check_resize_with_decreasing_size");
+    TestSystem::start_test(test_6_check_for_equivalence,
+        "TVector.test_6_check_for_equivalence");
+    TestSystem::start_test(test_7_check_for_equivalence,
+        "TVector.test_7_check_for_equivalence");
+    TestSystem::start_test(test_8_check_for_not_equivalence,
+        "TVector.test_8_check_for_not_equivalence");
+    TestSystem::start_test(test_9_check_for_not_equivalence,
+        "TVector.test_9_check_for_not_equivalence");
+    TestSystem::start_test(test_10_check_reserve_with_decreasing_capacity,
+        "TVector.test_10_check_reserve_with_decreasing_capacity");
+    TestSystem::start_test(test_11_check_reserve_with_increasing_capacity,
+        "TVector.test_11_check_reserve_with_increasing_capacity");
+    TestSystem::start_test(test_12_check_resize_with_decreasing_size,
+        "TVector.test_12_check_resize_with_decreasing_size");
     TestSystem::
-        start_test(test_9_check_resize_with_increasing_size_and_capacity,
-        "TVector.test_9_check_resize_with_increasing_size_and_capacity");
-    TestSystem::start_test(test_10_check_resize_with_filling_in_the_value,
-        "TVector.test_10_check_resize_with_filling_in_the_value");
-    TestSystem::start_test(test_11_check_shrink_to_fit,
-        "TVector.test_11_check_shrink_to_fit");
+        start_test(test_13_check_resize_with_increasing_size_and_capacity,
+        "TVector.test_13_check_resize_with_increasing_size_and_capacity");
+    TestSystem::start_test(test_14_check_resize_with_filling_in_the_value,
+        "TVector.test_14_check_resize_with_filling_in_the_value");
+    TestSystem::start_test(test_15_check_shrink_to_fit,
+        "TVector.test_15_check_shrink_to_fit");
+    TestSystem::start_test(test_16_check_the_assignment_operator,
+        "TVector.test_16_check_the_assignment_operator");
+    TestSystem::start_test(test_17_check_the_index_conversion_operator,
+        "TVector.test_17_check_the_index_conversion_operator");
+    TestSystem::start_test(test_18_check_the_index_conversion_operator,
+        "TVector.test_18_check_the_index_conversion_operator");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
