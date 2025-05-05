@@ -673,17 +673,24 @@ void hoara_sort_rec(TVector<T>& data, size_t left, size_t right) {
 }
 template<class T>
 size_t find_first_elem(const TVector<T>& data, const T& value) {
+    size_t count_deleted = 0;
     for (size_t i = 0; i < data._size + data._deleted; i++) {
-        if (data._data[i] == value && data._states[i] == busy)
-            return i;
+        if (data._states[i] == deleted)
+            count_deleted++;
+        if (data._data[i] == value && data._states[i] == busy) {
+            return i - count_deleted;
+        }
     }
     throw std::invalid_argument("The element was not found in the vector!\n");
 }
 template <class T>
 size_t find_last_elem(const TVector<T>& data, T value) {
+    size_t count_deleted = 0;
     for (int i = data._size + data._deleted - 1; i >= 0; i--) {
+        if (data._states[i] != busy)
+            count_deleted++;
         if (data._data[i] == value && data._states[i] == busy)
-            return i;
+            return i - data._deleted + count_deleted;
     }
     throw std::invalid_argument("The element was not found in the vector!\n");
 }
@@ -698,13 +705,16 @@ size_t* find_elem(const TVector<T>& data, T value) {
     if (count_repetitions == 0)
         throw std::invalid_argument
         ("The element was not found in the vector!\n");
+    size_t count_deleted = 0;
     size_t* result = new size_t[count_repetitions + 1];
     result[0] = count_repetitions;
     if (count_repetitions > 0) {
         size_t  index = 1;
         for (size_t i = 0; i < data._size + data._deleted; i++) {
+            if (data._states[i] == deleted)
+                count_deleted++;
             if (data._data[i] == value && data._states[i] == busy) {
-                result[index++] = i;
+                result[index++] = i - count_deleted;
             }
         }
     }

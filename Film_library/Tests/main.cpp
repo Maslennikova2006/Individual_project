@@ -625,6 +625,61 @@ bool test_45_check_the_exception_when_accessing_the_index() {
     return TestSystem::check
     (expected_result, actual_result_1 && actual_result_2);
 }
+bool test_46_check_find_first_elem_after_deletion() {
+    int* mass = new int[100];
+    for (int i = 0; i < 100; i++) {
+        mass[i] = i + 1;
+    }
+    TVector<int> vec(100, mass);
+    vec.erase(3);
+    vec.pop_front();
+    vec.pop_back();
+    vec.erase(3);
+    size_t pos = find_first_elem(vec, 7);
+    bool expected_result = true;
+    bool actual_result = (pos == 3);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_47_check_find_last_elem_after_deletion() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
+        35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
+        53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70,
+        71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88,
+        89, 90, 91, 92, 93, 94, 95, 96, 7, 97, 98, 99, 100 });
+    vec.erase(3);
+    vec.pop_front();
+    vec.pop_back();
+    vec.erase(3);
+    size_t pos = find_last_elem(vec, 7);
+    bool expected_result = true;
+    bool actual_result = (pos == 93);
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_48_check_find_all_elements_after_deletion() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 7, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
+        34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+        52, 53, 54, 7, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+        69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86,
+        7, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100 });
+    vec.erase(3);
+    vec.pop_front();
+    vec.pop_back();
+    vec.erase(30);
+    vec.erase(3);
+    size_t* indexes = find_elem(vec, 7);
+    size_t right_indexes[] = { 4, 3, 17, 51, 84 };
+    bool actual_result = true;
+    bool expected_result = true;
+    for (size_t i = 0; i < 5; i++) {
+        if (indexes[i] == right_indexes[i])
+            actual_result &= true;
+        else
+            actual_result &= false;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
         "TVector.test_1_check_the_default_constructor");
@@ -730,6 +785,12 @@ int main() {
     TestSystem::start_test(
         test_45_check_the_exception_when_accessing_the_index,
         "TVector.test_45_check_the_exception_when_accessing_the_index");
+    TestSystem::start_test(test_46_check_find_first_elem_after_deletion,
+        "TVector.test_46_check_find_first_elem_after_deletion");
+    TestSystem::start_test(test_47_check_find_last_elem_after_deletion,
+        "TVector.test_47_check_find_last_elem_after_deletion");
+    TestSystem::start_test(test_48_check_find_all_elements_after_deletion,
+        "TVector.test_48_check_find_all_elements_after_deletion");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
