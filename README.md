@@ -25,6 +25,6 @@
 
 ![Схема классов](source/Scheme.png)
 
-[Description of the study std::vector](/source/Description%20of%20the%20study%20Vector.pdf)
+[Description of the study std::vector](/source/Vector_research.pdf)
 
 
