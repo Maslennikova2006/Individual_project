@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <Windows.h>
+#include <string>
 
 #include "/git/Film_library/Actor/Actor.h"
 #include "/git/Film_library/Creator/Creator.h"
