@@ -24,24 +24,27 @@ void FIO::set_first_name(const std::string& fn) {
     if (!check_to_correct_form(fn)) {
         throw std::invalid_argument("Incorrect symbols were used!\n");
     } else {
-        convert_to_norm_form(fn);
-        _first_name = fn;
+        std::string first_name = fn;
+        convert_to_norm_form(first_name);
+        _first_name = first_name;
     }
 }
 void FIO::set_second_name(const std::string& sn) {
     if (!check_to_correct_form(sn)) {
         throw std::invalid_argument("Incorrect symbols were used!\n");
     } else {
-        convert_to_norm_form(sn);
-        _second_name = sn;
+        std::string second_name = sn;
+        convert_to_norm_form(second_name);
+        _second_name = second_name;
     }
 }
 void FIO::set_last_name(const std::string& ln) {
     if (!check_to_correct_form(ln)) {
         throw std::invalid_argument("Incorrect symbols were used!\n");
     } else {
-        convert_to_norm_form(ln);
-        _last_name = ln;
+        std::string last_name = ln;
+        convert_to_norm_form(last_name);
+        _last_name = last_name;
     }
 }
 
@@ -65,7 +68,7 @@ bool FIO::check_to_correct_form(const std::string name) const noexcept {
     }
     return true;
 }
-void FIO::convert_to_norm_form(std::string name) const noexcept {
+void FIO::convert_to_norm_form(std::string& name) const noexcept {
     int len = name.length();
     if ('a' <= name[0] && 'z' >= name[0]) {
         name[0] = name[0] - ('a' - 'A');

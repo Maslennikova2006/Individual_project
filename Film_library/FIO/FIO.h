@@ -27,6 +27,6 @@ class FIO {
 
  private:
     bool check_to_correct_form(const std::string) const noexcept;
-    void convert_to_norm_form(std::string) const noexcept;
+    void convert_to_norm_form(std::string&) const noexcept;
 };
 #endif  // FILM_LIBRARY_FIO_FIO_H_
