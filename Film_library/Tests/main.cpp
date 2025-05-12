@@ -278,13 +278,21 @@ int main() {
 #endif  // FIO_TESTS
 
 #ifdef DATE_TESTS
-    TestSystem::start_test(Date_test_1_check_the_default_constructor, "Date.test_1_check_the_default_constructor");
-    TestSystem::start_test(Date_test_2_check_the_initialization_constructor, "Date.test_2_check_the_initialization_constructor");
-    TestSystem::start_test(Date_test_3_check_the_exception_in_initialization_constructor, "Date.test_3_check_the_exception_in_initialization_constructor");
-    TestSystem::start_test(Date_test_4_throw_when_try_copy_date, "Date.test_4_throw_when_try_copy_date");
-    TestSystem::start_test(Date_test_5_check_the_copy_constructor, "Date.test_5_check_the_copy_constructor");
-    TestSystem::start_test(Date_test_6_check_the_setters, "Date.test_6_check_the_setters");
-    TestSystem::start_test(Date_test_7_check_the_exception_in_the_setters, "Date.test_7_check_the_exception_in_the_setters");
+    TestSystem::start_test(Date_test_1_check_the_default_constructor,
+        "Date.test_1_check_the_default_constructor");
+    TestSystem::start_test(Date_test_2_check_the_initialization_constructor,
+        "Date.test_2_check_the_initialization_constructor");
+    TestSystem::start_test(
+        Date_test_3_check_the_exception_in_initialization_constructor,
+        "Date.test_3_check_the_exception_in_initialization_constructor");
+    TestSystem::start_test(Date_test_4_throw_when_try_copy_date,
+        "Date.test_4_throw_when_try_copy_date");
+    TestSystem::start_test(Date_test_5_check_the_copy_constructor,
+        "Date.test_5_check_the_copy_constructor");
+    TestSystem::start_test(Date_test_6_check_the_setters,
+        "Date.test_6_check_the_setters");
+    TestSystem::start_test(Date_test_7_check_the_exception_in_the_setters,
+        "Date.test_7_check_the_exception_in_the_setters");
 #endif  // DATE_TESTS
 
     TestSystem::print_init_info();
