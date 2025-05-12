@@ -15,6 +15,7 @@
 #include "/git/Film_library/User/User.h"
 
 #define FIO_TESTS
+#define DATE_TESTS
 
 void set_color(int text_color, int bg_color) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -172,7 +173,89 @@ bool FIO_test_8_check_string_conversion_in_setters() {
         TestSystem::check((std::string)"Andreevna", person.get_second_name())
         && TestSystem::check((std::string)"Osipova", person.get_last_name());
 }
-#endif
+#endif  // FIO_TESTS
+
+#ifdef DATE_TESTS
+bool Date_test_1_check_the_default_constructor() {
+    Date date;
+    return TestSystem::check(1, date.get_day()) &&
+        TestSystem::check(1, date.get_month()) &&
+        TestSystem::check(2025, date.get_year());
+}
+bool Date_test_2_check_the_initialization_constructor() {
+    Date date(22, 3, 2006);
+    return TestSystem::check(22, date.get_day()) &&
+        TestSystem::check(3, date.get_month()) &&
+        TestSystem::check(2006, date.get_year());
+}
+bool Date_test_3_check_the_exception_in_initialization_constructor() {
+    bool expected_result = false;
+    bool actual_result = true;
+    try {
+        Date date(29, 2, 2023);
+    }
+    catch (const std::exception& ex) {
+        actual_result = false;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+bool Date_test_4_throw_when_try_copy_date() {
+    Date* date = nullptr;
+    bool expected_result = false;
+    bool actual_result = true;
+    try {
+        Date copy_date(*date);
+    }
+    catch (const std::exception& ex) {
+        actual_result = false;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+bool Date_test_5_check_the_copy_constructor() {
+    Date date1(11, 5, 2025);
+    Date date2(date1);
+    return TestSystem::check(11, date2.get_day()) &&
+        TestSystem::check(5, date2.get_month()) &&
+        TestSystem::check(2025, date2.get_year());
+}
+bool Date_test_6_check_the_setters() {
+    Date date(8, 11, 1970);
+    date.set_day(23);
+    date.set_month(12);
+    date.set_year(1973);
+    return TestSystem::check(23, date.get_day()) &&
+        TestSystem::check(12, date.get_month()) &&
+        TestSystem::check(1973, date.get_year());
+}
+bool Date_test_7_check_the_exception_in_the_setters() {
+    Date date;
+    bool expected_result = true;
+    bool actual_result = true;
+    try {
+        date.set_day(32);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        date.set_month(13);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        date.set_year(1801);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+#endif  // DATE_TESTS
+
 int main() {
 #ifdef FIO_TESTS
     TestSystem::start_test(FIO_test_1_check_the_default_constructor,
@@ -183,7 +266,7 @@ int main() {
         FIO_test_3_check_the_exception_in_initialization_constructor,
         "FIO_test_3_check_the_exception_in_initialization_constructor");
     TestSystem::start_test(FIO_test_4_throw_when_try_copy_FIO,
-        "FIO.test_4_throw_when_try_copy_vector");
+        "FIO.test_4_throw_when_try_copy_FIO");
     TestSystem::start_test(FIO_test_5_check_the_copy_constructor,
         "FIO.test_5_check_the_copy_constructor");
     TestSystem::start_test(FIO_test_6_check_the_setters,
@@ -192,7 +275,18 @@ int main() {
         "FIO.test_7_check_the_exception_in_the_setters");
     TestSystem::start_test(FIO_test_8_check_string_conversion_in_setters,
         "FIO.test_8_check_string_conversion_in_setters");
-#endif
+#endif  // FIO_TESTS
+
+#ifdef DATE_TESTS
+    TestSystem::start_test(Date_test_1_check_the_default_constructor, "Date.test_1_check_the_default_constructor");
+    TestSystem::start_test(Date_test_2_check_the_initialization_constructor, "Date.test_2_check_the_initialization_constructor");
+    TestSystem::start_test(Date_test_3_check_the_exception_in_initialization_constructor, "Date.test_3_check_the_exception_in_initialization_constructor");
+    TestSystem::start_test(Date_test_4_throw_when_try_copy_date, "Date.test_4_throw_when_try_copy_date");
+    TestSystem::start_test(Date_test_5_check_the_copy_constructor, "Date.test_5_check_the_copy_constructor");
+    TestSystem::start_test(Date_test_6_check_the_setters, "Date.test_6_check_the_setters");
+    TestSystem::start_test(Date_test_7_check_the_exception_in_the_setters, "Date.test_7_check_the_exception_in_the_setters");
+#endif  // DATE_TESTS
+
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
