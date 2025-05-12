@@ -4,9 +4,9 @@
 #define FILM_LIBRARY_DATE_OF_BIRTH_DATE_H_
 
 class Date {
-    int day;
-    int month;
-    int year;
+    int _day;
+    int _month;
+    int _year;
 
  public:
     Date();
