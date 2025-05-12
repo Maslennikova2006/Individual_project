@@ -96,7 +96,18 @@ bool FIO_test_2_check_the_initialization_constructor() {
             person.get_second_name()) &&
         TestSystem::check((std::string)"Maslennikova", person.get_last_name());
 }
-bool FIO_test_3_throw_when_try_copy_vector() {
+bool FIO_test_3_check_the_exception_in_initialization_constructor() {
+    bool expected_result = false;
+    bool actual_result = true;
+    try {
+        FIO person("EL08na", "Sidorov a", "Petrovna_");
+    }
+    catch (const std::exception& ex) {
+        actual_result = false;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+bool FIO_test_4_throw_when_try_copy_FIO() {
     FIO* person = nullptr;
     bool expected_result = false;
     bool actual_result = true;
@@ -108,7 +119,7 @@ bool FIO_test_3_throw_when_try_copy_vector() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool FIO_test_4_check_the_copy_constructor() {
+bool FIO_test_5_check_the_copy_constructor() {
     FIO person1("Anna", "Dmitrievna", "Danilova");
     FIO person2(person1);
     return TestSystem::check((std::string)"Anna", person2.get_first_name()) &&
@@ -116,7 +127,7 @@ bool FIO_test_4_check_the_copy_constructor() {
             person2.get_second_name()) &&
         TestSystem::check((std::string)"Danilova", person2.get_last_name());
 }
-bool FIO_test_5_check_the_setters() {
+bool FIO_test_6_check_the_setters() {
     FIO person("Anna", "Dmitrievna", "Danilova");
     person.set_first_name("Elena");
     person.set_second_name("Andreevna");
@@ -125,7 +136,7 @@ bool FIO_test_5_check_the_setters() {
         TestSystem::check((std::string)"Andreevna", person.get_second_name())
         && TestSystem::check((std::string)"Osipova", person.get_last_name());
 }
-bool FIO_test_6_check_the_exception_in_the_setters() {
+bool FIO_test_7_check_the_exception_in_the_setters() {
     FIO person;
     bool expected_result = true;
     bool actual_result = true;
@@ -152,7 +163,7 @@ bool FIO_test_6_check_the_exception_in_the_setters() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool FIO_test_7_check_string_conversion_in_setters() {
+bool FIO_test_8_check_string_conversion_in_setters() {
     FIO person("Anna", "Dmitrievna", "Danilova");
     person.set_first_name("eLENA");
     person.set_second_name("anDreEvnA");
@@ -168,16 +179,19 @@ int main() {
         "FIO.test_1_check_the_default_constructor");
     TestSystem::start_test(FIO_test_2_check_the_initialization_constructor,
         "FIO.test_2_check_the_initialization_constructor");
-    TestSystem::start_test(FIO_test_3_throw_when_try_copy_vector,
-        "FIO.test_3_throw_when_try_copy_vector");
-    TestSystem::start_test(FIO_test_4_check_the_copy_constructor,
-        "FIO.test_4_check_the_copy_constructor");
-    TestSystem::start_test(FIO_test_5_check_the_setters,
-        "FIO.test_5_check_the_setters");
-    TestSystem::start_test(FIO_test_6_check_the_exception_in_the_setters,
-        "FIO.test_6_check_the_exception_in_the_setters");
-    TestSystem::start_test(FIO_test_7_check_string_conversion_in_setters,
-        "FIO.test_7_check_string_conversion_in_setters");
+    TestSystem::start_test(
+        FIO_test_3_check_the_exception_in_initialization_constructor,
+        "FIO_test_3_check_the_exception_in_initialization_constructor");
+    TestSystem::start_test(FIO_test_4_throw_when_try_copy_FIO,
+        "FIO.test_4_throw_when_try_copy_vector");
+    TestSystem::start_test(FIO_test_5_check_the_copy_constructor,
+        "FIO.test_5_check_the_copy_constructor");
+    TestSystem::start_test(FIO_test_6_check_the_setters,
+        "FIO.test_6_check_the_setters");
+    TestSystem::start_test(FIO_test_7_check_the_exception_in_the_setters,
+        "FIO.test_7_check_the_exception_in_the_setters");
+    TestSystem::start_test(FIO_test_8_check_string_conversion_in_setters,
+        "FIO.test_8_check_string_conversion_in_setters");
 #endif
     TestSystem::print_init_info();
     TestSystem::print_final_info();

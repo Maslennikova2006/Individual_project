@@ -26,7 +26,7 @@ class FIO {
     const std::string get_last_name() const noexcept;
 
  private:
-    bool check_to_correct_form(const std::string) const noexcept;
-    void convert_to_norm_form(std::string&) const noexcept;
+    bool check_to_correct_form(const std::string&) const noexcept;
+    std::string convert_to_norm_form(const std::string&) const noexcept;
 };
 #endif  // FILM_LIBRARY_FIO_FIO_H_
