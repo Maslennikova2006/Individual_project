@@ -334,11 +334,8 @@ bool test_26_check_for_deletion_from_the_back() {
 bool test_27_check_for_complete_deletion() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.clear();
-    TVector<int> res;
-    bool expected_result = true;
-    bool actual_result = (vec == res);
-    return TestSystem::check(expected_result, actual_result) &&
-        TestSystem::check(static_cast<size_t>(0), vec.size());
+    return TestSystem::check(static_cast<size_t>(0), vec.size()) &&
+        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY), vec.capacity());
 }
 bool test_28_check_the_insertion_after_deletion() {
     int* mass = new int[100];
@@ -395,12 +392,24 @@ bool test_30_check_the_replacement_by_index_after_deleted() {
 }
 bool test_31_check_at() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-    int res = vec.at(4);
+    size_t res = vec.at(4);
     bool expected_result = true;
     bool actual_result = (res == 5);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_32_check_assign_value() {
+bool test_32_check_the_exception_in_at() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = false;
+    bool actual_result = true;
+    try {
+        size_t res = vec.at(10);
+    }
+    catch (const std::exception& ex) {
+        actual_result &= false;
+    }
+    return TestSystem::check(expected_result, actual_result);
+}
+bool test_33_check_assign_value() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.assign(4, 66);
     TVector<int> res({ 66, 66, 66, 66 });
@@ -408,7 +417,7 @@ bool test_32_check_assign_value() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_33_check_assign_list() {
+bool test_34_check_assign_list() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.assign({ 11, 22, 33, 44, 55, 66 });
     TVector<int> res({ 11, 22, 33, 44, 55, 66 });
@@ -416,103 +425,105 @@ bool test_33_check_assign_list() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_34_check_the_exception_when_going_out_of_bounds() {
+bool test_35_check_the_exception_when_going_out_of_bounds() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-    bool actual_result = true;
-    bool expected_result = true;
+    bool actual_result_1 = true;
+    bool actual_result_2 = true;
+    bool actual_result_3 = true;
+    bool actual_result_4 = true;
+    bool actual_result_5 = true;
+    bool actual_result_6 = true;
+    bool expected_result = false;
     try {
         vec.insert(11, { 2, 3, 4 });
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_1 = false;
     }
     try {
         vec.insert(11, 2, 77);
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_2 = false;
     }
     try {
         vec.insert(12, 55);
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_3 = false;
     }
     try {
         vec.erase(12);
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_4 = false;
     }
     try {
         vec.erase(7, 18);
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_5 = false;
     }
     try {
         vec.replace(12, 8);
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_6 = false;
     }
-    return TestSystem::check(expected_result, actual_result);
+    return TestSystem::check(expected_result, actual_result_1 &&
+        actual_result_2 && actual_result_3 && actual_result_4 &&
+        actual_result_5 && actual_result_6);
 }
-bool test_35_check_for_an_exception_when_interacting_with_an_empty_vector() {
+bool test_36_check_for_an_exception_when_interacting_with_an_empty_vector() {
     TVector<int> vec;
-    bool actual_result = true;
-    bool expected_result = true;
+    bool actual_result_1 = true;
+    bool actual_result_2 = true;
+    bool actual_result_3 = true;
+    bool actual_result_4 = true;
+    bool actual_result_5 = true;
+    bool actual_result_6 = true;
+    bool expected_result = false;
     try {
         vec.pop_front();
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_1 = false;
     }
     try {
         vec.pop_back();
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_2 = false;
     }
     try {
         vec.clear();
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_3 = false;
     }
     try {
         vec.erase(10);
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_4 = false;
     }
     try {
         vec.erase(7, 18);
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_5 = false;
     }
     try {
         vec.replace(12, 8);
-        actual_result &= false;
     }
     catch (const std::exception& ex) {
-        actual_result &= true;
+        actual_result_6 = false;
     }
-    return TestSystem::check(expected_result, actual_result);
+    return TestSystem::check(expected_result, actual_result_1 &&
+        actual_result_2 && actual_result_3 && actual_result_4 &&
+        actual_result_5 && actual_result_6);
 }
-bool test_36_check_the_insertion_into_an_empty_vector() {
+bool test_37_check_the_insertion_into_an_empty_vector() {
     TVector<int> vec1;
     vec1.push_front(1);
     TVector<int> res1({ 1 });
@@ -529,7 +540,7 @@ bool test_36_check_the_insertion_into_an_empty_vector() {
 
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_37_check_shuffle_vector() {
+bool test_38_check_shuffle_vector() {
     TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
     TVector<int> vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
     bool expected_result = true;
@@ -537,7 +548,7 @@ bool test_37_check_shuffle_vector() {
     bool actual_result = (vec1 != vec2);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_38_check_hoara_sort() {
+bool test_39_check_hoara_sort() {
     TVector<int> vec({ 2, 7, 3, 9, 28, 38, 93, 9, 6, 4, 2 });
     hoara_sort(vec);
     TVector<int> res({ 2, 2, 3, 4, 6, 7, 9, 9, 28, 38, 93 });
@@ -545,12 +556,12 @@ bool test_38_check_hoara_sort() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_39_check_find_first_element() {
+bool test_40_check_find_first_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
     size_t pos = find_first_elem(vec, 5);
     return TestSystem::check(static_cast<size_t>(2), pos);
 }
-bool test_40_check_find_first_element_if_there_is_no_element() {
+bool test_41_check_find_first_element_if_there_is_no_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
     bool expected_result = true;
     bool actual_result = false;
@@ -562,12 +573,12 @@ bool test_40_check_find_first_element_if_there_is_no_element() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_41_check_find_last_element() {
+bool test_42_check_find_last_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
     size_t pos = find_last_elem(vec, 5);
     return TestSystem::check(static_cast < size_t>(4), pos);
 }
-bool test_42_check_find_last_element_if_there_is_no_element() {
+bool test_43_check_find_last_element_if_there_is_no_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
     bool expected_result = true;
     bool actual_result = false;
@@ -579,7 +590,7 @@ bool test_42_check_find_last_element_if_there_is_no_element() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_43_check_find_several_elements() {
+bool test_44_check_find_several_elements() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 5, 9 });
     size_t* actual_indexes = find_elem(vec, 5);
     size_t expected_indexes[] = { 3, 2, 4, 8 };
@@ -593,7 +604,7 @@ bool test_43_check_find_several_elements() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_44_check_find_several_elements_if_there_is_no_element() {
+bool test_45_check_find_several_elements_if_there_is_no_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 5, 9 });
     bool expected_result = true;
     bool actual_result = false;
@@ -604,26 +615,6 @@ bool test_44_check_find_several_elements_if_there_is_no_element() {
         actual_result = true;
     }
     return TestSystem::check(expected_result, actual_result);
-}
-bool test_45_check_the_exception_when_accessing_the_index() {
-    TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 5, 9 });
-    bool expected_result = true;
-    bool actual_result_1 = false;
-    bool actual_result_2 = false;
-    try {
-        size_t value = vec[10];
-    }
-    catch (const std::exception& ex) {
-        actual_result_1 = true;
-    }
-    try {
-        vec[10] = 55;
-    }
-    catch (const std::exception& ex) {
-        actual_result_2 = true;
-    }
-    return TestSystem::check
-    (expected_result, actual_result_1 && actual_result_2);
 }
 bool test_46_check_find_first_elem_after_deletion() {
     int* mass = new int[100];
@@ -751,40 +742,39 @@ int main() {
         test_30_check_the_replacement_by_index_after_deleted,
         "TVector.test_30_check_the_replacement_by_index_after_deleted");
     TestSystem::start_test(test_31_check_at, "TVector.test_31_check_at");
-    TestSystem::start_test(test_32_check_assign_value,
-        "TVector.test_32_check_assign_value");
-    TestSystem::start_test(test_33_check_assign_list,
-        "TVector.test_33_check_assign_list");
+    TestSystem::start_test(test_32_check_the_exception_in_at,
+        "TVector.test_32_check_the_exception_in_at");
+    TestSystem::start_test(test_33_check_assign_value,
+        "TVector.test_33_check_assign_value");
+    TestSystem::start_test(test_34_check_assign_list,
+        "TVector.test_34_check_assign_list");
     TestSystem::start_test(
-        test_34_check_the_exception_when_going_out_of_bounds,
-        "TVector.test_34_check_the_exception_when_going_out_of_bounds");
+        test_35_check_the_exception_when_going_out_of_bounds,
+        "TVector.test_35_check_the_exception_when_going_out_of_bounds");
     TestSystem::start_test(
-        test_35_check_for_an_exception_when_interacting_with_an_empty_vector,
-        "TVector.test_35_check_except_when_interacting_with_an_empty_vec");
-    TestSystem::start_test(test_36_check_the_insertion_into_an_empty_vector,
-        "TVector.test_36_check_the_insertion_into_an_empty_vector");
-    TestSystem::start_test(test_37_check_shuffle_vector,
-        "TVector.test_37_check_shuffle_vector");
-    TestSystem::start_test(test_38_check_hoara_sort,
-        "TVector.test_38_check_hoara_sort");
-    TestSystem::start_test(test_39_check_find_first_element,
-        "TVector.test_39_check_find_first_element");
+        test_36_check_for_an_exception_when_interacting_with_an_empty_vector,
+        "TVector.test_36_check_except_when_interacting_with_an_empty_vec");
+    TestSystem::start_test(test_37_check_the_insertion_into_an_empty_vector,
+        "TVector.test_37_check_the_insertion_into_an_empty_vector");
+    TestSystem::start_test(test_38_check_shuffle_vector,
+        "TVector.test_38_check_shuffle_vector");
+    TestSystem::start_test(test_39_check_hoara_sort,
+        "TVector.test_39_check_hoara_sort");
+    TestSystem::start_test(test_40_check_find_first_element,
+        "TVector.test_40_check_find_first_element");
     TestSystem::start_test(
-        test_40_check_find_first_element_if_there_is_no_element,
-        "TVector.test_40_check_find_first_element_if_there_is_no_element");
-    TestSystem::start_test(test_41_check_find_last_element,
-        "TVector.test_41_check_find_last_element");
+        test_41_check_find_first_element_if_there_is_no_element,
+        "TVector.test_41_check_find_first_element_if_there_is_no_element");
+    TestSystem::start_test(test_42_check_find_last_element,
+        "TVector.test_42_check_find_last_element");
     TestSystem::start_test(
-        test_42_check_find_last_element_if_there_is_no_element,
-        "TVector.test_42_check_find_last_element_if_there_is_no_element");
-    TestSystem::start_test(test_43_check_find_several_elements,
-        "TVector.test_43_check_find_several_elements");
+        test_43_check_find_last_element_if_there_is_no_element,
+        "TVector.test_43_check_find_last_element_if_there_is_no_element");
+    TestSystem::start_test(test_44_check_find_several_elements,
+        "TVector.test_44_check_find_several_elements");
     TestSystem::start_test(
-        test_44_check_find_several_elements_if_there_is_no_element,
-        "TVector.test_44_check_find_several_elements_if_there_is_no_element");
-    TestSystem::start_test(
-        test_45_check_the_exception_when_accessing_the_index,
-        "TVector.test_45_check_the_exception_when_accessing_the_index");
+        test_45_check_find_several_elements_if_there_is_no_element,
+        "TVector.test_45_check_find_several_elements_if_there_is_no_element");
     TestSystem::start_test(test_46_check_find_first_elem_after_deletion,
         "TVector.test_46_check_find_first_elem_after_deletion");
     TestSystem::start_test(test_47_check_find_last_elem_after_deletion,

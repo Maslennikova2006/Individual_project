@@ -456,7 +456,7 @@ void TVector<T>::replace(size_t index, const T& value) {
 
 template <class T>
 const T& TVector<T>::at(size_t index) const {
-    if (index >= _size) {
+    if (index >= _size + _deleted) {
         throw std::invalid_argument("The index goes beyond the boundaries\n");
     }
     size_t new_index = recalculate_the_position(index);
@@ -533,17 +533,11 @@ bool TVector<T>::operator==(const TVector<T>& other) const noexcept {
 }
 template <class T>
 const T& TVector<T>::operator[](size_t index) const {
-    if (index >= _size + _deleted) {
-        throw std::invalid_argument("The index goes beyond the boundaries\n");
-    }
     size_t new_index = recalculate_the_position(index);
     return _data[new_index];
 }
 template <class T>
 T& TVector<T>::operator[](size_t index) {
-    if (index >= _size + _deleted) {
-        throw std::invalid_argument("The index goes beyond the boundaries\n");
-    }
     size_t new_index = recalculate_the_position(index);
     return _data[new_index];
 }
