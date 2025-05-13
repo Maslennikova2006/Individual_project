@@ -335,7 +335,7 @@ bool test_27_check_for_complete_deletion() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.clear();
     return TestSystem::check(static_cast<size_t>(0), vec.size()) &&
-        TestSystem::check(static_cast<size_t>(STEP_OF_CAPACITY), vec.capacity());
+        TestSystem::check(static_cast<size_t>(15), vec.capacity());
 }
 bool test_28_check_the_insertion_after_deletion() {
     int* mass = new int[100];
