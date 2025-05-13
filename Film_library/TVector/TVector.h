@@ -101,14 +101,12 @@ _capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
     set_memory(0);
 }
 template <class T>
-TVector<T>::TVector(size_t size, const T* data) : _data(nullptr), _size(size),
-_capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
+TVector<T>::TVector(size_t size, const T* data) {
     set_memory(size);
-    if (data != nullptr) {
-        for (size_t i = 0; i < _size; i++) {
-            _data[i] = data[i];
-            _states[i] = busy;
-        }
+    _deleted = 0;
+    for (size_t i = 0; i < _size; i++) {
+        _data[i] = data[i];
+        _states[i] = busy;
     }
 }
 template <class T>
@@ -144,11 +142,9 @@ template <class T>
 TVector<T>::TVector(const TVector<T>& other) {
     if (&other == NULL)
         throw std::invalid_argument("The object was not received!\n");
-    _size = other._size;
-    _capacity = other._capacity;
+    set_memory(other._size);
     _deleted = other._deleted;
-    set_memory(_size);
-    for (size_t i = 0; i < _size; i++) {
+    for (size_t i = 0; i < _size + _deleted; i++) {
         _data[i] = other._data[i];
         _states[i] = other._states[i];
     }
@@ -174,8 +170,7 @@ inline size_t TVector<T>::capacity() const noexcept {
 }
 template <class T>
 inline const T* TVector<T>::data() const noexcept {
-    if (is_empty())
-        return nullptr;
+    if (is_empty()) return nullptr;
     T* new_address = recalculate_the_address(0);
     return new_address;
 }
@@ -197,15 +192,13 @@ inline const T& TVector<T>::back() {
 }
 template <class T>
 inline const T* TVector<T>::begin() const noexcept {
-    if (is_empty())
-        return nullptr;
+    if (is_empty()) return nullptr;
     T* new_address = recalculate_the_address(0);
     return new_address;
 }
 template <class T>
 inline const T* TVector<T>::end() const noexcept {
-    if (is_empty())
-        return nullptr;
+    if (is_empty()) return nullptr;
     T* new_address = recalculate_the_address(_size - 1) + 1;
     return new_address;
 }
@@ -239,22 +232,28 @@ void TVector<T>::resize(size_t count) noexcept {
         return;
     }
     if (count < _size) {
-        T* new_data = new T[_capacity];
-        State* new_states = new State[_capacity];
-        for (size_t i = 0, j = 0; i < _size + _deleted; i++) {
+        size_t new_capacity = (count / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
+        T* new_data = new T[new_capacity];
+        State* new_states = new State[new_capacity];
+        size_t j = 0;
+        for (size_t i = 0; i < _size + _deleted; i++) {
             if (_states[i] == busy) {
                 new_data[j] = _data[i];
                 new_states[j] = busy;
                 if (j == count) {
-                    new_states[j] = empty;
+                    break;
                 }
                 j++;
             }
+        }
+        for (int i = j; i < new_capacity; i++) {
+            new_states[i] = empty;
         }
         delete[] _data;
         delete[] _states;
         _data = new_data;
         _states = new_states;
+        _capacity = new_capacity;
     }
     if (count > _capacity) {
         reallocation_memory(count);
@@ -277,6 +276,7 @@ void TVector<T>::resize(size_t count, const T& value) noexcept {
     _size = count;
     for (size_t i = size; i < _size; i++) {
         _data[i] = value;
+        _states[i] = busy;
     }
 }
 template <class T>
@@ -448,7 +448,7 @@ void TVector<T>::replace(size_t index, const T& value) {
     if (is_empty())
         throw std::invalid_argument
         ("It is impossible to replace an element in an empty vector\n");
-    if (index >= _size)
+    if (index >= _size + _deleted)
         throw std::invalid_argument("The index goes beyond the boundaries\n");
     size_t new_index = recalculate_the_position(index);
     _data[new_index] = value;
@@ -520,9 +520,6 @@ bool TVector<T>::operator==(const TVector<T>& other) const noexcept {
             i++;
         while (j < other._capacity && other._states[j] != busy)
             j++;
-        if (i >= _capacity || j >= other._capacity) {
-            break;
-        }
         if (_data[i] != other._data[j]) {
             return false;
         }
