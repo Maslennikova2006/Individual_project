@@ -499,48 +499,48 @@ bool test_41_check_assign_list() {
 }
 bool test_42_check_the_exception_when_going_out_of_bounds() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
-    bool actual_result_1 = true;
-    bool actual_result_2 = true;
-    bool actual_result_3 = true;
-    bool actual_result_4 = true;
-    bool actual_result_5 = true;
-    bool actual_result_6 = true;
-    bool expected_result = false;
+    bool actual_result_1 = false;
+    bool actual_result_2 = false;
+    bool actual_result_3 = false;
+    bool actual_result_4 = false;
+    bool actual_result_5 = false;
+    bool actual_result_6 = false;
+    bool expected_result = true;
     try {
         vec.insert(11, { 2, 3, 4 });
     }
     catch (const std::exception& ex) {
-        actual_result_1 = false;
+        actual_result_1 = true;
     }
     try {
         vec.insert(11, 2, 77);
     }
     catch (const std::exception& ex) {
-        actual_result_2 = false;
+        actual_result_2 = true;
     }
     try {
         vec.insert(12, 55);
     }
     catch (const std::exception& ex) {
-        actual_result_3 = false;
+        actual_result_3 = true;
     }
     try {
         vec.erase(12);
     }
     catch (const std::exception& ex) {
-        actual_result_4 = false;
+        actual_result_4 = true;
     }
     try {
         vec.erase(7, 18);
     }
     catch (const std::exception& ex) {
-        actual_result_5 = false;
+        actual_result_5 = true;
     }
     try {
         vec.replace(12, 8);
     }
     catch (const std::exception& ex) {
-        actual_result_6 = false;
+        actual_result_6 = true;
     }
     return TestSystem::check(expected_result, actual_result_1 &&
         actual_result_2 && actual_result_3 && actual_result_4 &&
@@ -548,48 +548,48 @@ bool test_42_check_the_exception_when_going_out_of_bounds() {
 }
 bool test_43_check_for_an_exception_when_interacting_with_an_empty_vector() {
     TVector<int> vec;
-    bool actual_result_1 = true;
-    bool actual_result_2 = true;
-    bool actual_result_3 = true;
-    bool actual_result_4 = true;
-    bool actual_result_5 = true;
-    bool actual_result_6 = true;
-    bool expected_result = false;
+    bool actual_result_1 = false;
+    bool actual_result_2 = false;
+    bool actual_result_3 = false;
+    bool actual_result_4 = false;
+    bool actual_result_5 = false;
+    bool actual_result_6 = false;
+    bool expected_result = true;
     try {
         vec.pop_front();
     }
     catch (const std::exception& ex) {
-        actual_result_1 = false;
+        actual_result_1 = true;
     }
     try {
         vec.pop_back();
     }
     catch (const std::exception& ex) {
-        actual_result_2 = false;
+        actual_result_2 = true;
     }
     try {
         vec.clear();
     }
     catch (const std::exception& ex) {
-        actual_result_3 = false;
+        actual_result_3 = true;
     }
     try {
         vec.erase(10);
     }
     catch (const std::exception& ex) {
-        actual_result_4 = false;
+        actual_result_4 = true;
     }
     try {
         vec.erase(7, 18);
     }
     catch (const std::exception& ex) {
-        actual_result_5 = false;
+        actual_result_5 = true;
     }
     try {
         vec.replace(12, 8);
     }
     catch (const std::exception& ex) {
-        actual_result_6 = false;
+        actual_result_6 = true;
     }
     return TestSystem::check(expected_result, actual_result_1 &&
         actual_result_2 && actual_result_3 && actual_result_4 &&
