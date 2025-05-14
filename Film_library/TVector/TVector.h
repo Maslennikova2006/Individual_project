@@ -396,9 +396,13 @@ void TVector<T>::erase(size_t index) {
     if (index > _size)
         throw std::invalid_argument("The index goes beyond the boundaries\n");
     size_t new_index = recalculate_the_position(index);
-    _states[new_index] = deleted;
+    if (index == _size - 1) {
+        _states[new_index] = empty;
+    } else {
+        _states[new_index] = deleted;
+        _deleted++;
+    }
     _size--;
-    _deleted++;
     if (_deleted >= 0.10 * (_size + _deleted)) {
         reallocation_memory_for_deleted();
     }
