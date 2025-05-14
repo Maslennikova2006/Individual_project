@@ -96,9 +96,9 @@ class TVector {
 };
 
 template <class T>
-TVector<T>::TVector() : _data(nullptr), _size(0),
-_capacity(STEP_OF_CAPACITY), _deleted(0), _states(nullptr) {
+TVector<T>::TVector() : {
     set_memory(0);
+    _deleted = 0;
 }
 template <class T>
 TVector<T>::TVector(size_t size, const T* data) {
