@@ -142,6 +142,8 @@ template <class T>
 TVector<T>::TVector(const TVector<T>& other) {
     if (&other == NULL)
         throw std::invalid_argument("The object was not received!\n");
+    if (this == &other)
+        return *this;
     set_memory(other._size);
     _deleted = other._deleted;
     for (size_t i = 0; i < _size + _deleted; i++) {
