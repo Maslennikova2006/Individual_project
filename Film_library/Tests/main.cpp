@@ -247,7 +247,55 @@ bool test_18_check_the_index_conversion_operator() {
     vec[3] = 5;
     return TestSystem::check(expected_value, vec[3]);
 }
-bool test_19_check_the_insertion_at_the_beginning_with_memory_reallocation() {
+bool test_19_check_the_insertion_at_the_beginning() {
+    TVector<int> vec(10, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.push_front(55);
+    TVector<int> res(11,
+        { 55, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_20_check_the_insertion_in_the_middle() {
+    TVector<int> vec(10, { 6, 2, 3, 4, 5, 6, 7, 8, 3, 4 });
+    vec.insert(3, 44);
+    TVector<int> res(11, { 6, 2, 3, 44, 4, 5, 6, 7, 8, 3, 4 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_21_check_the_insertion_several_elems() {
+    TVector<int> vec(10, { 6, 2, 3, 4, 5, 6, 7, 8, 5, 6 });
+    vec.insert(2, 4, 99);
+    TVector<int> res(14,
+        { 6, 2, 99, 99, 99, 99, 3, 4, 5, 6, 7, 8, 5, 6 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_22_check_the_insertion_from_the_list() {
+    TVector<int> vec(10, { 6, 2, 3, 4, 5, 6, 7, 8, 99, 87 });
+    vec.insert(3, { 11, 22, 33 });
+    TVector<int> res(13,
+        { 6, 2, 3, 11, 22, 33, 4, 5, 6, 7, 8, 99, 87 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_23_check_the_insertion_at_the_end() {
+    TVector<int> vec(10, { 4, 5, 6, 7, 8, 2, 3, 4, 5, 6 });
+    vec.push_back(9);
+    TVector<int> res(11, { 4, 5, 6, 7, 8, 2, 3, 4, 5, 6, 9 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_24_check_the_insertion_at_the_beginning_with_memory_reallocation() {
     TVector<int> vec(15, { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     vec.push_front(55);
     TVector<int> res(16,
@@ -257,7 +305,7 @@ bool test_19_check_the_insertion_at_the_beginning_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_20_check_the_insertion_in_the_middle_with_memory_reallocation() {
+bool test_25_check_the_insertion_in_the_middle_with_memory_reallocation() {
     TVector<int> vec(15, { 6, 2, 3, 4, 5, 6, 7, 8, 3, 4, 5, 6, 7, 8, 9 });
     vec.insert(3, 44);
     TVector<int> res(16, { 6, 2, 3, 44, 4, 5, 6, 7, 8, 3, 4, 5, 6, 7, 8, 9 });
@@ -266,7 +314,7 @@ bool test_20_check_the_insertion_in_the_middle_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_21_check_the_insertion_several_elems_with_memory_reallocation() {
+bool test_26_check_the_insertion_several_elems_with_memory_reallocation() {
     TVector<int> vec(14, { 6, 2, 3, 4, 5, 6, 7, 8, 5, 6, 7, 8, 9, 3 });
     vec.insert(2, 4, 99);
     TVector<int> res(18,
@@ -276,7 +324,7 @@ bool test_21_check_the_insertion_several_elems_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_22_check_the_insertion_from_the_list_with_memory_reallocation() {
+bool test_27_check_the_insertion_from_the_list_with_memory_reallocation() {
     TVector<int> vec(13, { 6, 2, 3, 4, 5, 6, 7, 8, 99, 87, 5, 66, 7 });
     vec.insert(3, { 11, 22, 33 });
     TVector<int> res(16,
@@ -286,7 +334,7 @@ bool test_22_check_the_insertion_from_the_list_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_23_check_the_insertion_at_the_end_with_memory_reallocation() {
+bool test_28_check_the_insertion_at_the_end_with_memory_reallocation() {
     TVector<int> vec(15, { 4, 5, 6, 7, 8, 2, 3, 4, 5, 6, 7, 34, 5, 4, 6 });
     vec.push_back(9);
     TVector<int> res(16, { 4, 5, 6, 7, 8, 2, 3, 4, 5, 6, 7, 34, 5, 4, 6, 9 });
@@ -295,7 +343,31 @@ bool test_23_check_the_insertion_at_the_end_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_24_check_for_deletion_from_the_beginning_with_memory_reallocation() {
+bool test_29_check_for_deletion_from_the_beginning() {
+    TVector<int> vec(10,
+        { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.pop_front();
+    vec.pop_front();
+    vec.pop_front();
+    TVector<int> res(7, { 4, 5, 6, 7, 8, 9, 10 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_30_check_for_deletion_from_the_middle() {
+    TVector<int> vec(10,
+        { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+    vec.erase(4);
+    vec.erase(3);
+    vec.erase(5);
+    TVector<int> res(7, { 1, 2, 3, 6, 7, 9, 10 });
+    bool expected_result = true;
+    bool actual_result = (vec == res);
+    return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
+        TestSystem::check(expected_result, actual_result);
+}
+bool test_31_check_for_deletion_from_the_beginning_with_memory_reallocation() {
     TVector<int> vec(16,
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
     vec.pop_front();
@@ -307,7 +379,7 @@ bool test_24_check_for_deletion_from_the_beginning_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_25_check_for_deletion_from_the_middle_with_memory_reallocation() {
+bool test_32_check_for_deletion_from_the_middle_with_memory_reallocation() {
     TVector<int> vec(16,
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
     vec.erase(4);
@@ -319,7 +391,7 @@ bool test_25_check_for_deletion_from_the_middle_with_memory_reallocation() {
     return TestSystem::check(static_cast<size_t>(15), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_26_check_for_deletion_from_the_back() {
+bool test_33_check_for_deletion_from_the_back() {
     TVector<int> vec(16,
         { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
     vec.pop_back();
@@ -331,13 +403,13 @@ bool test_26_check_for_deletion_from_the_back() {
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
-bool test_27_check_for_complete_deletion() {
+bool test_34_check_for_complete_deletion() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.clear();
     return TestSystem::check(static_cast<size_t>(0), vec.size()) &&
         TestSystem::check(static_cast<size_t>(15), vec.capacity());
 }
-bool test_28_check_the_insertion_after_deletion() {
+bool test_35_check_the_insertion_after_deletion() {
     int* mass = new int[100];
     for (int i = 0; i < 100; i++) {
         mass[i] = i + 1;
@@ -360,7 +432,7 @@ bool test_28_check_the_insertion_after_deletion() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_29_check_the_replacement_by_index() {
+bool test_36_check_the_replacement_by_index() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.replace(4, 77);
     TVector<int> res({ 1, 2, 3, 4, 77, 6, 7, 8, 9, 10 });
@@ -368,7 +440,7 @@ bool test_29_check_the_replacement_by_index() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_30_check_the_replacement_by_index_after_deleted() {
+bool test_37_check_the_replacement_by_index_after_deleted() {
     int* mass = new int[100];
     for (int i = 0; i < 100; i++) {
         mass[i] = i + 1;
@@ -390,14 +462,14 @@ bool test_30_check_the_replacement_by_index_after_deleted() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_31_check_at() {
+bool test_38_check_at() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     size_t res = vec.at(4);
     bool expected_result = true;
     bool actual_result = (res == 5);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_32_check_the_exception_in_at() {
+bool test_39_check_the_exception_in_at() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     bool expected_result = false;
     bool actual_result = true;
@@ -409,7 +481,7 @@ bool test_32_check_the_exception_in_at() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_33_check_assign_value() {
+bool test_40_check_assign_value() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.assign(4, 66);
     TVector<int> res({ 66, 66, 66, 66 });
@@ -417,7 +489,7 @@ bool test_33_check_assign_value() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_34_check_assign_list() {
+bool test_41_check_assign_list() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     vec.assign({ 11, 22, 33, 44, 55, 66 });
     TVector<int> res({ 11, 22, 33, 44, 55, 66 });
@@ -425,7 +497,7 @@ bool test_34_check_assign_list() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_35_check_the_exception_when_going_out_of_bounds() {
+bool test_42_check_the_exception_when_going_out_of_bounds() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
     bool actual_result_1 = true;
     bool actual_result_2 = true;
@@ -474,7 +546,7 @@ bool test_35_check_the_exception_when_going_out_of_bounds() {
         actual_result_2 && actual_result_3 && actual_result_4 &&
         actual_result_5 && actual_result_6);
 }
-bool test_36_check_for_an_exception_when_interacting_with_an_empty_vector() {
+bool test_43_check_for_an_exception_when_interacting_with_an_empty_vector() {
     TVector<int> vec;
     bool actual_result_1 = true;
     bool actual_result_2 = true;
@@ -523,7 +595,7 @@ bool test_36_check_for_an_exception_when_interacting_with_an_empty_vector() {
         actual_result_2 && actual_result_3 && actual_result_4 &&
         actual_result_5 && actual_result_6);
 }
-bool test_37_check_the_insertion_into_an_empty_vector() {
+bool test_44_check_the_insertion_into_an_empty_vector() {
     TVector<int> vec1;
     vec1.push_front(1);
     TVector<int> res1({ 1 });
@@ -540,7 +612,7 @@ bool test_37_check_the_insertion_into_an_empty_vector() {
 
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_38_check_shuffle_vector() {
+bool test_45_check_shuffle_vector() {
     TVector<int> vec1({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
     TVector<int> vec2({ 1, 2, 3, 4, 5, 6, 7, 8, 9 });
     bool expected_result = true;
@@ -548,7 +620,7 @@ bool test_38_check_shuffle_vector() {
     bool actual_result = (vec1 != vec2);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_39_check_hoara_sort() {
+bool test_46_check_hoara_sort() {
     TVector<int> vec({ 2, 7, 3, 9, 28, 38, 93, 9, 6, 4, 2 });
     hoara_sort(vec);
     TVector<int> res({ 2, 2, 3, 4, 6, 7, 9, 9, 28, 38, 93 });
@@ -556,12 +628,12 @@ bool test_39_check_hoara_sort() {
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_40_check_find_first_element() {
+bool test_47_check_find_first_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
     size_t pos = find_first_elem(vec, 5);
     return TestSystem::check(static_cast<size_t>(2), pos);
 }
-bool test_41_check_find_first_element_if_there_is_no_element() {
+bool test_48_check_find_first_element_if_there_is_no_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
     bool expected_result = true;
     bool actual_result = false;
@@ -573,12 +645,12 @@ bool test_41_check_find_first_element_if_there_is_no_element() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_42_check_find_last_element() {
+bool test_49_check_find_last_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
     size_t pos = find_last_elem(vec, 5);
     return TestSystem::check(static_cast < size_t>(4), pos);
 }
-bool test_43_check_find_last_element_if_there_is_no_element() {
+bool test_50_check_find_last_element_if_there_is_no_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 9 });
     bool expected_result = true;
     bool actual_result = false;
@@ -590,7 +662,7 @@ bool test_43_check_find_last_element_if_there_is_no_element() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_44_check_find_several_elements() {
+bool test_51_check_find_several_elements() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 5, 9 });
     size_t* actual_indexes = find_elem(vec, 5);
     size_t expected_indexes[] = { 3, 2, 4, 8 };
@@ -604,7 +676,7 @@ bool test_44_check_find_several_elements() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_45_check_find_several_elements_if_there_is_no_element() {
+bool test_52_check_find_several_elements_if_there_is_no_element() {
     TVector<int> vec({ 1, 2, 5, 4, 5, 3, 6, 7, 5, 9 });
     bool expected_result = true;
     bool actual_result = false;
@@ -616,7 +688,7 @@ bool test_45_check_find_several_elements_if_there_is_no_element() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_46_check_find_first_elem_after_deletion() {
+bool test_53_check_find_first_elem_after_deletion() {
     int* mass = new int[100];
     for (int i = 0; i < 100; i++) {
         mass[i] = i + 1;
@@ -631,7 +703,7 @@ bool test_46_check_find_first_elem_after_deletion() {
     bool actual_result = (pos == 3);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_47_check_find_last_elem_after_deletion() {
+bool test_54_check_find_last_elem_after_deletion() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
         17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
         35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52,
@@ -647,7 +719,7 @@ bool test_47_check_find_last_elem_after_deletion() {
     bool actual_result = (pos == 93);
     return TestSystem::check(expected_result, actual_result);
 }
-bool test_48_check_find_all_elements_after_deletion() {
+bool test_55_check_find_all_elements_after_deletion() {
     TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
         17, 18, 19, 20, 7, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33,
         34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
@@ -709,78 +781,92 @@ int main() {
         "TVector.test_17_check_the_index_conversion_operator");
     TestSystem::start_test(test_18_check_the_index_conversion_operator,
         "TVector.test_18_check_the_index_conversion_operator");
+    TestSystem::start_test(test_19_check_the_insertion_at_the_beginning,
+        "TVector.test_19_check_the_insertion_at_the_beginning");
+    TestSystem::start_test(test_20_check_the_insertion_in_the_middle,
+        "TVector.test_20_check_the_insertion_in_the_middle");
+    TestSystem::start_test(test_21_check_the_insertion_several_elems,
+        "TVector.test_21_check_the_insertion_several_elems");
+    TestSystem::start_test(test_22_check_the_insertion_from_the_list,
+        "TVector.test_22_check_the_insertion_from_the_list");
+    TestSystem::start_test(test_23_check_the_insertion_at_the_end,
+        "TVector.test_23_check_the_insertion_at_the_end");
     TestSystem::start_test(
-        test_19_check_the_insertion_at_the_beginning_with_memory_reallocation,
-        "TVector.test_19_check_the_insertion_at_the_begin_with_reallocation");
+        test_24_check_the_insertion_at_the_beginning_with_memory_reallocation,
+        "TVector.test_24_check_the_insertion_at_the_begin_with_reallocation");
     TestSystem::start_test(
-        test_20_check_the_insertion_in_the_middle_with_memory_reallocation,
-        "TVector.test_20_check_the_insertion_in_the_middle_with_reallocation");
+        test_25_check_the_insertion_in_the_middle_with_memory_reallocation,
+        "TVector.test_25_check_the_insertion_in_the_middle_with_reallocation");
     TestSystem::start_test(
-        test_21_check_the_insertion_several_elems_with_memory_reallocation,
-        "TVector.test_21_check_the_insertion_several_elems_with_reallocation");
+        test_26_check_the_insertion_several_elems_with_memory_reallocation,
+        "TVector.test_26_check_the_insertion_several_elems_with_reallocation");
     TestSystem::start_test(
-        test_22_check_the_insertion_from_the_list_with_memory_reallocation,
-        "TVector.test_22_check_the_insertion_from_the_list_with_reallocation");
+        test_27_check_the_insertion_from_the_list_with_memory_reallocation,
+        "TVector.test_27_check_the_insertion_from_the_list_with_reallocation");
     TestSystem::start_test(
-        test_23_check_the_insertion_at_the_end_with_memory_reallocation,
-        "TVector.test_23_check_the_insertion_at_the_end_with_reallocation");
+        test_28_check_the_insertion_at_the_end_with_memory_reallocation,
+        "TVector.test_28_check_the_insertion_at_the_end_with_reallocation");
+    TestSystem::start_test(test_29_check_for_deletion_from_the_beginning,
+        "TVector.test_29_check_for_deletion_from_the_beginning");
+    TestSystem::start_test(test_30_check_for_deletion_from_the_middle,
+        "TVector.test_30_check_for_deletion_from_the_middle");
     TestSystem::start_test(
-        test_24_check_for_deletion_from_the_beginning_with_memory_reallocation,
-        "TVector.test_24_check_for_deletion_from_the_beginning_with_realloc");
+        test_31_check_for_deletion_from_the_beginning_with_memory_reallocation,
+        "TVector.test_31_check_for_deletion_from_the_beginning_with_realloc");
     TestSystem::start_test(
-        test_25_check_for_deletion_from_the_middle_with_memory_reallocation,
-        "TVector.test_25_check_for_deletion_from_the_middle_with_realloc");
-    TestSystem::start_test(test_26_check_for_deletion_from_the_back,
-        "TVector.test_26_check_for_deletion_from_the_back");
-    TestSystem::start_test(test_27_check_for_complete_deletion,
-        "TVector.test_27_check_for_complete_deletion");
-    TestSystem::start_test(test_28_check_the_insertion_after_deletion,
-        "TVector.test_28_check_the_insertion_after_deletion");
-    TestSystem::start_test(test_29_check_the_replacement_by_index,
-        "TVector.test_29_check_the_replacement_by_index");
+        test_32_check_for_deletion_from_the_middle_with_memory_reallocation,
+        "TVector.test_32_check_for_deletion_from_the_middle_with_realloc");
+    TestSystem::start_test(test_33_check_for_deletion_from_the_back,
+        "TVector.test_33_check_for_deletion_from_the_back");
+    TestSystem::start_test(test_34_check_for_complete_deletion,
+        "TVector.test_34_check_for_complete_deletion");
+    TestSystem::start_test(test_35_check_the_insertion_after_deletion,
+        "TVector.test_35_check_the_insertion_after_deletion");
+    TestSystem::start_test(test_36_check_the_replacement_by_index,
+        "TVector.test_36_check_the_replacement_by_index");
     TestSystem::start_test(
-        test_30_check_the_replacement_by_index_after_deleted,
-        "TVector.test_30_check_the_replacement_by_index_after_deleted");
-    TestSystem::start_test(test_31_check_at, "TVector.test_31_check_at");
-    TestSystem::start_test(test_32_check_the_exception_in_at,
-        "TVector.test_32_check_the_exception_in_at");
-    TestSystem::start_test(test_33_check_assign_value,
-        "TVector.test_33_check_assign_value");
-    TestSystem::start_test(test_34_check_assign_list,
-        "TVector.test_34_check_assign_list");
+        test_37_check_the_replacement_by_index_after_deleted,
+        "TVector.test_37_check_the_replacement_by_index_after_deleted");
+    TestSystem::start_test(test_38_check_at, "TVector.test_38_check_at");
+    TestSystem::start_test(test_39_check_the_exception_in_at,
+        "TVector.test_39_check_the_exception_in_at");
+    TestSystem::start_test(test_40_check_assign_value,
+        "TVector.test_40_check_assign_value");
+    TestSystem::start_test(test_41_check_assign_list,
+        "TVector.test_41_check_assign_list");
     TestSystem::start_test(
-        test_35_check_the_exception_when_going_out_of_bounds,
-        "TVector.test_35_check_the_exception_when_going_out_of_bounds");
+        test_42_check_the_exception_when_going_out_of_bounds,
+        "TVector.test_42_check_the_exception_when_going_out_of_bounds");
     TestSystem::start_test(
-        test_36_check_for_an_exception_when_interacting_with_an_empty_vector,
-        "TVector.test_36_check_except_when_interacting_with_an_empty_vec");
-    TestSystem::start_test(test_37_check_the_insertion_into_an_empty_vector,
-        "TVector.test_37_check_the_insertion_into_an_empty_vector");
-    TestSystem::start_test(test_38_check_shuffle_vector,
-        "TVector.test_38_check_shuffle_vector");
-    TestSystem::start_test(test_39_check_hoara_sort,
-        "TVector.test_39_check_hoara_sort");
-    TestSystem::start_test(test_40_check_find_first_element,
-        "TVector.test_40_check_find_first_element");
+        test_43_check_for_an_exception_when_interacting_with_an_empty_vector,
+        "TVector.test_43_check_except_when_interacting_with_an_empty_vec");
+    TestSystem::start_test(test_44_check_the_insertion_into_an_empty_vector,
+        "TVector.test_44_check_the_insertion_into_an_empty_vector");
+    TestSystem::start_test(test_45_check_shuffle_vector,
+        "TVector.test_45_check_shuffle_vector");
+    TestSystem::start_test(test_46_check_hoara_sort,
+        "TVector.test_46_check_hoara_sort");
+    TestSystem::start_test(test_47_check_find_first_element,
+        "TVector.test_47_check_find_first_element");
     TestSystem::start_test(
-        test_41_check_find_first_element_if_there_is_no_element,
-        "TVector.test_41_check_find_first_element_if_there_is_no_element");
-    TestSystem::start_test(test_42_check_find_last_element,
-        "TVector.test_42_check_find_last_element");
+        test_48_check_find_first_element_if_there_is_no_element,
+        "TVector.test_48_check_find_first_element_if_there_is_no_element");
+    TestSystem::start_test(test_49_check_find_last_element,
+        "TVector.test_49_check_find_last_element");
     TestSystem::start_test(
-        test_43_check_find_last_element_if_there_is_no_element,
-        "TVector.test_43_check_find_last_element_if_there_is_no_element");
-    TestSystem::start_test(test_44_check_find_several_elements,
-        "TVector.test_44_check_find_several_elements");
+        test_50_check_find_last_element_if_there_is_no_element,
+        "TVector.test_50_check_find_last_element_if_there_is_no_element");
+    TestSystem::start_test(test_51_check_find_several_elements,
+        "TVector.test_51_check_find_several_elements");
     TestSystem::start_test(
-        test_45_check_find_several_elements_if_there_is_no_element,
-        "TVector.test_45_check_find_several_elements_if_there_is_no_element");
-    TestSystem::start_test(test_46_check_find_first_elem_after_deletion,
-        "TVector.test_46_check_find_first_elem_after_deletion");
-    TestSystem::start_test(test_47_check_find_last_elem_after_deletion,
-        "TVector.test_47_check_find_last_elem_after_deletion");
-    TestSystem::start_test(test_48_check_find_all_elements_after_deletion,
-        "TVector.test_48_check_find_all_elements_after_deletion");
+        test_52_check_find_several_elements_if_there_is_no_element,
+        "TVector.test_52_check_find_several_elements_if_there_is_no_element");
+    TestSystem::start_test(test_53_check_find_first_elem_after_deletion,
+        "TVector.test_53_check_find_first_elem_after_deletion");
+    TestSystem::start_test(test_54_check_find_last_elem_after_deletion,
+        "TVector.test_54_check_find_last_elem_after_deletion");
+    TestSystem::start_test(test_55_check_find_all_elements_after_deletion,
+        "TVector.test_55_check_find_all_elements_after_deletion");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
