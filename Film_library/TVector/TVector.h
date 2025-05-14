@@ -96,7 +96,7 @@ class TVector {
 };
 
 template <class T>
-TVector<T>::TVector() : {
+TVector<T>::TVector() {
     set_memory(0);
     _deleted = 0;
 }
