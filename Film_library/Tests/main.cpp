@@ -302,7 +302,6 @@ bool test_24_check_the_insertion_at_the_beginning_with_memory_reallocation() {
         { 55, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
     bool expected_result = true;
     bool actual_result = (vec == res);
-    // проверять только первые элементы
     return TestSystem::check(static_cast<size_t>(30), vec.capacity()) &&
         TestSystem::check(expected_result, actual_result);
 }
@@ -751,8 +750,8 @@ bool test_57_check_shifted_insert_into_a_full_array_with_deleted_elems() {
     vec.insert(5, 88);
     vec.insert(7, 99);
     vec.insert(9, 100);
-    TVector<int> res({ 1, 2, 4, 5, 6, 88, 8, 99, 9, 100, 10, 11, 12, 13, 14, 15, 16,
-        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 });
+    TVector<int> res({ 1, 2, 4, 5, 6, 88, 8, 99, 9, 100, 10, 11, 12, 13, 14,
+        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 });
     bool actual_result = (vec == res);
     return TestSystem::check(expected_result, actual_result) &&
         TestSystem::check(static_cast<size_t>(30), vec.capacity());
@@ -1027,7 +1026,7 @@ int main() {
         "TVector.test_66_check_find_all_elements_after_deletion");
     TestSystem::start_test(
         test_67_check_the_replace_by_the_pointer_after_searching_and_deleting,
-        "TVector.test_67_check_the_replace_by_the_pointer_after_searching_and_deleting");
+        "TVector.test_67_check_the_replace_by_ptr_after_search_and_delete");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;

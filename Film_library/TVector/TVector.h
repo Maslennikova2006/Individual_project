@@ -275,8 +275,7 @@ void TVector<T>::push_front(const T& value) noexcept {
     if (is_full()) {
         if (_deleted > 0) {
             shift_based_on_deleted();
-        }
-        else {
+        } else {
             reallocation_memory(_size + 1);
         }
     }
@@ -297,7 +296,6 @@ void TVector<T>::insert(const size_t index, const T& value) {
             reallocation_memory(_size + 1);
         }
     }
-    
     size_t new_index = recalculate_the_position(index);
     move_the_elements(new_index, _size + _deleted);
     _data[new_index] = value;
@@ -308,13 +306,13 @@ template <class T>
 void TVector<T>::insert(const size_t index, size_t count, const T& value) {
     if (index > _size + _deleted)
         throw std::invalid_argument("The index goes beyond the boundaries\n");
-    if (_size + _deleted + count > _capacity)
+    if (_size + _deleted + count > _capacity) {
         if (_deleted > 0) {
             shift_based_on_deleted();
-        }
-        else {
+        } else {
             reallocation_memory(_size + count);
         }
+    }
     size_t new_index = recalculate_the_position(index);
     for (size_t i = _size + _deleted; i > new_index; i--) {
         _data[i + count - 1] = _data[i - 1];
@@ -330,13 +328,13 @@ template <class T>
 void TVector<T>::insert(const size_t index, std::initializer_list<T> data) {
     if (index > _size)
         throw std::invalid_argument("The index goes beyond the boundaries\n");
-    if (_size + _deleted + data.size() > _capacity)
+    if (_size + _deleted + data.size() > _capacity) {
         if (_deleted > 0) {
             shift_based_on_deleted();
-        }
-        else {
+        } else {
             reallocation_memory(_size + data.size());
         }
+    }
     size_t new_index = recalculate_the_position(index);
     for (size_t i = _size + _deleted; i > new_index; i--) {
         _data[i + data.size() - 1] = _data[i - 1];
@@ -354,8 +352,7 @@ void TVector<T>::push_back(const T& value) noexcept {
     if (is_full()) {
         if (_deleted > 0) {
             shift_based_on_deleted();
-        }
-        else {
+        } else {
             reallocation_memory(_size + 1);
         }
     }
@@ -736,7 +733,6 @@ int find_first_elem_by_index(const TVector<T>& data, T value) {
             return i - count_deleted;
         }
     }
-    //throw std::invalid_argument("The element was not found in the vector!\n");
     return -1;
 }
 template <class T>
@@ -748,7 +744,6 @@ int find_last_elem_by_index(const TVector<T>& data, T value) {
         if (data._data[i] == value && data._states[i] == busy)
             return i - data._deleted + count_deleted;
     }
-    //throw std::invalid_argument("The element was not found in the vector!\n");
     return -1;
 }
 template <class T>
@@ -782,7 +777,6 @@ T* find_first_elem_by_pointer(const TVector<T>& data, T value) {
             return &data._data[i];
         }
     }
-    //throw std::invalid_argument("The element was not found in the vector!\n");
     return nullptr;
 }
 template <class T>
@@ -792,7 +786,6 @@ T* find_last_elem_by_pointer(const TVector<T>& data, T value) {
         if (data._data[i] == value && data._states[i] == busy)
             return &data._data[i];
     }
-    //throw std::invalid_argument("The element was not found in the vector!\n");
     return nullptr;
 }
 template <class T>
