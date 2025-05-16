@@ -861,6 +861,50 @@ bool test_67_check_the_replace_by_the_pointer_after_searching_and_deleting() {
     }
     return TestSystem::check(expected_result, actual_result);
 }
+bool test_68_check_shifted_insert_into_a_full_array_with_deleted_elems() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 });
+    bool expected_result = true;
+    vec.erase(2);
+    vec.erase(5);
+    vec.insert(3, 3, 77);
+    return (vec[0] == 1) && (vec[3] == 77) && (vec[4] == 77) && (vec[5] == 77)
+        && TestSystem::check(static_cast<size_t>(30), vec.capacity());
+}
+bool test_69_check_shifted_insert_into_a_full_array_with_deleted_elems() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 });
+    bool expected_result = true;
+    vec.erase(2);
+    vec.erase(3);
+    vec.insert(3, {3, 6, 8});
+    return (vec[0] == 1) && (vec[3] == 3) && (vec[4] == 6) && (vec[5] == 8)
+        && TestSystem::check(static_cast<size_t>(30), vec.capacity());
+}
+bool test_70_check_shifted_push_front_into_a_full_array_with_deleted_elems() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 });
+    bool expected_result = true;
+    vec.erase(2);
+    vec.erase(3);
+    vec.push_front(11);
+    vec.push_front(22);
+    vec.push_front(33);
+    return (vec.front() == 33) && (vec[1] == 22) && (vec[2] == 11)
+        && TestSystem::check(static_cast<size_t>(30), vec.capacity());
+}
+bool test_71_check_shifted_push_back_into_a_full_array_with_deleted_elems() {
+    TVector<int> vec({ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 });
+    bool expected_result = true;
+    vec.erase(2);
+    vec.erase(3);
+    vec.push_back(11);
+    vec.push_back(22);
+    vec.push_back(33);
+    return (vec.back() == 33) && (vec[28] == 22) && (vec[27] == 11)
+        && TestSystem::check(static_cast<size_t>(30), vec.capacity());
+}
 
 int main() {
     TestSystem::start_test(test_1_check_the_default_constructor,
@@ -1015,6 +1059,18 @@ int main() {
     TestSystem::start_test(
         test_67_check_the_replace_by_the_pointer_after_searching_and_deleting,
         "TVector.test_67_check_the_replace_by_ptr_after_search_and_delete");
+    TestSystem::start_test(
+        test_68_check_shifted_insert_into_a_full_array_with_deleted_elems,
+        "TVector.test_68_check_shift_insert_in_a_array_with_deleted_elems");
+    TestSystem::start_test(
+        test_69_check_shifted_insert_into_a_full_array_with_deleted_elems,
+        "TVector.test_69_check_shift_insert_in_a_array_with_deleted_elems");
+    TestSystem::start_test(
+        test_70_check_shifted_push_front_into_a_full_array_with_deleted_elems,
+        "TVector.test_70_check_shift_push_front_in_a_array_with_deleted_elem");
+    TestSystem::start_test(
+        test_71_check_shifted_push_back_into_a_full_array_with_deleted_elems,
+        "TVector.test_71_check_shift_push_back_in_a_array_with_deleted_elem");
     TestSystem::print_init_info();
     TestSystem::print_final_info();
     return 0;
