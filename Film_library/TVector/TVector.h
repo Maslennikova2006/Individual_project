@@ -101,7 +101,7 @@ class TVector {
     size_t recalculate_the_position(size_t index) const noexcept;
     T* recalculate_the_address(size_t index) const noexcept;
     void move_the_elements(size_t begin, size_t end) noexcept;
-    void shift_based_on_deleted(const size_t start_index, const size_t count) noexcept;
+    void shift_based_on_deleted(const size_t, const size_t) noexcept;
     void move_busy_cells(size_t new_capacity, size_t count) noexcept;
 };
 
@@ -497,8 +497,9 @@ void TVector<T>::assign(size_t count, const T& value) {
     size_t capacity = (count / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
     if (_capacity != capacity) {
         set_memory(count);
-    } else
+    } else {
         _size = count;
+    }
     size_t i = 0;
     while (i < count) {
         _data[i] = value;
@@ -516,8 +517,9 @@ void TVector<T>::assign(std::initializer_list<T> data) {
     size_t capacity = (size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
     if (_capacity != capacity) {
         set_memory(size);
-    } else
+    } else {
         _size = size;
+    }
     size_t i = 0;
     auto it = data.begin();
     for (i; it != data.end(); i++, it++) {
@@ -538,8 +540,9 @@ TVector<T>& TVector<T>::operator=(const TVector<T>& other) noexcept {
     size_t capacity = (size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
     if (_capacity != capacity) {
         set_memory(size);
-    } else
+    } else {
         _size = size;
+    }
     size_t j = 0;
     for (size_t i = 0; i < size + other._deleted; i++) {
         if (other._states[i] == busy) {
@@ -694,7 +697,8 @@ void TVector<T>::move_the_elements(size_t begin, size_t end) noexcept {
     }
 }
 template <class T>
-void TVector<T>::shift_based_on_deleted(const size_t start_index, const size_t count) noexcept {
+void TVector<T>::shift_based_on_deleted
+(const size_t start_index, const size_t count) noexcept {
     size_t busy_count = 0;
     for (size_t i = 0; i < _size + _deleted; i++) {
         if (_states[i] == busy) {
