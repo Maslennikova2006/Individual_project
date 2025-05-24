@@ -8,9 +8,11 @@
 //  Do not add files here that you will be updating
 //  frequently as this negates the performance advantage.
 
+// Copyright 2025 Maslennikova Mary
+
 #ifndef FILM_LIBRARY_LOGINWINDOW_PCH_H_
 #define FILM_LIBRARY_LOGINWINDOW_PCH_H_
 
 // add headers that you want to pre-compile here
 #include <msclr/marshal_cppstd.h>
-#endif //  FILM_LIBRARY_LOGINWINDOW_PCH_H_
+#endif  //  FILM_LIBRARY_LOGINWINDOW_PCH_H_

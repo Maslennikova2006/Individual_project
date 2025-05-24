@@ -4,6 +4,6 @@
 //  Microsoft Visual C++ generated include file.
 //  Used by app.rc
 #ifndef FILM_LIBRARY_LOGINWINDOW_RESOURCE_H_
-#define FILM_LIBRARY_LOGINWINDOW_RESOURCE_H_ 
+#define FILM_LIBRARY_LOGINWINDOW_RESOURCE_H_
 
-#endif //  FILM_LIBRARY_LOGINWINDOW_RESOURCE_H_ 
+#endif  //  FILM_LIBRARY_LOGINWINDOW_RESOURCE_H_
