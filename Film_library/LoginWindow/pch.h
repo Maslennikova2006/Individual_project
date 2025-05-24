@@ -1,3 +1,5 @@
+// Copyright 2025 Maslennikova Mary
+
 //  pch.h: This is a precompiled header file.
 //  Files listed below are compiled only once,
 //  improving build performance for future builds.
@@ -7,8 +9,6 @@
 //  if any one of them is updated between builds.
 //  Do not add files here that you will be updating
 //  frequently as this negates the performance advantage.
-
-// Copyright 2025 Maslennikova Mary
 
 #ifndef FILM_LIBRARY_LOGINWINDOW_PCH_H_
 #define FILM_LIBRARY_LOGINWINDOW_PCH_H_

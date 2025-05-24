@@ -24,7 +24,7 @@ public:
     Form1(void) {
         InitializeComponent();
         //
-        //TODO(Maslennikova Mary):  Add the constructor code here
+        //  TODO(Maslennikova Mary):  Add the constructor code here
         //
     }
 
@@ -34,7 +34,7 @@ protected:
     /// </summary>
     ~Form1() {
         if (components) {
-			delete components;
+            delete components;
         }
     }
 private: System::Windows::Forms::Button^ login_btn;
@@ -239,67 +239,67 @@ private: System::Void login_btn_Click
 }
 private: System::Void register_btn_Click
        (System::Object^ sender, System::EventArgs^ e) {
-std::string login = msclr::interop::
-marshal_as<std::string>(login_txt->Text);
-std::string password = msclr::interop::
-marshal_as<std::string>(password_txt->Text);
+    std::string login = msclr::interop::
+        marshal_as<std::string>(login_txt->Text);
+    std::string password = msclr::interop::
+        marshal_as<std::string>(password_txt->Text);
 
-if (login == "" || password == "") {
-    System::Windows::Forms::MessageBox::Show(
-        "Enter your username and password!", "Error",
-        System::Windows::Forms::MessageBoxButtons::OK,
-        System::Windows::Forms::MessageBoxIcon::Error);
-    return;
-}
-try {
-    User temporary_user(login, password);
-}
-catch (const std::exception& ex) {
-    MessageBox::Show(gcnew System::String(ex.what()), "Error",
-        MessageBoxButtons::OK, MessageBoxIcon::Error);
-    return;
-}
-
-std::ifstream file("C:\\git\\Film_library\\users.txt");
-if (!file.is_open()) {
-    System::Windows::Forms::MessageBox::Show("The file users.txt not found!",
-        "Error", System::Windows::Forms::MessageBoxButtons::OK,
-        System::Windows::Forms::MessageBoxIcon::Error);
-    return;
-}
-
-std::string line;
-bool found = false;
-
-while (std::getline(file, line)) {
-    size_t delimiter_pos = line.find(' ');
-    std::string existingLogin = line.substr(0, delimiter_pos);
-    if (existingLogin == login) {
-        found = true;
-        break;
+    if (login == "" || password == "") {
+        System::Windows::Forms::MessageBox::Show(
+            "Enter your username and password!", "Error",
+            System::Windows::Forms::MessageBoxButtons::OK,
+            System::Windows::Forms::MessageBoxIcon::Error);
+        return;
     }
-}
-file.close();
+    try {
+        User temporary_user(login, password);
+    }
+    catch (const std::exception& ex) {
+        MessageBox::Show(gcnew System::String(ex.what()), "Error",
+            MessageBoxButtons::OK, MessageBoxIcon::Error);
+        return;
+    }
 
-if (found) {
-    MessageBox::Show("Username already exists!", "Error",
-        MessageBoxButtons::OK, MessageBoxIcon::Error);
-    return;
-}
+    std::ifstream file("C:\\git\\Film_library\\users.txt");
+    if (!file.is_open()) {
+        System::Windows::Forms::MessageBox::Show("The file users.txt not found!",
+            "Error", System::Windows::Forms::MessageBoxButtons::OK,
+            System::Windows::Forms::MessageBoxIcon::Error);
+        return;
+    }
 
-std::ofstream outFile("C:\\git\\Film_library\\users.txt", std::ios::app);
-if (!outFile.is_open()) {
-    MessageBox::Show("Cannot open users file!", "Error",
-        MessageBoxButtons::OK, MessageBoxIcon::Error);
-    return;
-}
+    std::string line;
+    bool found = false;
 
-outFile << std::endl << login << " " << password;
-outFile.close();
+    while (std::getline(file, line)) {
+        size_t delimiter_pos = line.find(' ');
+        std::string existingLogin = line.substr(0, delimiter_pos);
+        if (existingLogin == login) {
+            found = true;
+            break;
+        }
+    }
+    file.close();
 
-MessageBox::Show("Registration successful!", "Information",
-    MessageBoxButtons::OK, MessageBoxIcon::Information);
-this->Hide();
-}
+    if (found) {
+        MessageBox::Show("Username already exists!", "Error",
+            MessageBoxButtons::OK, MessageBoxIcon::Error);
+        return;
+    }
+
+    std::ofstream outFile("C:\\git\\Film_library\\users.txt", std::ios::app);
+    if (!outFile.is_open()) {
+        MessageBox::Show("Cannot open users file!", "Error",
+            MessageBoxButtons::OK, MessageBoxIcon::Error);
+        return;
+    }
+
+    outFile << std::endl << login << " " << password;
+    outFile.close();
+
+    MessageBox::Show("Registration successful!", "Information",
+        MessageBoxButtons::OK, MessageBoxIcon::Information);
+    this->Hide();
+    }
 };
 }  //  namespace CppCLRWinFormsProject
