@@ -1,6 +1,7 @@
 // Copyright 2025 Maslennikova Mary
 
 #include <iostream>
+#include <string>
 
 #include "/git/Film_library/User/User.h"
 
@@ -52,7 +53,7 @@ bool User::check_to_correct_password(const std::string& password) {
         throw std::invalid_argument
         ("The password must contain from 8 to 20 symbols!\n");
         return false;
-	}
+    }
 
     if (password.find(' ') != std::string::npos) {
         throw std::invalid_argument("The password must not contain spaces!\n");
