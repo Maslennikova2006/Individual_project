@@ -5,8 +5,8 @@
 #include <initializer_list>
 #include <iostream>
 #include <random>
-#ifndef FILM_LIBRARY_TVECTOR_TVECTOR_H_
-#define FILM_LIBRARY_TVECTOR_TVECTOR_H_
+#ifndef FILM_LIBRARY_MYTVECTOR_TVECTOR_H_
+#define FILM_LIBRARY_MYTVECTOR_TVECTOR_H_
 
 #define STEP_OF_CAPACITY 15
 enum State { empty, busy, deleted };
@@ -30,7 +30,7 @@ class TVector {
     size_t _deleted;
     State* _states;
 
-public:
+ public:
     TVector();
     TVector(size_t size, const T* data);
     TVector(size_t size, std::initializer_list<T> data);
@@ -92,7 +92,7 @@ public:
     friend TVector<T*> find_elem_by_pointer<T>(const TVector<T>& data, T value);
     friend void shuffle<T>(TVector<T>& data);
 
-private:
+ private:
     inline bool is_full() const noexcept;
     void set_memory(size_t size) noexcept;
     void reallocation_memory(size_t count) noexcept;
@@ -278,8 +278,7 @@ void TVector<T>::push_front(const T& value) noexcept {
             _states[0] = busy;
             _size++;
             return;
-        }
-        else {
+        } else {
             reallocation_memory(_size + 1);
         }
     }
@@ -301,8 +300,7 @@ void TVector<T>::insert(const size_t index, const T& value) {
             _states[index] = busy;
             _size++;
             return;
-        }
-        else {
+        } else {
             reallocation_memory(_size + 1);
         }
     }
@@ -326,8 +324,7 @@ void TVector<T>::insert(const size_t index, size_t count, const T& value) {
             }
             _size += count;
             return;
-        }
-        else {
+        } else {
             reallocation_memory(_size + count);
         }
     }
@@ -357,8 +354,7 @@ void TVector<T>::insert(const size_t index, std::initializer_list<T> data) {
             }
             _size += data.size();
             return;
-        }
-        else {
+        } else {
             reallocation_memory(_size + data.size());
         }
     }
@@ -384,8 +380,7 @@ void TVector<T>::push_back(const T& value) noexcept {
             _states[_size] = busy;
             _size++;
             return;
-        }
-        else {
+        } else {
             reallocation_memory(_size + 1);
         }
     }
@@ -416,8 +411,7 @@ void TVector<T>::erase(size_t index) {
     size_t new_index = recalculate_the_position(index);
     if (index == _size - 1) {
         _states[new_index] = empty;
-    }
-    else {
+    } else {
         _states[new_index] = deleted;
         _deleted++;
     }
@@ -503,8 +497,7 @@ void TVector<T>::assign(size_t count, const T& value) {
     size_t capacity = (count / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
     if (_capacity != capacity) {
         set_memory(count);
-    }
-    else {
+    } else {
         _size = count;
     }
     size_t i = 0;
@@ -524,8 +517,7 @@ void TVector<T>::assign(std::initializer_list<T> data) {
     size_t capacity = (size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
     if (_capacity != capacity) {
         set_memory(size);
-    }
-    else {
+    } else {
         _size = size;
     }
     size_t i = 0;
@@ -548,8 +540,7 @@ TVector<T>& TVector<T>::operator=(const TVector<T>& other) noexcept {
     size_t capacity = (size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
     if (_capacity != capacity) {
         set_memory(size);
-    }
-    else {
+    } else {
         _size = size;
     }
     size_t j = 0;
@@ -777,8 +768,7 @@ void hoara_sort_rec(TVector<T>& data, size_t left, size_t right) {
                 l++;
                 if (r > 0)
                     r--;
-            }
-            else {
+            } else {
                 break;
             }
         }
@@ -881,4 +871,4 @@ void shuffle(TVector<T>& data) {
         my_swap(data._states[i], data._states[rand_i]);
     }
 }
-#endif  // FILM_LIBRARY_TVECTOR_TVECTOR_H_
+#endif  // FILM_LIBRARY_MYTVECTOR_TVECTOR_H_
