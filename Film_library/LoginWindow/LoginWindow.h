@@ -24,7 +24,7 @@ public:
     Form1(void) {
         InitializeComponent();
         //
-        //  TODO(Maslennikova Mary):  Add the constructor code here
+        // TODO(Maslennikova Mary):  Add the constructor code here
         //
     }
 
@@ -262,7 +262,8 @@ private: System::Void register_btn_Click
 
     std::ifstream file("C:\\git\\Film_library\\users.txt");
     if (!file.is_open()) {
-        System::Windows::Forms::MessageBox::Show("The file users.txt not found!",
+        System::Windows::Forms::MessageBox::Show(
+            "The file users.txt not found!",
             "Error", System::Windows::Forms::MessageBoxButtons::OK,
             System::Windows::Forms::MessageBoxIcon::Error);
         return;
