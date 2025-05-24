@@ -36,6 +36,14 @@ const std::string User::get_password() const noexcept {
     return _password;
 }
 
+bool User::operator==(const User& other) const noexcept {
+    if (_login != other._login)
+        return false;
+    if (_password != other._password)
+        return false;
+    return true;
+}
+
 bool User::check_to_correct_login(const std::string& login) {
     if (login.length() < 4 || login.length() > 20) {
         throw std::invalid_argument

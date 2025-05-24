@@ -22,6 +22,8 @@ class User {
     const std::string get_login() const noexcept;
     const std::string get_password() const noexcept;
 
+    bool operator==(const User& other) const noexcept;
+
  private:
     bool check_to_correct_login(const std::string& login);
     bool check_to_correct_password(const std::string& password);

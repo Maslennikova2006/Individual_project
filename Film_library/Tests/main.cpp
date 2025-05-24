@@ -220,9 +220,7 @@ bool Date_test_5_check_the_copy_constructor() {
 }
 bool Date_test_6_check_the_setters() {
     Date date(8, 11, 1970);
-    date.set_day(23);
-    date.set_month(12);
-    date.set_year(1973);
+    date.set_date(23, 12, 1973);
     return TestSystem::check(23, date.get_day()) &&
         TestSystem::check(12, date.get_month()) &&
         TestSystem::check(1973, date.get_year());
@@ -232,21 +230,28 @@ bool Date_test_7_check_the_exception_in_the_setters() {
     bool expected_result = true;
     bool actual_result = true;
     try {
-        date.set_day(32);
+        date.set_date(32, 12, 2007);
         actual_result &= false;
     }
     catch (const std::exception& ex) {
         actual_result &= true;
     }
     try {
-        date.set_month(13);
+        date.set_date(29, 2, 2025);
         actual_result &= false;
     }
     catch (const std::exception& ex) {
         actual_result &= true;
     }
     try {
-        date.set_year(1801);
+        date.set_date(2, 13, 1956);
+        actual_result &= false;
+    }
+    catch (const std::exception& ex) {
+        actual_result &= true;
+    }
+    try {
+        date.set_date(2, 3, 1756);
         actual_result &= false;
     }
     catch (const std::exception& ex) {
