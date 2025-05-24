@@ -19,19 +19,11 @@ Date::Date(const Date& other) {
     _year = other._year;
 }
 
-void Date::set_day(const int& day) {
-    if (!check_to_correct_date(day, _month, _year))
+void Date::set_date(const int day, const int month, const int year) {
+    if (!check_to_correct_date(day, month, year))
         throw std::invalid_argument("Incorrect date!\n");
     _day = day;
-}
-void Date::set_month(const int& month) {
-    if (!check_to_correct_date(_day, month, _year))
-        throw std::invalid_argument("Incorrect date!\n");
     _month = month;
-}
-void Date::set_year(const int& year) {
-    if (!check_to_correct_date(_day, _month, year))
-        throw std::invalid_argument("Incorrect date!\n");
     _year = year;
 }
 
@@ -46,7 +38,7 @@ const int Date::get_year() const noexcept {
 }
 
 bool Date::check_to_correct_date
-(const int& day, const int& month, const int& year) const noexcept {
+(const int day, const int month, const int year) const noexcept {
     if (year < 1862) return false;
     int last_day_February = 28;
     switch (month) {
@@ -67,7 +59,7 @@ bool Date::check_to_correct_date
     }
     return true;
 }
-bool Date::check_to_correct_day(const int& current_day, const int last_day)
+bool Date::check_to_correct_day(const int current_day, const int last_day)
 const noexcept {
     if (current_day < 1 || current_day > last_day) return false;
     return true;
