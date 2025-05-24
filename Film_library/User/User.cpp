@@ -4,6 +4,7 @@
 #include <string>
 
 #include "/git/Film_library/User/User.h"
+#include "/git/Film_library/MyTVector/TVector.h"
 
 User::User() : _login("Username"), _password("123456pw") {}
 User::User(const std::string& login, const std::string& password) {
