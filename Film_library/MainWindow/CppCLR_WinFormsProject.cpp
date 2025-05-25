@@ -1,5 +1,3 @@
-// Copyright 2025 Maslennikova Mary
-
 #include "pch.h"
 
 using namespace System;
@@ -9,14 +7,15 @@ using namespace System;
 //    return 0;
 // }
 
-#include "LoginWindow.h"
+#include "MainWindow.h"
 
 using namespace System::Windows::Forms;
 
 [STAThread]
-int main() {
+int main()
+{
   Application::EnableVisualStyles();
   Application::SetCompatibleTextRenderingDefault(false);
-  Application::Run(gcnew CppCLRWinFormsProject::LoginWindow());
+  Application::Run(gcnew CppCLRWinFormsProject::MainWindow());
   return 0;
 }

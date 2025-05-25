@@ -7,6 +7,7 @@
 
 #include "/git/Film_library/MyTVector/TVector.h"
 #include "/git/Film_library/User/User.h"
+#include "../MainWindow/MainWindow.h"
 
 namespace CppCLRWinFormsProject {
 using namespace System;
@@ -19,9 +20,9 @@ using namespace System::Drawing;
 /// <summary>
 /// Summary for Form1
 /// </summary>
-public ref class Form1 : public System::Windows::Forms::Form {
+public ref class LoginWindow : public System::Windows::Forms::Form {
 public:
-    Form1(void) {
+    LoginWindow(void) {
         InitializeComponent();
         //
         // TODO(Maslennikova Mary):  Add the constructor code here
@@ -32,7 +33,7 @@ protected:
     /// <summary>
     /// Clean up any resources being used.
     /// </summary>
-    ~Form1() {
+    ~LoginWindow() {
         if (components) {
             delete components;
         }
@@ -80,7 +81,7 @@ private:
         this->login_btn->Text = L"Log in";
         this->login_btn->UseVisualStyleBackColor = true;
         this->login_btn->Click += gcnew System::
-            EventHandler(this, &Form1::login_btn_Click);
+            EventHandler(this, &LoginWindow::login_btn_Click);
         //
         //  register_btn
         //
@@ -95,7 +96,7 @@ private:
         this->register_btn->Text = L"Register";
         this->register_btn->UseVisualStyleBackColor = true;
         this->register_btn->Click += gcnew System::
-            EventHandler(this, &Form1::register_btn_Click);
+            EventHandler(this, &LoginWindow::register_btn_Click);
         //
         //  label1
         //
@@ -170,7 +171,7 @@ private:
         this->Controls->Add(this->label1);
         this->Controls->Add(this->register_btn);
         this->Controls->Add(this->login_btn);
-        this->Name = L"Form1";
+        this->Name = L"LoginWindow";
         this->Text = L"LoginWindow";
         this->ResumeLayout(false);
         this->PerformLayout();
@@ -225,6 +226,8 @@ private: System::Void login_btn_Click
                 System::Windows::Forms::MessageBoxButtons::OK,
                 System::Windows::Forms::MessageBoxIcon::Information);
             this->Hide();
+            MainWindow^ window = gcnew MainWindow();
+            window->Show(this);
         } else {
             System::Windows::Forms::MessageBox::Show(
                 "The user is not registered!", "Error",
@@ -301,6 +304,8 @@ private: System::Void register_btn_Click
     MessageBox::Show("Registration successful!", "Information",
         MessageBoxButtons::OK, MessageBoxIcon::Information);
     this->Hide();
+    MainWindow^ window = gcnew MainWindow();
+    window->ShowDialog(this);
     }
 };
 }  //  namespace CppCLRWinFormsProject
