@@ -28,7 +28,6 @@ public:
         // TODO(Maslennikova Mary): Add the constructor code here
         //
         this->AutoScroll = true;
-        //this->AutoScrollMinSize = System::Drawing::Size(0, 1000);
     }
 
 protected:

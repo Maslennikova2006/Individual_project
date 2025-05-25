@@ -15,4 +15,4 @@
 
 // add headers that you want to pre-compile here
 
-#endif // FILM_LIBRARY_MAINWINDOW_PCH_H_
+#endif  // FILM_LIBRARY_MAINWINDOW_PCH_H_
