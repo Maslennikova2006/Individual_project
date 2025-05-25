@@ -7,11 +7,10 @@
 #define FILM_LIBRARY_CREATOR_CREATOR_H_
 
 class Creator {
-protected:
+ protected:
     FIO _person;
     Date _date_of_birth;
-
-public:
+ public:
     Creator();
     Creator(const FIO&, const Date&);
     Creator(const Creator&);

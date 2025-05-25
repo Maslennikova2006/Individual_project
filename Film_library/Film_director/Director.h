@@ -12,8 +12,7 @@
 class Director : public Creator{
     TVector<std::string> _awards;
     float _rating;
-
-public:
+ public:
     Director();
     Director(const FIO&, const Date&, const TVector<std::string>&, const float);
     Director(const Creator&, const TVector<std::string>&, const float);

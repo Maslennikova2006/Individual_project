@@ -1,6 +1,7 @@
 // Copyright 2025 Maslennikova Mary
 
 #include <iostream>
+#include <string>
 
 #include "/git/Film_library/Film/Film.h"
 
@@ -12,7 +13,7 @@ Film::Film(const std::string& film, const std::string& genre,
     _film_genre = genre;
     _country = country;
     _year = year;
-    _average_mark = mark; //  calculate_mark();
+    _average_mark = mark;  // calculate_mark();
 }
 Film::Film(const Film& other) {
     if (&other == NULL)

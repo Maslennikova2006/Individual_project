@@ -6,11 +6,10 @@
 #define FILM_LIBRARY_ACTOR_ACTOR_H_
 
 class Actor : public Creator {
-
-public:
+ public:
     Actor();
     Actor(const FIO&, const Date&);
-    Actor(const Creator&);
+    explicit Actor(const Creator&);
     Actor(const Actor&);
 
     ~Actor() = default;
