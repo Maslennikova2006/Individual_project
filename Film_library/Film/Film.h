@@ -14,8 +14,8 @@ class Film {
 
  public:
     Film();
-    Film
-    (const std::string&, const std::string&, const std::string&, int, float);
+    Film(const std::string&, const std::string&,
+        const std::string&, int, float);
     Film(const Film&);
 
     ~Film() = default;
@@ -26,6 +26,6 @@ class Film {
     const int get_year() const noexcept;
     const float get_average_mark() const noexcept;
 
-    const float calculate_average_mark() const noexcept;
+    //  const float calculate_average_mark() const noexcept;
 };
 #endif  // FILM_LIBRARY_FILM_FILM_H_

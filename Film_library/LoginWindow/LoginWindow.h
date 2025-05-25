@@ -21,12 +21,10 @@ using namespace System::Drawing;
 /// Summary for Form1
 /// </summary>
 public ref class LoginWindow : public System::Windows::Forms::Form {
+private:
 public:
     LoginWindow(void) {
         InitializeComponent();
-        //
-        // TODO(Maslennikova Mary):  Add the constructor code here
-        //
     }
 
 protected:

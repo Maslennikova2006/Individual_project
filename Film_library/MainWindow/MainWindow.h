@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iostream>
 
+#include <msclr/marshal_cppstd.h>
+
 #include "/git/Film_library/Film/Film.h"
 #include "/git/Film_library/Film_library/Film_library.h"
 #include "/git/Film_library/MyTVector/TVector.h"
@@ -22,7 +24,7 @@ using namespace System::Drawing;
 /// </summary>
 public ref class MainWindow : public System::Windows::Forms::Form {
 public:
-    MainWindow(void) {
+    MainWindow() {
         InitializeComponent();
         //
         // TODO(Maslennikova Mary): Add the constructor code here

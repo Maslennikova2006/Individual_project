@@ -80,13 +80,13 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\git\Film_library\Film_library;C:\git\Film_library\MyTVector;C:\git\Film_library\Film;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\git\Film_library\Film_director;C:\git\Film_library\Creator;C:\git\Film_library\Actor;C:\git\Film_library\User;C:\git\Film_library\Film_library;C:\git\Film_library\MyTVector;C:\git\Film_library\Film;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
-      <AdditionalLibraryDirectories>C:\git\Film_library\Film_library;C:\git\Film_library\Film;C:\git\Film_library\MyTVector;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\git\Film_library\User;C:\git\Film_library\MyTVector;C:\git\Film_library\Film_director;C:\git\Film_library\Film;C:\git\Film_library\Creator;C:\git\Film_library\Actor;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -165,14 +165,26 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Actor\Actor.vcxproj">
+      <Project>{fb3e9f66-8163-40d3-a9db-6936c16b8eae}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Creator\Creator.vcxproj">
+      <Project>{4a47d517-5461-4923-9bf4-8b4dd6ed6055}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Film\Film.vcxproj">
       <Project>{e5897009-9aa1-4c54-a541-6861660d3972}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Film_director\Film_director.vcxproj">
+      <Project>{6d369a4d-54c5-4480-929f-16f3621c7876}</Project>
     </ProjectReference>
     <ProjectReference Include="..\Film_library\Film_library.vcxproj">
       <Project>{40409a31-8e8b-49f8-afc4-9acf9c1ebaf6}</Project>
     </ProjectReference>
     <ProjectReference Include="..\MyTVector\MyTVector.vcxproj">
       <Project>{e67dfe26-1923-41c8-8cb1-c7e183213a35}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\User\User.vcxproj">
+      <Project>{01f876cb-61a5-41ce-aa52-24e6123c953b}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

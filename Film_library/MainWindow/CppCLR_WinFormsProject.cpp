@@ -10,6 +10,7 @@ using namespace System;
 // }
 
 #include "MainWindow.h"
+#include "/git/Film_library/LoginWindow/LoginWindow.h"
 
 using namespace System::Windows::Forms;
 
