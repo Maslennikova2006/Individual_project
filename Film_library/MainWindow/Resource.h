@@ -1,6 +1,6 @@
 // Copyright 2025 Maslennikova Mary
 
-//{{NO_DEPENDENCIES}}
+// {{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
 // Used by app.rc
 

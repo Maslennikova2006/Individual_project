@@ -10,9 +10,9 @@
 // Do not add files here that you will be updating
 // frequently as this negates the performance advantage.
 
-#ifndef PCH_H
-#define PCH_H
+#ifndef FILM_LIBRARY_MAINWINDOW_PCH_H_
+#define FILM_LIBRARY_MAINWINDOW_PCH_H_
 
 // add headers that you want to pre-compile here
 
-#endif //PCH_H
+#endif // FILM_LIBRARY_MAINWINDOW_PCH_H_
