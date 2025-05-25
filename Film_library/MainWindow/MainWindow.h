@@ -1,3 +1,5 @@
+// Copyright 2025 Maslennikova Mary
+
 #pragma once
 
 #include <fstream>
@@ -18,13 +20,12 @@ using namespace System::Drawing;
 /// <summary>
 /// Summary for Form1
 /// </summary>
-public ref class MainWindow : public System::Windows::Forms::Form
-{
+public ref class MainWindow : public System::Windows::Forms::Form {
 public:
     MainWindow(void) {
         InitializeComponent();
         //
-        //TODO(Maslennikova Mary): Add the constructor code here
+        // TODO(Maslennikova Mary): Add the constructor code here
         //
         this->AutoScroll = true;
         //this->AutoScrollMinSize = System::Drawing::Size(0, 1000);
@@ -41,7 +42,6 @@ protected:
     }
 
 protected:
-
 private:
     /// <summary>
     /// Required designer variable.
@@ -72,4 +72,4 @@ private: System::Void MainWindow_Load
        (System::Object^ sender, System::EventArgs^ e) {
 }
 };
-}
+}  // namespace CppCLRWinFormsProject
