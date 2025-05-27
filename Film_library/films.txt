@@ -1,0 +1,6 @@
+Challenge|Drama|Russia|2023|C:\git\Film_library\Pictures\The Challenge.jpg
+Ice|Drama|Russia|2018|C:\git\Film_library\Pictures\Ice.jpg
+Titanic|Drama|USA|1997|C:\git\Film_library\Pictures\Titanic.jpg
+Madagascar|Comedy|USA|2005|C:\git\Film_library\Pictures\Madagascar.jpg
+Inside Out|Comedy|USA|2015|C:\git\Film_library\Pictures\Inside Out.jpg
+Cheburashka|Comedy|Russia|2023|C:\git\Film_library\Pictures\Cheburashka.jpg

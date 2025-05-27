@@ -80,13 +80,13 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\git\Film_library\MyTVector;C:\git\Film_library\User;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\git\Film_library\Film;C:\git\Film_library\MyTVector;C:\git\Film_library\User;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
-      <AdditionalLibraryDirectories>C:\git\Film_library\MyTVector;C:\git\Film_library\User;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\git\Film_library\Film;C:\git\Film_library\MyTVector;C:\git\Film_library\User;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -165,6 +165,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Film\Film.vcxproj">
+      <Project>{e5897009-9aa1-4c54-a541-6861660d3972}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\MyTVector\MyTVector.vcxproj">
       <Project>{e67dfe26-1923-41c8-8cb1-c7e183213a35}</Project>
     </ProjectReference>

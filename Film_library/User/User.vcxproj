@@ -137,6 +137,11 @@
   <ItemGroup>
     <ClInclude Include="User.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyTVector\MyTVector.vcxproj">
+      <Project>{e67dfe26-1923-41c8-8cb1-c7e183213a35}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
