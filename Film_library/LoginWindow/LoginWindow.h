@@ -273,9 +273,9 @@ private: System::Void register_btn_Click
             this->Hide();
             MainWindow^ window = gcnew MainWindow();
             window->Show(this);
-        }
-        else {
-            std::ofstream outFile("C:\\git\\Film_library\\users.txt", std::ios::app);
+        } else {
+            std::ofstream outFile
+            ("C:\\git\\Film_library\\users.txt", std::ios::app);
             if (!outFile.is_open()) {
                 MessageBox::Show("Cannot open users file!", "Error",
                     MessageBoxButtons::OK, MessageBoxIcon::Error);
