@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <string>
 
 #include "/git/Film_library/Film/Film.h"
 #include "/git/Film_library/Film_library/Film_library.h"
@@ -56,7 +57,7 @@ private:
     /// the contents of this method with the code editor.
     /// </summary>
     void InitializeComponent(void) {
-        this->flowLayoutPanelFilms = 
+        this->flowLayoutPanelFilms =
             (gcnew System::Windows::Forms::FlowLayoutPanel());
         this->label1 = (gcnew System::Windows::Forms::Label());
         this->SuspendLayout();
@@ -74,7 +75,8 @@ private:
         this->label1->AutoSize = true;
         this->label1->Font = (gcnew System::Drawing::Font(
             L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Bold,
-            System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+            System::Drawing::GraphicsUnit::Point,
+            static_cast<System::Byte>(204)));
         this->label1->Location = System::Drawing::Point(228, 56);
         this->label1->Name = L"label1";
         this->label1->Size = System::Drawing::Size(364, 55);
@@ -94,7 +96,6 @@ private:
             &MainWindow::MainWindow_Load);
         this->ResumeLayout(false);
         this->PerformLayout();
-
     }
 #pragma endregion
 public: void LoadFilms() {
@@ -151,7 +152,7 @@ public: void ShowFilms() {
 
         Label^ title = gcnew Label();
         title->Text = gcnew System::String(film.get_film_name().c_str());
-        title->Font = gcnew System::Drawing::Font("Arial",10,
+        title->Font = gcnew System::Drawing::Font("Arial", 10,
             System::Drawing::FontStyle::Bold);
         int x = (filmCard->Width - title->Width) / 2;
         title->Location = Point(x, 170);

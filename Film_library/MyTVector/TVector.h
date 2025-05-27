@@ -32,7 +32,7 @@ class TVector {
 
  public:
     TVector();
-    TVector(size_t size);
+    explicit TVector(size_t size);
     TVector(size_t size, const T* data);
     TVector(size_t size, std::initializer_list<T> data);
     TVector(std::initializer_list<T> data);
