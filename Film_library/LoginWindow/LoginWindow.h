@@ -223,10 +223,6 @@ private: System::Void login_btn_Click
             }
         }
         if (found) {
-            System::Windows::Forms::MessageBox::Show(
-                "The login was completed successfully!", "Information",
-                System::Windows::Forms::MessageBoxButtons::OK,
-                System::Windows::Forms::MessageBoxIcon::Information);
             this->Hide();
             MainWindow^ window = gcnew MainWindow(&temporary_user);
             window->ShowDialog(this);
@@ -282,8 +278,6 @@ private: System::Void register_btn_Click
             outFile << std::endl << login << " " << password;
             outFile.close();
 
-            MessageBox::Show("Registration successful!", "Information",
-                MessageBoxButtons::OK, MessageBoxIcon::Information);
             this->Hide();
             MainWindow^ window = gcnew MainWindow(&temporary_user);  // вынести после кнопок
             window->ShowDialog(this);
