@@ -279,7 +279,7 @@ private: System::Void register_btn_Click
             outFile.close();
 
             this->Hide();
-            MainWindow^ window = gcnew MainWindow(&temporary_user);  // вынести после кнопок
+            MainWindow^ window = gcnew MainWindow(&temporary_user);
             window->ShowDialog(this);
         }
     }
