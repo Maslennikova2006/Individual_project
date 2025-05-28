@@ -71,8 +71,8 @@ class TVector {
     void replace(const T* pointer, const T& value);
 
     const T& at(size_t index) const;
-    void assign(size_t count, const T& value);
-    void assign(std::initializer_list<T> data);
+    void assign(size_t count, const T& value) noexcept;
+    void assign(std::initializer_list<T> data) noexcept;
 
     TVector<T>& operator=(const TVector<T>& other) noexcept;
     bool operator!=(const TVector<T>& other) const noexcept;
@@ -499,7 +499,7 @@ const T& TVector<T>::at(size_t index) const {
     return _data[new_index];
 }
 template <class T>
-void TVector<T>::assign(size_t count, const T& value) {
+void TVector<T>::assign(size_t count, const T& value) noexcept {
     size_t capacity = (count / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
     if (_capacity != capacity) {
         reallocation_memory(count);
@@ -518,7 +518,7 @@ void TVector<T>::assign(size_t count, const T& value) {
     _deleted = 0;
 }
 template <class T>
-void TVector<T>::assign(std::initializer_list<T> data) {
+void TVector<T>::assign(std::initializer_list<T> data) noexcept {
     size_t size = data.size();
     size_t capacity = (size / STEP_OF_CAPACITY + 1) * STEP_OF_CAPACITY;
     if (_capacity != capacity) {

@@ -15,8 +15,8 @@
 #include "/git/Film_library/User/User.h"
 #include "/git/Film_library/MyTVector/TVector.h"
 
-#define FIO_TESTS
-#define DATE_TESTS
+//#define FIO_TESTS
+//#define DATE_TESTS
 #define TVECTOR_TESTS
 
 void set_color(int text_color, int bg_color) {

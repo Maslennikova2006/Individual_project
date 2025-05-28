@@ -228,7 +228,7 @@ private: System::Void login_btn_Click
                 System::Windows::Forms::MessageBoxButtons::OK,
                 System::Windows::Forms::MessageBoxIcon::Information);
             this->Hide();
-            MainWindow^ window = gcnew MainWindow();
+            MainWindow^ window = gcnew MainWindow(&temporary_user);
             window->ShowDialog(this);
         } else {
             System::Windows::Forms::MessageBox::Show(
@@ -270,9 +270,6 @@ private: System::Void register_btn_Click
                 "Username already exists!", "Information",
                 System::Windows::Forms::MessageBoxButtons::OK,
                 System::Windows::Forms::MessageBoxIcon::Information);
-            this->Hide();
-            MainWindow^ window = gcnew MainWindow();
-            window->Show(this);
         } else {
             std::ofstream outFile
             ("C:\\git\\Film_library\\users.txt", std::ios::app);
@@ -288,7 +285,7 @@ private: System::Void register_btn_Click
             MessageBox::Show("Registration successful!", "Information",
                 MessageBoxButtons::OK, MessageBoxIcon::Information);
             this->Hide();
-            MainWindow^ window = gcnew MainWindow();
+            MainWindow^ window = gcnew MainWindow(&temporary_user);  // вынести после кнопок
             window->ShowDialog(this);
         }
     }

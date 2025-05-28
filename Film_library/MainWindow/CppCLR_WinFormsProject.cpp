@@ -18,6 +18,6 @@ using namespace System::Windows::Forms;
 int main() {
   Application::EnableVisualStyles();
   Application::SetCompatibleTextRenderingDefault(false);
-  Application::Run(gcnew CppCLRWinFormsProject::MainWindow());
+  // Application::Run(gcnew CppCLRWinFormsProject::MainWindow());
   return 0;
 }

@@ -24,10 +24,12 @@ using namespace System::Drawing;
 /// </summary>
 public ref class MainWindow : public System::Windows::Forms::Form {
 private: TVector<Film>* films;
+       User* _user;
 public:
-    MainWindow() {
+    MainWindow(User* user) {
         InitializeComponent();
         films = new TVector<Film>();
+        _user = user;
         LoadFilms();
         ShowFilms();
     }
