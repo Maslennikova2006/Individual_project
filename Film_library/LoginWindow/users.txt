@@ -1,0 +1,4 @@
+Mary|22032006ujl|5|Inside Out;Ice;Cheburashka;Madagascar;Titanic;|4|Titanic;Cheburashka;Inside Out;Challenge;|
+Nastya|19051996hp|2|Ice;Titanic;|1|Madagascar;|
+Vika|05062006|3|Madagascar;Inside Out;Ice;|2|Challenge;Inside Out;|
+Margo|24122006|2|Ice;Titanic;|1|Cheburashka;|

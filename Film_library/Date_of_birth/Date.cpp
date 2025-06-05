@@ -1,6 +1,9 @@
 // Copyright 2025 Maslennikova Mary
 
 #include <iostream>
+#include <sstream>
+#include <iomanip>
+
 #include "/git/Film_library/Date_of_birth/Date.h"
 
 Date::Date() : _day(1), _month(1), _year(2025) {}
@@ -26,6 +29,22 @@ void Date::set_date(const int day, const int month, const int year) {
     _month = month;
     _year = year;
 }
+void Date::set_from_string(const std::string& date_str) {
+    std::istringstream iss(date_str);
+    char delimeter1, delimeter2;
+    int day, month, year;
+
+    if (!(iss >> day >> delimeter1 >> month >> delimeter2 >> year) || delimeter1 != '.' || delimeter2 != '.') {
+        throw std::invalid_argument("Некорректный формат даты. Ожидается dd.mm.yyyy");
+    }
+
+    if (!check_to_correct_date(day, month, year))
+        throw std::invalid_argument("Некорректные значения даты");
+
+    _day = day;
+    _month = month;
+    _year = year;
+}
 
 const int Date::get_day() const noexcept {
     return _day;
@@ -35,6 +54,12 @@ const int Date::get_month() const noexcept {
 }
 const int Date::get_year() const noexcept {
     return _year;
+}
+
+std::string Date::toString() const noexcept {
+    char buffer[11];
+    snprintf(buffer, sizeof(buffer), "%02d.%02d.%04d", _day, _month, _year);
+    return std::string(buffer);
 }
 
 bool Date::check_to_correct_date

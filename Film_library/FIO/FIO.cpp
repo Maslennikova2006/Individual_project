@@ -2,8 +2,12 @@
 
 #include <stdexcept>
 #include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 #include "/git/Film_library/FIO/FIO.h"
+#include "/git/Film_library/MyTVector/TVector.h"
 
 FIO::FIO(const std::string& fn, const std::string& sn, const std::string& ln) {
     set_first_name(fn);
@@ -41,6 +45,18 @@ void FIO::set_last_name(const std::string& ln) {
         _last_name = convert_to_norm_form(ln);
     }
 }
+void FIO::set_from_string(const std::string& name_str) {
+    std::istringstream iss(name_str);
+    TVector<std::string> parts;
+    std::string part;
+
+    while (iss >> part) {
+        parts.push_back(part);
+    }
+    _last_name = parts[0];
+    _first_name = parts[1];
+    _second_name = parts[2];
+}
 
 const std::string FIO::get_first_name() const noexcept {
     return _first_name;
@@ -50,6 +66,9 @@ const std::string FIO::get_second_name() const noexcept {
 }
 const std::string FIO::get_last_name() const noexcept {
     return _last_name;
+}
+const std::string FIO::get_full_name() const noexcept {
+    return _last_name + " " + _first_name + " " + _second_name;
 }
 
 bool FIO::check_to_correct_form(const std::string& name) const noexcept {

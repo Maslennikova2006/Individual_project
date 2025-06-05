@@ -22,5 +22,6 @@ class Creator {
 
     const FIO get_person() const noexcept;
     const Date get_date_of_birth() const noexcept;
+    std::string toString() const noexcept;
 };
 #endif  // FILM_LIBRARY_CREATOR_CREATOR_H_

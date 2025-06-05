@@ -5,8 +5,16 @@
 #include <fstream>
 #include <string>
 
-#include "/git/Film_library/MyTVector/TVector.h"
+#include "/git/Film_library/Actor/Actor.h"
+#include "/git/Film_library/Creator/Creator.h"
+#include "/git/Film_library/Date_of_birth/Date.h"
+#include "/git/Film_library/Feedback/Feedback.h"
+#include "/git/Film_library/Film/Film.h"
+#include "/git/Film_library/Film_director/Director.h"
+#include "/git/Film_library/Film_library/Film_library.h"
+#include "/git/Film_library/FIO/FIO.h"
 #include "/git/Film_library/User/User.h"
+#include "/git/Film_library/MyTVector/TVector.h"
 #include "/git/Film_library/MainWindow/MainWindow.h"
 
 
@@ -23,12 +31,11 @@ using namespace System::Drawing;
 /// </summary>
 public ref class LoginWindow : public System::Windows::Forms::Form {
 private:
-    TVector<User>* users;
+      FilmLibrary* film_library;
 public:
     LoginWindow(void) {
         InitializeComponent();
-        users = new TVector<User>();
-        LoadUsers();
+        film_library = new FilmLibrary("C:\\git\\Film_library\\films.txt", "C:\\git\\Film_library\\users.txt");
     }
 
 protected:
@@ -38,8 +45,8 @@ protected:
     ~LoginWindow() {
         if (components) {
             delete components;
-            delete users;
         }
+        delete film_library;
     }
 private: System::Windows::Forms::Button^ login_btn;
 private: System::Windows::Forms::Button^ register_btn;
@@ -180,63 +187,11 @@ private:
         this->PerformLayout();
     }
 #pragma endregion
-public: void LoadUsers() {
-    std::ifstream file("C:\\git\\Film_library\\users.txt");
-    if (!file.is_open()) {
-        System::Windows::Forms::MessageBox::Show(
-            "The file users.txt not found!", "Error",
-            System::Windows::Forms::MessageBoxButtons::OK,
-            System::Windows::Forms::MessageBoxIcon::Error);
-        return;
-    }
 
-    std::string line;
-    while (std::getline(file, line)) {
-        size_t delimiter_pos = line.find(' ');
-        std::string login = line.substr(0, delimiter_pos);
-        std::string password = line.substr(delimiter_pos + 1);
-        users->push_back(User(login, password));
-    }
-    file.close();
-}
-private: System::Void login_btn_Click
-       (System::Object^ sender, System::EventArgs^ e) {
-    std::string login = msclr::interop::
-        marshal_as<std::string>(login_txt->Text);
-    std::string password = msclr::interop::
-        marshal_as<std::string>(password_txt->Text);
-    if (login == "" || password == "") {
-        System::Windows::Forms::MessageBox::Show(
-            "Enter your username and password!", "Error",
-            System::Windows::Forms::MessageBoxButtons::OK,
-            System::Windows::Forms::MessageBoxIcon::Error);
-        return;
-    }
-
-    try {
-        User temporary_user(login, password);
-        bool found = false;
-        for (size_t i = 0; i < users->size(); i++) {
-            if (users->at(i) == temporary_user) {
-                found = true;
-                break;
-            }
-        }
-        if (found) {
-            this->Hide();
-            MainWindow^ window = gcnew MainWindow(&temporary_user);
-            window->ShowDialog(this);
-        } else {
-            System::Windows::Forms::MessageBox::Show(
-                "The user is not registered!", "Error",
-                System::Windows::Forms::MessageBoxButtons::OK,
-                System::Windows::Forms::MessageBoxIcon::Error);
-        }
-    }
-    catch (const std::exception& ex) {
-        MessageBox::Show(gcnew System::String(ex.what()), "Error",
-            MessageBoxButtons::OK, MessageBoxIcon::Error);
-    }
+private: System::Void switch_to_another_window(User temporary_user) {
+    this->Hide();
+    MainWindow^ window = gcnew MainWindow(film_library, &temporary_user);
+    window->ShowDialog(this);
 }
 private: System::Void register_btn_Click
        (System::Object^ sender, System::EventArgs^ e) {
@@ -255,8 +210,8 @@ private: System::Void register_btn_Click
     try {
         User temporary_user(login, password);
         bool found = false;
-        for (size_t i = 0; i < users->size(); i++) {
-            if ((*users)[i].get_login() == login) {
+        for (size_t i = 0; i < film_library->get_users().size(); i++) {
+            if (film_library->get_users()[i]->get_login() == login) {
                 found = true;
                 break;
             }
@@ -266,7 +221,8 @@ private: System::Void register_btn_Click
                 "Username already exists!", "Information",
                 System::Windows::Forms::MessageBoxButtons::OK,
                 System::Windows::Forms::MessageBoxIcon::Information);
-        } else {
+        }
+        else {
             std::ofstream outFile
             ("C:\\git\\Film_library\\users.txt", std::ios::app);
             if (!outFile.is_open()) {
@@ -275,12 +231,46 @@ private: System::Void register_btn_Click
                 return;
             }
 
-            outFile << std::endl << login << " " << password;
+            outFile << std::endl << login << "|" << password << "|" << 0 << "|" << "|" << 0 << "|" << "|";
             outFile.close();
+            switch_to_another_window(temporary_user);
+        }
+    }
+    catch (const std::exception& ex) {
+        MessageBox::Show(gcnew System::String(ex.what()), "Error",
+            MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
+}
+private: System::Void login_btn_Click
+       (System::Object^ sender, System::EventArgs^ e) {
+    std::string login = msclr::interop::
+        marshal_as<std::string>(login_txt->Text);
+    std::string password = msclr::interop::
+        marshal_as<std::string>(password_txt->Text);
 
-            this->Hide();
-            MainWindow^ window = gcnew MainWindow(&temporary_user);
-            window->ShowDialog(this);
+    if (login == "" || password == "") {
+        System::Windows::Forms::MessageBox::Show(
+            "Enter your username and password!", "Error",
+            System::Windows::Forms::MessageBoxButtons::OK,
+            System::Windows::Forms::MessageBoxIcon::Error);
+        return;
+    }
+    try {
+        User temporary_user(login, password);
+        bool found = false;
+        for (size_t i = 0; i < film_library->get_users().size(); i++) {
+            if (*film_library->get_users()[i] == temporary_user) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            switch_to_another_window(temporary_user);
+        } else {
+            System::Windows::Forms::MessageBox::Show(
+                "The user is not registered!", "Error",
+                System::Windows::Forms::MessageBoxButtons::OK,
+                System::Windows::Forms::MessageBoxIcon::Error);
         }
     }
     catch (const std::exception& ex) {

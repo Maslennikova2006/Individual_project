@@ -105,14 +105,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\git\Film_library\MyTVector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\git\Film_library\Film_library;C:\git\Film_library\Film;C:\git\Film_library\MyTVector;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>C:\git\Film_library\MyTVector;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\git\Film_library\Film_library;C:\git\Film_library\MyTVector;C:\git\Film_library\Film;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,6 +138,12 @@
     <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Film\Film.vcxproj">
+      <Project>{e5897009-9aa1-4c54-a541-6861660d3972}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Film_library\Film_library.vcxproj">
+      <Project>{40409a31-8e8b-49f8-afc4-9acf9c1ebaf6}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\MyTVector\MyTVector.vcxproj">
       <Project>{e67dfe26-1923-41c8-8cb1-c7e183213a35}</Project>
     </ProjectReference>

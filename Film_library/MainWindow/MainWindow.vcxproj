@@ -80,13 +80,13 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\git\Film_library\Film_director;C:\git\Film_library\Creator;C:\git\Film_library\Actor;C:\git\Film_library\User;C:\git\Film_library\Film_library;C:\git\Film_library\MyTVector;C:\git\Film_library\Film;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\git\Film_library\FIO;C:\git\Film_library\Date_of_birth;C:\git\Film_library\Feedback;C:\git\Film_library\Film_director;C:\git\Film_library\Creator;C:\git\Film_library\Actor;C:\git\Film_library\User;C:\git\Film_library\Film_library;C:\git\Film_library\MyTVector;C:\git\Film_library\Film;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies />
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
-      <AdditionalLibraryDirectories>C:\git\Film_library\User;C:\git\Film_library\MyTVector;C:\git\Film_library\Film_director;C:\git\Film_library\Film;C:\git\Film_library\Creator;C:\git\Film_library\Actor;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\git\Film_library\FIO;C:\git\Film_library\Date_of_birth;C:\git\Film_library\Feedback;C:\git\Film_library\User;C:\git\Film_library\MyTVector;C:\git\Film_library\Film_director;C:\git\Film_library\Film;C:\git\Film_library\Creator;C:\git\Film_library\Actor;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -171,6 +171,12 @@
     <ProjectReference Include="..\Creator\Creator.vcxproj">
       <Project>{4a47d517-5461-4923-9bf4-8b4dd6ed6055}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\Date_of_birth\Date_of_birth.vcxproj">
+      <Project>{6e7010da-48c1-4ee8-aed1-aa039fd681fa}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Feedback\Feedback.vcxproj">
+      <Project>{97c45939-c3e3-4ec9-9a77-c7d2f7c56404}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\Film\Film.vcxproj">
       <Project>{e5897009-9aa1-4c54-a541-6861660d3972}</Project>
     </ProjectReference>
@@ -179,6 +185,9 @@
     </ProjectReference>
     <ProjectReference Include="..\Film_library\Film_library.vcxproj">
       <Project>{40409a31-8e8b-49f8-afc4-9acf9c1ebaf6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\FIO\FIO.vcxproj">
+      <Project>{e929ca4b-1d94-4b2a-b1dd-62164a742c7d}</Project>
     </ProjectReference>
     <ProjectReference Include="..\MyTVector\MyTVector.vcxproj">
       <Project>{e67dfe26-1923-41c8-8cb1-c7e183213a35}</Project>

@@ -29,3 +29,6 @@ const FIO Creator::get_person() const noexcept {
 const Date Creator::get_date_of_birth() const noexcept {
     return _date_of_birth;
 }
+std::string Creator::toString() const noexcept {
+    return _person.get_full_name() + " " + _date_of_birth.toString();
+}

@@ -105,11 +105,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\git\Film_library\MyTVector;C:\git\Film_library\Feedback;C:\git\Film_library\Film;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalLibraryDirectories>C:\git\Film_library\Feedback;C:\git\Film_library\MyTVector;C:\git\Film_library\Film;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -132,6 +136,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Film_library.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Feedback\Feedback.vcxproj">
+      <Project>{97c45939-c3e3-4ec9-9a77-c7d2f7c56404}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Film\Film.vcxproj">
+      <Project>{e5897009-9aa1-4c54-a541-6861660d3972}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\MyTVector\MyTVector.vcxproj">
+      <Project>{e67dfe26-1923-41c8-8cb1-c7e183213a35}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
-Challenge|Drama|Russia|2023|C:\git\Film_library\Pictures\The Challenge.jpg
-Ice|Drama|Russia|2018|C:\git\Film_library\Pictures\Ice.jpg
-Titanic|Drama|USA|1997|C:\git\Film_library\Pictures\Titanic.jpg
-Madagascar|Comedy|USA|2005|C:\git\Film_library\Pictures\Madagascar.jpg
-Inside Out|Comedy|USA|2015|C:\git\Film_library\Pictures\Inside Out.jpg
-Cheburashka|Comedy|Russia|2023|C:\git\Film_library\Pictures\Cheburashka.jpg
+Challenge|Drama|Shipenko Klim Alekseevich 16.06.1983|Russia|2023|C:\git\Film_library\Pictures\The Challenge.jpg
+Ice|Drama|Trofim Oleg Borisovich 12.10.1989|Russia|2018|C:\git\Film_library\Pictures\Ice.jpg
+Titanic|Drama|Cameron James Francis 16.08.1954|USA|1997|C:\git\Film_library\Pictures\Titanic.jpg
+Madagascar|Comedy|Darnell Eric  21.08.1961|USA|2005|C:\git\Film_library\Pictures\Madagascar.jpg
+Inside Out|Comedy|Docter Pete  09.10.1968|USA|2015|C:\git\Film_library\Pictures\Inside Out.jpg
+Cheburashka|Comedy|Dyachenko Dmitry Vladimirovich 16.09.1972|Russia|2023|C:\git\Film_library\Pictures\Cheburashka.jpg
