@@ -38,8 +38,7 @@ protected:
     /// Clean up any resources being used.
     /// </summary>
     ~ProfileWindow() {
-        if (components)
-        {
+        if (components) {
             delete components;
         }
     }
@@ -47,12 +46,9 @@ protected:
 private: System::Windows::Forms::Button^ exit_btn;
 private: System::Windows::Forms::ListBox^ favorites_box;
 private: System::Windows::Forms::ListBox^ watched_box;
-
-
 private: System::Windows::Forms::Label^ label1;
 private: System::Windows::Forms::Label^ label2;
 protected:
-
 private:
     /// <summary>
     /// Required designer variable.
@@ -169,4 +165,4 @@ private: System::Void exit_btn_Click(System::Object^ sender,
     form->Show();
 }
 };
-}
+}  // namespace CppCLRWinFormsProject

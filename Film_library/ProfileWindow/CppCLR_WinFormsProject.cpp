@@ -17,6 +17,6 @@ using namespace System::Windows::Forms;
 int main() {
   Application::EnableVisualStyles();
   Application::SetCompatibleTextRenderingDefault(false);
-  //Application::Run(gcnew CppCLRWinFormsProject::ProfileWindow());
+  // Application::Run(gcnew CppCLRWinFormsProject::ProfileWindow());
   return 0;
 }
