@@ -12,6 +12,7 @@
 class FilmLibrary {
     TVector<Film> _films;
     TVector<User*> _users;
+
  public:
     FilmLibrary();
     FilmLibrary(TVector<Film>&, TVector<User*>&);
@@ -24,13 +25,13 @@ class FilmLibrary {
     const TVector<User*>& get_users() const noexcept;
 
     void save_users_to_file(const std::string& filename);
-    //void load_users_from_file(const std::string& filename);
 
     const Film* find_film_by_name(const std::string& name) const;
     User* find_user(const std::string&);
     void update_user(const User& user);
     void update_user_favorites(const std::string& login, const Film* film);
     void update_user_watched(const std::string& login, const Film* film);
+
  private:
     void load_films_from_file(const std::string& file);
     void load_users_from_file(const std::string& filename);

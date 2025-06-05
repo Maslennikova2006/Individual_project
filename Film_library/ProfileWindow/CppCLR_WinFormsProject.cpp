@@ -1,3 +1,5 @@
+// Copyright 2025 Maslennikova Mary
+
 #include "pch.h"
 
 using namespace System;
@@ -12,10 +14,9 @@ using namespace System;
 using namespace System::Windows::Forms;
 
 [STAThread]
-int main()
-{
+int main() {
   Application::EnableVisualStyles();
   Application::SetCompatibleTextRenderingDefault(false);
-  Application::Run(gcnew CppCLRWinFormsProject::ProfileWindow());
+  //Application::Run(gcnew CppCLRWinFormsProject::ProfileWindow());
   return 0;
 }

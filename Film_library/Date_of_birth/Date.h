@@ -1,5 +1,7 @@
 // Copyright 2025 Maslennikova Mary
 
+#include <string>
+
 #ifndef FILM_LIBRARY_DATE_OF_BIRTH_DATE_H_
 #define FILM_LIBRARY_DATE_OF_BIRTH_DATE_H_
 

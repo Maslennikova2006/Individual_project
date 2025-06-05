@@ -1,5 +1,7 @@
 // Copyright 2025 Maslennikova Mary
 
+#include <string>
+
 #include "/git/Film_library/FIO/FIO.h"
 #include "/git/Film_library/Date_of_birth/Date.h"
 

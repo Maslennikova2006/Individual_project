@@ -14,7 +14,7 @@ class Director : public Creator{
  public:
     Director();
     Director(const FIO&, const Date&);
-    Director(const Creator&);
+    explicit Director(const Creator&);
     Director(const Director&);
 
     ~Director() = default;

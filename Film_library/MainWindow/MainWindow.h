@@ -73,33 +73,38 @@ private:
     /// the contents of this method with the code editor.
     /// </summary>
     void InitializeComponent(void) {
-        this->flowLayoutPanelFilms = (gcnew System::Windows::Forms::FlowLayoutPanel());
+        this->flowLayoutPanelFilms = (gcnew System::Windows::Forms::
+            FlowLayoutPanel());
         this->label1 = (gcnew System::Windows::Forms::Label());
         this->profile_btn = (gcnew System::Windows::Forms::Button());
         this->SuspendLayout();
-        // 
+        //
         // flowLayoutPanelFilms
-        // 
+        //
         this->flowLayoutPanelFilms->AutoScroll = true;
         this->flowLayoutPanelFilms->Location = System::Drawing::Point(0, 162);
         this->flowLayoutPanelFilms->Name = L"flowLayoutPanelFilms";
         this->flowLayoutPanelFilms->Size = System::Drawing::Size(835, 399);
         this->flowLayoutPanelFilms->TabIndex = 0;
-        // 
+        //
         // label1
-        // 
+        //
         this->label1->AutoSize = true;
-        this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-            static_cast<System::Byte>(204)));
+        this->label1->Font = (gcnew System::Drawing::
+            Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
+                static_cast<System::Byte>(204)));
         this->label1->Location = System::Drawing::Point(228, 56);
         this->label1->Name = L"label1";
         this->label1->Size = System::Drawing::Size(364, 55);
         this->label1->TabIndex = 1;
         this->label1->Text = L"FILM LIBRARY";
-        // 
+        //
         // profile_btn
-        // 
-        this->profile_btn->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+        //
+        this->profile_btn->Font = (gcnew System::Drawing::
+            Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
+                System::Drawing::GraphicsUnit::Point,
             static_cast<System::Byte>(204)));
         this->profile_btn->Location = System::Drawing::Point(697, 13);
         this->profile_btn->Name = L"profile_btn";
@@ -107,10 +112,11 @@ private:
         this->profile_btn->TabIndex = 2;
         this->profile_btn->Text = L"Profile";
         this->profile_btn->UseVisualStyleBackColor = true;
-        this->profile_btn->Click += gcnew System::EventHandler(this, &MainWindow::profile_btn_Click);
-        // 
+        this->profile_btn->Click += gcnew System::EventHandler(this,
+            &MainWindow::profile_btn_Click);
+        //
         // MainWindow
-        // 
+        //
         this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
         this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
         this->ClientSize = System::Drawing::Size(835, 561);
@@ -119,15 +125,15 @@ private:
         this->Controls->Add(this->flowLayoutPanelFilms);
         this->Name = L"MainWindow";
         this->Text = L"MainWindow";
-        this->Load += gcnew System::EventHandler(this, &MainWindow::MainWindow_Load);
+        this->Load += gcnew System::EventHandler(this,
+            &MainWindow::MainWindow_Load);
         this->ResumeLayout(false);
         this->PerformLayout();
-
     }
 #pragma endregion
 public: void ShowFilms() {
     flowLayoutPanelFilms->Controls->Clear();
-    for (int i = 0; i < filmLibrary->get_films().size(); ++i) {
+    for (int i = 0; i < filmLibrary->get_films().size(); i++) {
         const Film film = filmLibrary->get_films()[i];
 
         Panel^ filmCard = gcnew Panel();
@@ -174,7 +180,8 @@ public: void ShowFilms() {
             System::Drawing::FontStyle::Regular);
         addToFavorites->Location = Point(50, 300);
         addToFavorites->Tag = i;
-        addToFavorites->CheckedChanged += gcnew EventHandler(this, &MainWindow::AddToFavorites_CheckedChanged);
+        addToFavorites->CheckedChanged += gcnew EventHandler(this,
+            &MainWindow::AddToFavorites_CheckedChanged);
         filmCard->Controls->Add(addToFavorites);
 
         CheckBox^ addToWatched = gcnew CheckBox();
@@ -183,7 +190,8 @@ public: void ShowFilms() {
             System::Drawing::FontStyle::Regular);
         addToWatched->Location = Point(250, 300);
         addToWatched->Tag = i;
-        addToWatched->CheckedChanged += gcnew EventHandler(this, &MainWindow::AddToWatched_CheckedChanged);
+        addToWatched->CheckedChanged += gcnew EventHandler(this,
+            &MainWindow::AddToWatched_CheckedChanged);
         filmCard->Controls->Add(addToWatched);
 
         flowLayoutPanelFilms->Controls->Add(filmCard);
@@ -191,7 +199,7 @@ public: void ShowFilms() {
 }
 private: void AddToFavorites_CheckedChanged(Object^ sender, EventArgs^ e) {
     CheckBox^ checkBox = (CheckBox^)sender;
-    int filmIndex = (int)checkBox->Tag;
+    int filmIndex = static_cast<int>(checkBox->Tag);
 
     try {
         const Film* film = &filmLibrary->get_films()[filmIndex];
@@ -208,7 +216,7 @@ private: void AddToFavorites_CheckedChanged(Object^ sender, EventArgs^ e) {
 
 private: void AddToWatched_CheckedChanged(Object^ sender, EventArgs^ e) {
     CheckBox^ checkBox = (CheckBox^)sender;
-    int filmIndex = (int)checkBox->Tag;
+    int filmIndex = static_cast<int>(checkBox->Tag);
 
     try {
         const Film* film = &filmLibrary->get_films()[filmIndex];

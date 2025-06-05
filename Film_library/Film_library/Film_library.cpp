@@ -1,7 +1,7 @@
 // Copyright 2025 Maslennikova Mary
 
 #include <fstream>
-#include <sstream>
+#include <string>
 
 #include "/git/Film_library/Film_library/Film_library.h"
 
@@ -19,7 +19,8 @@ FilmLibrary::FilmLibrary(const std::string& filmsFile,
         TVector<const Film*> watched = user->get_watched();
 
         for (size_t i = 0; i < favorites.size(); i++) {
-            const Film* found = find_film_by_name(favorites[i]->get_film_name());
+            const Film* found = find_film_by_name
+            (favorites[i]->get_film_name());
             if (found) {
                 favorites[i] = const_cast<Film*>(found);
             }
@@ -146,7 +147,8 @@ void FilmLibrary::update_user(const User& user) {
     }
     _users.push_back(new User(user));
 }
-void FilmLibrary::update_user_favorites(const std::string& login, const Film* film) {
+void FilmLibrary::update_user_favorites(const std::string& login,
+    const Film* film) {
     for (User* user : _users) {
         if (user && user->get_login() == login) {
             user->add_favorites(film);
@@ -154,7 +156,8 @@ void FilmLibrary::update_user_favorites(const std::string& login, const Film* fi
         }
     }
 }
-void FilmLibrary::update_user_watched(const std::string& login, const Film* film) {
+void FilmLibrary::update_user_watched(const std::string& login,
+    const Film* film) {
     for (User* user : _users) {
         if (user && user->get_login() == login) {
             user->add_watched(film);

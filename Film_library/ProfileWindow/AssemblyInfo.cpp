@@ -1,3 +1,5 @@
+// Copyright 2025 Maslennikova Mary
+
 #include "pch.h"
 
 using namespace System;

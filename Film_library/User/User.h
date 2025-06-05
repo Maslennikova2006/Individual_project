@@ -4,7 +4,6 @@
 
 #include "/git/Film_library/Film/Film.h"
 #include "/git/Film_library/MyTVector/TVector.h"
-//#include "/git/Film_library/Film_library/Film_library.h"
 
 #ifndef FILM_LIBRARY_USER_USER_H_
 #define FILM_LIBRARY_USER_USER_H_
@@ -17,11 +16,13 @@ class User {
     std::string _password;
     TVector<const Film*> _favorites;
     TVector<const Film*> _watched;
+
  public:
     User();
     User(const std::string&, const std::string&);
     User(const std::string& login, const std::string& password,
-        const TVector<const Film*>& favorites, const TVector<const Film*>& watched);
+        const TVector<const Film*>& favorites,
+        const TVector<const Film*>& watched);
     User(const User&);
 
     ~User();

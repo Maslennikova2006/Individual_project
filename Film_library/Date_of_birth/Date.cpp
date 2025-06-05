@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <sstream>
-#include <iomanip>
+#include <cstdio>
+#include <string>
 
 #include "/git/Film_library/Date_of_birth/Date.h"
 
@@ -34,12 +35,14 @@ void Date::set_from_string(const std::string& date_str) {
     char delimeter1, delimeter2;
     int day, month, year;
 
-    if (!(iss >> day >> delimeter1 >> month >> delimeter2 >> year) || delimeter1 != '.' || delimeter2 != '.') {
-        throw std::invalid_argument("Некорректный формат даты. Ожидается dd.mm.yyyy");
+    if (!(iss >> day >> delimeter1 >> month >> delimeter2 >> year) ||
+        delimeter1 != '.' || delimeter2 != '.') {
+        throw std::invalid_argument
+        ("Incorrect date format. Expected dd.mm.yyyy!\n");
     }
 
     if (!check_to_correct_date(day, month, year))
-        throw std::invalid_argument("Некорректные значения даты");
+        throw std::invalid_argument("Incorrect date!\n");
 
     _day = day;
     _month = month;

@@ -18,7 +18,8 @@ User::User(const std::string& login, const std::string& password) {
     _watched = TVector<const Film*>();
 }
 User::User(const std::string& login, const std::string& password,
-    const TVector<const Film*>& favorites, const TVector<const Film*>& watched) {
+    const TVector<const Film*>& favorites,
+    const TVector<const Film*>& watched) {
     set_login(login);
     set_password(password);
     _favorites = favorites;
@@ -119,7 +120,7 @@ void User::load_from_stream(std::istream& is, const FilmLibrary& library) {
     std::string line;
     if (!std::getline(is, line)) return;
 
-    std::vector<std::string> parts;
+    TVector<std::string> parts;
     size_t start = 0, end = line.find('|');
     while (end != std::string::npos) {
         parts.push_back(line.substr(start, end - start));
@@ -137,8 +138,7 @@ void User::load_from_stream(std::istream& is, const FilmLibrary& library) {
     if (_favorites.size() > 0)
         _favorites.clear();
     size_t fav_count = 0;
-    try { fav_count = std::stoul(parts[2]); }
-    catch (...) {}
+    fav_count = std::stoul(parts[2]);
 
     if (fav_count > 0 && !parts[3].empty()) {
         std::istringstream fav_stream(parts[3]);
@@ -150,12 +150,10 @@ void User::load_from_stream(std::istream& is, const FilmLibrary& library) {
             }
         }
     }
-
     if (_watched.size() > 0)
         _watched.clear();
     size_t watched_count = 0;
-    try { watched_count = std::stoul(parts[4]); }
-    catch (...) {}
+    watched_count = std::stoul(parts[4]);
 
     if (watched_count > 0 && !parts[5].empty()) {
         std::istringstream watched_stream(parts[5]);

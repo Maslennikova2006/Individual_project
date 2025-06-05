@@ -35,7 +35,8 @@ private:
 public:
     LoginWindow(void) {
         InitializeComponent();
-        film_library = new FilmLibrary("C:\\git\\Film_library\\films.txt", "C:\\git\\Film_library\\users.txt");
+        film_library = new FilmLibrary("C:\\git\\Film_library\\films.txt",
+            "C:\\git\\Film_library\\users.txt");
     }
 
 protected:
@@ -221,8 +222,7 @@ private: System::Void register_btn_Click
                 "Username already exists!", "Information",
                 System::Windows::Forms::MessageBoxButtons::OK,
                 System::Windows::Forms::MessageBoxIcon::Information);
-        }
-        else {
+        } else {
             std::ofstream outFile
             ("C:\\git\\Film_library\\users.txt", std::ios::app);
             if (!outFile.is_open()) {
@@ -231,7 +231,8 @@ private: System::Void register_btn_Click
                 return;
             }
 
-            outFile << std::endl << login << "|" << password << "|" << 0 << "|" << "|" << 0 << "|" << "|";
+            outFile << std::endl << login << "|" << password << "|" << 0
+                << "|" << "|" << 0 << "|" << "|";
             outFile.close();
             switch_to_another_window(temporary_user);
         }

@@ -1,6 +1,7 @@
 // Copyright 2025 Maslennikova Mary
 
 #include <iostream>
+#include <string>
 
 #include "/git/Film_library/Creator/Creator.h"
 
